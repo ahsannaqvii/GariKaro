@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> 
+* {
+  margin: 0;
+  padding: 0;
+  /* text-size:14px; */
+}
+.container {
+  /* position:relative; */
+  /* background-color:#9d061e; */
+}
+body {
+  /* background: url("https://images.pexels.com/photos/1655166/pexels-photo-1655166.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
+	  no-repeat center center; */
+  /* background-color: #9d061e; */
+  /* background-size: cover; */
+  /* display: grid;
+  margin: 0 auto;
+
+  font-family: "Inconsolata", monospace;
+  min-height: 100vh;
+  place-items: center; */
+}
+.holder {
+  position: relative;
+}
+.holder:before,
+.holder:after {
+  animation: orbit 5s linear infinite;
+  border-radius: 50%;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  content: "";
+  height: 150px;
+  position: absolute;
+  width: 150px;
+}
+.holder:before {
+  background: #ffe897;
+  background: -moz-radial-gradient(top right, #ffe897, #f98a05);
+  background: radial-gradient(to bottom left, #ffe897, #f98a05);
+  background: -webkit-radial-gradient(top right, #ffe897, #f98a05);
+}
+.holder:after {
+  animation-delay: 2.5s;
+  background: #e0e793;
+  background: -moz-radial-gradient(bottom right, #e0e793, #6dd0f1);
+  background: radial-gradient(to top left, #e0e793, #6dd0f1);
+  background: -webkit-radial-gradient(bottom right, #e0e793, #6dd0f1);
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.card {
+
+  /* display: grid;
+  place-items: center; */
+  border: 1px solid #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  font-size: 2rem;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  width: 800px;
+}
+.card:before {
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+  content: "";
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.card__text {
+  color: #0a546d;
+  margin-left: 100px;
+
+  font-family: "Bebas Neue", cursive;
+  font-size: 55px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(100px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(100px) rotate(-360deg);
+  }
+}
+
+.form-style-7 {
+  max-width: 400px;
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  margin-top: -50px;
+  padding: 10px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.form-style-7 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.form-style-7 li {
+  display: block;
+  padding: 9px;
+  border: 1px solid #dddddd;
+  margin-bottom: 30px;
+  border-radius: 3px;
+}
+.form-style-7 li:last-child {
+  border: none;
+  margin-bottom: 0px;
+  text-align: center;
+}
+.form-style-7 li > label {
+  display: block;
+  float: left;
+  margin-top: -19px;
+  background: #FFFFFF;
+  /* height: 14px; */
+  padding: 2px 5px 2px 5px;
+  color: "#004D40";
+  margin-top: -10px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.form-style-7 input[type="text"],
+.form-style-7 input[type="date"],
+.form-style-7 input[type="datetime"],
+.form-style-7 input[type="email"],
+.form-style-7 input[type="number"],
+.form-style-7 input[type="search"],
+.form-style-7 input[type="time"],
+.form-style-7 input[type="url"],
+.form-style-7 input[type="password"],
+.form-style-7 textarea,
+.form-style-7 select {
+  box-sizing: border-box;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 14px;
+  display: block;
+  outline: none;
+  border-radius: 20px;
+  border: none;
+  height: 40px;
+  line-height: 25px;
+  font-size: 16px;
+  padding: 0;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.form-style-7 input[type="text"]:focus,
+.form-style-7 input[type="date"]:focus,
+.form-style-7 input[type="datetime"]:focus,
+.form-style-7 input[type="email"]:focus,
+.form-style-7 input[type="number"]:focus,
+.form-style-7 input[type="search"]:focus,
+.form-style-7 input[type="time"]:focus,
+.form-style-7 input[type="url"]:focus,
+.form-style-7 input[type="password"]:focus,
+.form-style-7 textarea:focus,
+.form-style-7 select:focus {
+}
+.form-style-7 li > span {
+  /* font-family: 'Bebas Neue', cursive; */
+  background: #f3f3f3;
+  display: block;
+  padding: 3px;
+
+  margin: 0 -9px -9px -9px;
+  text-align: center;
+  color: #c0c0c0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+.form-style-7 textarea {
+  resize: none;
+}
+.form-style-7 input[type="submit"],
+.form-style-7 input[type="button"] {
+  background: #024961;
+  border: none;
+  margin: -150px;
+  position: relative;
+  /* margin */
+  font-family: "Bebas Neue", cursive;
+  padding: 10px 20px 10px 20px;
+  /* border-bottom: 3px solid #5994ff; */
+  border-radius: 40px;
+  color: #d2e2ff;
+  width: 150%;
+}
+.form-style-7 input[type="submit"]:hover,
+.form-style-7 input[type="button"]:hover {
+  background: #0a546d;
+  color: #fff;
+}
