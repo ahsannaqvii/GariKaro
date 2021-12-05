@@ -22,11 +22,18 @@ const Signup = () => {
     reset: resetPassword,
   } = useInput((value) => value.trim().length !== 0); //FOR USER PASSWORD
   const {
-    value: enteredName,
-    enteredValueIsValid: NameIsValid,
-    valueBlurHandler: NameBlurHandler,
-    valueChangeHandler: NameChangeHandler,
-    reset: resetName,
+    value: enteredFirstName,
+    enteredValueIsValid: FirstNameIsValid,
+    valueBlurHandler: FirstNameBlurHandler,
+    valueChangeHandler: FirstNameChangeHandler,
+    reset: resetFirstName,
+  } = useInput((value) => value.trim().length !== 0); //FOR USER NAME
+  const {
+    value: enteredLastName,
+    enteredValueIsValid: LastNameIsValid,
+    valueBlurHandler: LastNameBlurHandler,
+    valueChangeHandler: LastNameChangeHandler,
+    reset: resetLastName,
   } = useInput((value) => value.trim().length !== 0); //FOR USER NAME
   const {
     value: enteredRollNo,
@@ -50,7 +57,8 @@ const Signup = () => {
     PhoneNumberIsValid &&
     EmailIsValid &&
     PasswordIsValid &&
-    NameIsValid &&
+    FirstNameIsValid &&
+    LastNameIsValid &&
     RollNoIsValid
   ) {
     formIsValid = true;
@@ -63,7 +71,8 @@ const Signup = () => {
       return;
     }
     resetRollNo();
-    resetName();
+    resetFirstName();
+    resetLastName();
     resetEmail();
     resetPassword();
     resetPhoneNumber();
@@ -74,11 +83,12 @@ const Signup = () => {
       email: enteredEmail,
       password: enteredPassword,
       phoneNumber: enteredPhoneNumber,
-      name: enteredName,
+      firstname: enteredFirstName,
+      lastname: enteredLastName,
       Rollno: enteredRollNo,
     };
     axios
-      .post("http://localhost:4000/login", user)
+      .post("http://localhost:4000/signup", user)
       .then((res) => console.log(res));
   };
 
@@ -112,12 +122,24 @@ const Signup = () => {
                     <div class="form-group mb-3">
                       <input
                         id="inputName"
-                        type="name"
-                        placeholder="Name"
+                        type="firstname"
+                        placeholder="First Name"
                         required=""
                         autofocus=""
-                        onBlur={NameBlurHandler}
-                        onChange={NameChangeHandler}
+                        onBlur={FirstNameBlurHandler}
+                        onChange={FirstNameChangeHandler}
+                        class="form-control rounded-pill border-0 shadow-sm px-4"
+                      />
+                    </div>
+                    <div class="form-group mb-3">
+                      <input
+                        id="inputName"
+                        type="lastname"
+                        placeholder="Last Name"
+                        required=""
+                        autofocus=""
+                        onBlur={LastNameBlurHandler}
+                        onChange={LastNameChangeHandler}
                         class="form-control rounded-pill border-0 shadow-sm px-4"
                       />
                     </div>
@@ -183,10 +205,10 @@ const Signup = () => {
                     </div>
                     <button
                       disabled={!formIsValid}
-                      // onClick={login}
+                      onClick={login}
                       onClick={() => {
                         finishEnteringHandler();
-                        //  login();
+                         login();
                       }}
                       type="submit"
                       class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"

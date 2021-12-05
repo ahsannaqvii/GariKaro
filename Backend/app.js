@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
@@ -10,8 +10,6 @@ const signupRoutes = require('./routes/signup');
 
 app.use(cors());
 app.use(bodyParser({extended: true}));
-
-mongoose.connect("mongodb://localhost:27017/GariKro");
 
 app.post("/login" , loginRoutes);
 
