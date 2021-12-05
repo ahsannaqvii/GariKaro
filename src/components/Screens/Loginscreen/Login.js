@@ -4,7 +4,9 @@ import useInput from "../../hooks/use-input";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Prompt } from "react-router";
-
+import { authentication } from "../../../firebase_config";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import logo from '../../../assets/google_signin.png';
 const Login = () => {
   const [isEntering, setisEntering] = useState(false);
   const {
@@ -23,15 +25,6 @@ const Login = () => {
     // hasError: PasswordHasError,
     reset: resetPassword,
   } = useInput((value) => value.trim().length !== 0); //FOR USER PASSWORD
-
-  // const {
-  //   value: enteredPhoneNumber,
-  //   enteredValueIsValid: PhoneNumberIsValid,
-  //   valueBlurHandler: PhoneNumberBlurHandler,
-  //   valueChangeHandler: PhoneNumberChangeHander,
-  //   hasError: NumberHasError,
-  //   reset: resetPhoneNumber,
-  // } = useInput((value) => value.length >= 11); //FOR USER PHONE NUMBER
 
   let formIsValid = false;
   if (EmailIsValid && PasswordIsValid) {
@@ -65,7 +58,21 @@ const Login = () => {
   const finishEnteringHandler = () => {
     setisEntering(false);
   };
+
+  const signInWithGoogle = () => {  //FOR FIREBASE SIGN IN AUTH
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(authentication, provider)
+    .then((res)=>{
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+  };
+
   return (
+    // <authentication/>
     <React.Fragment>
       <Prompt
         when={isEntering}
@@ -127,7 +134,7 @@ const Login = () => {
                         disabled={!formIsValid}
                         onClick={login}
                         onClick={() => {
-                          finishEnteringHandler(); 
+                          finishEnteringHandler();
                           login();
                         }}
                         // onClick={finishEnteringHandler}
@@ -136,6 +143,10 @@ const Login = () => {
                       >
                         Sign in
                       </button>
+                        <button onClick={signInWithGoogle} className="btn-google">
+                          <img src={logo} className="btn-img" ></img>
+                        </button>
+
                       <div class="text-center d-flex justify-content-between mt-4 ">
                         <p>
                           New here? {"  "}

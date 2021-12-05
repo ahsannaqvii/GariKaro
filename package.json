@@ -14,6 +14,7 @@
     "axios": "^0.21.4",
     "bootstrap": "^5.1.0",
     "core-js": "^3.18.0",
+    "firebase": "^9.6.0",
     "font-awesome": "^4.7.0",
     "google-maps-react": "^2.0.6",
     "modules": "^0.4.0",
