@@ -49,6 +49,7 @@ const Login = () => {
     // resetPhoneNumber();
   };
   const login = () => {
+    console.log("Here");
     const user = {
       email: enteredEmail,
       password: enteredPassword,
@@ -124,11 +125,12 @@ const Login = () => {
                       </div>
                       <button
                         disabled={!formIsValid}
-                        // onClick={() => {
-                        //   finishEnteringHandler;
-                        //   // login();
-                        // }}
-                        onClick={finishEnteringHandler}
+                        onClick={login}
+                        onClick={() => {
+                          finishEnteringHandler(); 
+                          login();
+                        }}
+                        // onClick={finishEnteringHandler}
                         type="submit"
                         class=" btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm "
                       >
