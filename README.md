@@ -35,7 +35,7 @@ For Back-End, cd to Backend folder, then type the following command
 if npm-install doesnot work then install the following npm packages
 
 <ul>
-  <li>npm i express, body-parser, cors, mongoose</li>
+  <li>npm i express, body-parser, cors, mysql</li>
  </ul>
  
 if you have nodemon then,
