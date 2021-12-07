@@ -1,0 +1,31 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    /* background-color: whi; */
+}
+
+.formLayout{
+    margin: 1.5rem;
+    padding: 1.0rem;
+    background-color: #F2F5F8;
+}
+
+.cartype-btn{
+    margin:0.5rem;
+    height: 70px;
+    width: 140px;
+}
+
+.BelowForm{
+    margin-top: 5em;
+    color:#5B0A0C;
+}
+
+.submit-btn{
+    float: right;
+   
+}
+
+.map{
+    margin-top: 1.5rem;
+}
