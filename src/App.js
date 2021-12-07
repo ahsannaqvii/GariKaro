@@ -2,6 +2,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import SignUp from "./components/Screens/Signupscreen/Signup";
 import Login from "./components/Screens/Loginscreen/Login";
+import DriverMain from "./components/Screens/DriverMain/DriverMain";
 import NotFound from './components/Screens/NotFound'
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,6 +27,10 @@ function App() {
 
         <Route path="/signup" exact >
           <SignUp />
+        </Route> 
+
+        <Route path="/driver" exact >
+          <DriverMain />
         </Route> 
 
         {/* default case for no page found  */}

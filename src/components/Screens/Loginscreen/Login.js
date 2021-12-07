@@ -7,6 +7,7 @@ import { Prompt } from "react-router";
 import { authentication } from "../../../firebase_config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import logo from '../../../assets/google_signin.png';
+
 const Login = () => {
   const [isEntering, setisEntering] = useState(false);
   const {
