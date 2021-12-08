@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Prompt } from "react-router";
 import { authentication } from "../../../firebase_config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {Button} from "react-bootstrap";
 import logo from '../../../assets/google_signin.png';
 
 const Login = () => {
@@ -144,9 +145,10 @@ const Login = () => {
                       >
                         Sign in
                       </button>
-                        <button onClick={signInWithGoogle} className="btn-google">
-                          <img src={logo} className="btn-img" ></img>
-                        </button>
+                        <Button onClick={signInWithGoogle} className="btn-google">
+                          {/* <img src={logo} className="btn-img" ></img> */}
+                          SignUp With Google
+                        </Button>
 
                       <div class="text-center d-flex justify-content-between mt-4 ">
                         <p>
