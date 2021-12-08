@@ -1,6 +1,7 @@
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import SignUp from "./components/Screens/Signupscreen/Signup";
+import UserForum from "../src/components/Screens/UserForum/UserForum"
 import Login from "./components/Screens/Loginscreen/Login";
 import DriverMain from "./components/Screens/DriverMain/DriverMain";
 import NotFound from './components/Screens/NotFound'
@@ -32,6 +33,10 @@ function App() {
         <Route path="/driver" exact >
           <DriverMain />
         </Route> 
+
+        <Route path="/user" exact >
+          <UserForum />
+        </Route>
 
         {/* default case for no page found  */}
         <Route path="*">
