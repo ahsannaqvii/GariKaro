@@ -58,7 +58,6 @@ export class MapContainer extends Component {
         this.setState({coordinates: Object.entries(latlng).slice(0).map(entry => entry[1])});
       
         console.log(this.state.Address);
-        // console.log(this.state.lat);
         // console.log(coordinates[0]);
         // console.log(coordinates[1]);
         console.log(this.state.coordinates);
@@ -69,24 +68,33 @@ export class MapContainer extends Component {
         //   .catch(error => console.error('Error', error));
       };
       
-     
+     searchOptions = {
+      
+       componentRestrictions: {country :'pk'},
+       types: ['geocode']  //Enter karachi geocode
+      
+     };
      
       render() {
-        return (
+  
+
+      return (
           <div id= "googleMap">
                <PlacesAutocomplete
-        value={this.state.Address}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
-      >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
-            <input
-              {...getInputProps({
-                placeholder: 'Enter Location',
-                className: 'location-search-input',
-              })}
-            />
+                  value={this.state.Address}
+                  onChange={this.handleChange}
+                  onSelect={this.handleSelect}
+                  searchOptions= {this.searchOptions}  
+                  >
+      
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              <div>
+                <input
+                  {...getInputProps({
+                    placeholder: 'Enter Location',
+                    className: 'location-search-input',
+                  })}
+                />
             <div className="autocomplete-dropdown-container">
 
               {loading && <div>Loading...</div>} 
