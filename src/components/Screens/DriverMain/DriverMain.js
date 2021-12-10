@@ -7,6 +7,8 @@ import axios from "axios";
 import carsvg from '../../../assets/images/car.svg';
 import bikesvg from '../../../assets/images/bike.jpeg';
 import map from '../../../assets/images/map.png';
+import Input from './PlacesAutocomplete';
+import Maps from './RouteMap2';
 
 function DriverMain (){
     return (
@@ -35,7 +37,8 @@ function DriverMain (){
                     Pickup
                     </Form.Label>
                     <Col sm={6}>
-                        <Form.Control type="textarea" placeholder="search for a location" />
+                        {/* <Form.Control type="textarea" placeholder="search for a location" /> */}
+                        <Input/>
                     </Col>
                 </Form.Group>
 
@@ -44,7 +47,8 @@ function DriverMain (){
                     Drop-Off / Stop
                     </Form.Label>
                     <Col sm={6}>
-                        <Form.Control type="textarea" placeholder="search for a location" />
+                        {/* <Form.Control type="textarea" placeholder="search for a location" /> */}
+                        <Input />
                     </Col>
                 </Form.Group>
 
@@ -102,7 +106,8 @@ function DriverMain (){
                 </Form>
             </Col>
             <Col>
-            <img src={map} className="map" height="90%"></img>
+            {/* <img src={map} className="map" height="90%"></img> */}
+            <Maps />
             </Col>
             
         </Row>
