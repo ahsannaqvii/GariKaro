@@ -3,14 +3,15 @@ import React, { useState } from "react";
 import useInput from "../../hooks/use-input";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Prompt } from "react-router";
+import { Prompt ,useHistory } from "react-router";
 import { authentication } from "../../../firebase_config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {Button} from "react-bootstrap";
 import logo from '../../../assets/google_signin.png';
 
-const Login = () => {
-  const [isEntering, setisEntering] = useState(false);
+const Login = ({authentication}) => {
+  let history=useHistory();
+  // const [isEntering, setisEntering] = useState(false);
   const {
     value: enteredEmail,
     enteredValueIsValid: EmailIsValid,
@@ -43,23 +44,23 @@ const Login = () => {
     resetPassword();
     // resetPhoneNumber();
   };
-  const login = () => {
-    console.log("Here");
-    const user = {
-      email: enteredEmail,
-      password: enteredPassword,
-      // phoneNumber: enteredPhoneNumber,
-    };
-    axios
-      .post("http://localhost:4000/login", user)
-      .then((res) => console.log(res));
-  };
-  const focusHandler = () => {
-    setisEntering(true);
-  };
-  const finishEnteringHandler = () => {
-    setisEntering(false);
-  };
+  // const login = () => {
+  //   console.log("Here");
+  //   const user = {
+  //     email: enteredEmail,
+  //     password: enteredPassword,
+  //     // phoneNumber: enteredPhoneNumber,
+  //   };
+  //   axios
+  //     .post("http://localhost:4000/login", user)
+  //     .then((res) => console.log(res));
+  // };
+  // const focusHandler = () => {
+  //   setisEntering(true);
+  // };
+  // const finishEnteringHandler = () => {
+  //   setisEntering(false);
+  // };
 
   const signInWithGoogle = () => {  //FOR FIREBASE SIGN IN AUTH
     const provider = new GoogleAuthProvider();
@@ -74,14 +75,9 @@ const Login = () => {
   };
 
   return (
-    // <authentication/>
+
     <React.Fragment>
-      <Prompt
-        when={isEntering}
-        message={(location) =>
-          "Are you sure you want to leave? All your data will be lost!"
-        }
-      />
+
 
       <div class="container-fluid">
         <div class="row no-gutter">
@@ -94,7 +90,8 @@ const Login = () => {
                   <div class="col-lg-10 col-xl-7 mx-auto">
                     <h3 class="display-4">Gari Karo!</h3>
                     <p class="text-muted mb-4">Already have an acccount?</p>
-                    <form onSubmit={formChangeHandler} onFocus={focusHandler}>
+                    {/* onFocus={focusHandler} */}
+                    <form onSubmit={formChangeHandler} >
                       <div class="form-group mb-3">
                         <input
                           id="inputEmail"
@@ -134,21 +131,24 @@ const Login = () => {
                       </div>
                       <button
                         disabled={!formIsValid}
-                        onClick={login}
-                        onClick={() => {
-                          finishEnteringHandler();
-                          login();
-                        }}
-                        // onClick={finishEnteringHandler}
+                        // onClick={login}
+                        onClick={authentication}
+                        // onClick={() => {
+                        //   // finishEnteringHandler();
+                        //   // login();
+                          
+                        //   history.push('/user');
+
+                        // }}
                         type="submit"
                         class=" btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm "
                       >
                         Sign in
                       </button>
-                        <Button onClick={signInWithGoogle} className="btn-google">
+                        {/* <Button onClick={signInWithGoogle} className="btn-google"> */}
                           {/* <img src={logo} className="btn-img" ></img> */}
-                          SignUp With Google
-                        </Button>
+                          {/* SignUp With Google
+                        </Button> */}
 
                       <div class="text-center d-flex justify-content-between mt-4 ">
                         <p>

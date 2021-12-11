@@ -5,8 +5,7 @@ import img from "../../../assets/GK_LOGO.svg";
 import "./Navbar.css";
 import { Button } from "../../UI/Button";
 
-//TO DO : CHANGE A TAGS WITH LINK TAGS
-function Navbar() {
+function Navbar(props) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -58,11 +57,11 @@ function Navbar() {
             </li>
             <li className="nav-btn">
               {button ? (
-                <Link to="/signup" className="btn-link">
-                  <Button buttonStyle="btn--outline">SIGN UP </Button>
+                <Link to="/login" className="btn-link">
+                  <Button buttonStyle="btn--outline" >{props.authorized ? "LOGOUT" : "LOGIN"} </Button>
                 </Link>
               ) : (
-                <Link to="/signup" className="btn-link">
+                <Link to="/login" className="btn-link">
                   <Button buttonStyle="btn--outline" buttonSize="btn--mobile">
                     SIGN UP{" "}
                   </Button>
