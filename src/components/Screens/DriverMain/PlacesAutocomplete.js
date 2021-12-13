@@ -49,34 +49,36 @@ export class MapContainer extends Component {
         console.log(this.state.Address);
       };
       
-      handleSelect = async address => {
+      handleSelect = async (address, id) => {
         const results = await geocodeByAddress(address);
         const latlng = await getLatLng(results[0]);
-        // setAddress(address);
-        // setCoordinates(Object.entries(latlng).slice(0).map(entry => entry[1]));
         this.setState({Address: address});
         this.setState({coordinates: Object.entries(latlng).slice(0).map(entry => entry[1])});
-      
-        console.log(this.state.Address);
-        // console.log(coordinates[0]);
-        // console.log(coordinates[1]);
-        console.log(this.state.coordinates);
-        console.log(this.state.coordinates[0]); //lat
-        console.log(this.state.coordinates[1]); //lng;
+        
+         if(this.props.name == 'setPick'){
+          console.log("setPickUp Prop"); 
+          this.props.parentCallback({address: this.state.Address, lat: this.state.coordinates[0],
+          lng: this.state.coordinates[1]});
+        }
+        else{
+           console.log("setDest Prop");
+           this.props.parentCallback({address: this.state.Address, lat: this.state.coordinates[0],
+           lng: this.state.coordinates[1]});
+        }
+        // console.log(this.state.Address);
+        // console.log(this.state.coordinates[0]); //lat
+        // console.log(this.state.coordinates[1]); //lng;
         //   .then(results => getLatLng(results[0]))
         //   .then(latLng => console.log('Success', latLng))
         //   .catch(error => console.error('Error', error));
       };
       
-     searchOptions = {
-      
+     searchOptions = { 
        componentRestrictions: {country :'pk'},
-       types: ['geocode']  //Enter karachi geocode
-      
+       types: ['geocode']  //Enter karachi geocode 
      };
      
       render() {
-  
 
       return (
           <div id= "googleMap">
@@ -127,9 +129,8 @@ export class MapContainer extends Component {
     }
 }
 
-
 // export default GoogleApiWrapper({
-//     apiKey: ('AIzaSyDkYqldBm1XifwNFpF21vNpwZQlCb0ldPk')
+//     apiKey: ('Google_API_Key')
 //   })(MapContainer)
  
 export default MapContainer;
