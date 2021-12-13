@@ -1,16 +1,39 @@
 import "./DriverMain.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {Form , Row, Col , Button} from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useInput from "../../hooks/use-input";
 import axios from "axios";
 import carsvg from '../../../assets/images/car.svg';
 import bikesvg from '../../../assets/images/bike.jpeg';
-import map from '../../../assets/images/map.png';
 import Input from './PlacesAutocomplete';
-import Maps from './RouteMap2';
+import GoogleMaps from './RouteMap4';
+
 
 function DriverMain (){
+
+    const [pickUp ,setPickUp]= useState({address:"", lat: 24.9180271, lng:67.0632675});
+    const [dest, setDest] = useState({address:"", lat: null, lng:null});
+   
+    useEffect(()=>{
+     console.log("value Changed");
+    console.log(pickUp.lat);
+    console.log(pickUp.lng);
+    // async function fetch(){
+    // document.getElementById("renderr").innerHTML = ' <GoogleMaps dataFromParent={[pickUp,dest] }/> ';
+    // }
+    // fetch();
+    const player = async() => {
+         setPickUp(pickUp);
+         console.log(pickUp);
+         <GoogleMaps dataFromParent={[pickUp,dest] }/> 
+         //document.getElementByID("renderr").innerHTML = '<h1> Sara </h1>';
+        //document.getElementById("renderr").innerHTML = ' <GoogleMaps dataFromParent={[pickUp,dest] }/> ';
+         console.log("value in here");
+    }
+    player();
+    },[pickUp,dest])
+
     return (
         <Row>
             <Col>
@@ -38,7 +61,8 @@ function DriverMain (){
                     </Form.Label>
                     <Col sm={6}>
                         {/* <Form.Control type="textarea" placeholder="search for a location" /> */}
-                        <Input/>
+                        <Input name= "setPick" parentCallback={setPickUp} />
+                       
                     </Col>
                 </Form.Group>
 
@@ -48,7 +72,7 @@ function DriverMain (){
                     </Form.Label>
                     <Col sm={6}>
                         {/* <Form.Control type="textarea" placeholder="search for a location" /> */}
-                        <Input />
+                        <Input name= "setDest" parentCallback={setDest}/>
                     </Col>
                 </Form.Group>
 
@@ -105,9 +129,12 @@ function DriverMain (){
                 </div>
                 </Form>
             </Col>
+
             <Col>
-            {/* <img src={map} className="map" height="90%"></img> */}
-            <Maps />
+              
+              <div id="renderr">   
+               <GoogleMaps dataFromParent={[pickUp,dest] }/> 
+             </div>
             </Col>
             
         </Row>
