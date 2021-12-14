@@ -18,6 +18,8 @@ function DriverMain (){
     const [pickUp ,setPickUp]= useState({address:"", lat: 24.918027, lng:67.0632675});
     const [dest, setDest] = useState({address:"" , lat: 24.8568991, lng: 67.0632675});
     const [org, setOrigin] = useState({lat: 24.918027, lng:67.0632675});
+    const [mapReference, setMapReference] = useState(null);
+    const [mapsReference, setMapsReference] = useState(null);
 
     //RouteMap Work
     const [showingInfoWindow, setInfo] = useState(false);
@@ -34,15 +36,20 @@ function DriverMain (){
 
          setOrigin({lat:pickUp.lat, lng: pickUp.lng});
 
-    },[pickUp,dest]);
+         <GoogleMapReact
+         lati={org.lat}
+         lngo={org.lng}
+         onGoogleApiLoaded={({ map, maps,lati,lngo}) => apiIsLoaded(map, maps, lati, lngo)}/>
+
+    },[pickUp,dest,mapReference, mapsReference]);
    
 
     const apiIsLoaded = (map, maps, pasLat, pasLng) => {
        const directionsService = new window.google.maps.DirectionsService();
        const directionsRenderer = new window.google.maps.DirectionsRenderer();
        directionsRenderer.setMap(map);
-      //const origin ={lat: org.lat , lng: org.lng};
-     //const origin= {lng: 67.063270 , lat: 24.9180271};
+      const origin ={lat: org.lat, lng: org.lng};
+      //const origin= {lng: 67.063270 , lat: 24.9180271};
       console.log(origin);
       console.log("yes");
       console.log("helllllo");
@@ -171,10 +178,17 @@ function DriverMain (){
                 
                 defaultCenter={{ lng: 67.0011 , lat: 24.8607  }}
                 defaultZoom={10}
-                yesIWantToUseGoogleMapApiInternals
-                lati={org.lat}
-                lngo={org.lng}
-                onGoogleApiLoaded={({ map, maps,lati,lngo}) => apiIsLoaded(map, maps, lati, lngo)}
+                 yesIWantToUseGoogleMapApiInternals
+                 lati={org.lat}
+                 lngo={org.lng}
+                 onGoogleApiLoaded={({ map, maps,lati,lngo}) => apiIsLoaded(map, maps, lati, lngo)}
+
+                // onGoogleApiLoaded={({ map, maps }) => {
+                //     setMapReference(map);
+                //     setMapsReference(maps);
+                //     apiIsLoaded(map, maps)
+                //   }}
+                //   yesIWantToUseGoogleMapApiInternals={true}
                  //This function is not re-rendering 
               >
                 <Marker
@@ -182,6 +196,7 @@ function DriverMain (){
                  lng={org.lng}
                 text="My Marker"
                 />
+
   </GoogleMapReact>
             </div>
             </Col>
