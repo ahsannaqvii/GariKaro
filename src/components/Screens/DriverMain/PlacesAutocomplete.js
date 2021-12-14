@@ -43,6 +43,7 @@ export class MapContainer extends Component {
     //   };
 
       handleChange = address => {
+        console.log(this.state.Address);
         this.setState({ Address: address});
         //setAddress(address);
         // console.log(Address);

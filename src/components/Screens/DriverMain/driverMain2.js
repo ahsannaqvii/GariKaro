@@ -9,14 +9,15 @@ import bikesvg from '../../../assets/images/bike.jpeg';
 import Input from './PlacesAutocomplete';
 import GoogleMaps from './RouteMap7';
 import GoogleMapReact from 'google-map-react';
-
+import Marker from './Marker';
 
 //Warning: each child must ahve unique prop value
 
 function DriverMain (){
 
     const [pickUp ,setPickUp]= useState({address:"", lat: 24.918027, lng:67.0632675});
-    const [dest, setDest] = useState({address:"", lat: 24.8568991, lng: 67.0632675});
+    const [dest, setDest] = useState({address:"" , lat: 24.8568991, lng: 67.0632675});
+    const [org, setOrigin] = useState({lat: 24.918027, lng:67.0632675});
 
     //RouteMap Work
     const [showingInfoWindow, setInfo] = useState(false);
@@ -30,20 +31,24 @@ function DriverMain (){
         console.log("value Changed");
          console.log(pickUp.lat);
          console.log(pickUp.lng);
+
+         setOrigin({lat:pickUp.lat, lng: pickUp.lng});
+
     },[pickUp,dest]);
    
 
-    const apiIsLoaded = (map, maps) => {
+    const apiIsLoaded = (map, maps, pasLat, pasLng) => {
        const directionsService = new window.google.maps.DirectionsService();
        const directionsRenderer = new window.google.maps.DirectionsRenderer();
-    
-      const origin ={lat: pickUp.lat , lng: pickUp.lng};
-     // const origin= {lng: 67.063255 , lat: 24.9180271};
+       directionsRenderer.setMap(map);
+      //const origin ={lat: org.lat , lng: org.lng};
+     //const origin= {lng: 67.063270 , lat: 24.9180271};
       console.log(origin);
       console.log("yes");
       console.log("helllllo");
-      const destination = {lng: dest.lng, lat: dest.lat};
-      directionsRenderer.setMap(map);
+      //const destination = {lng: dest.lng, lat: dest.lat};
+      const destination = {lat: 24.8568991, lng: 67.0632675};
+     
         directionsService.route(
           {
             origin: origin,
@@ -59,6 +64,7 @@ function DriverMain (){
             }
           }
         );
+
       }
    
    
@@ -162,11 +168,21 @@ function DriverMain (){
             <Col>
               <div style={{ height: "650px", width: "90%" , marginTop: "1.5rem"}}  id="renderr">   
               <GoogleMapReact
+                
                 defaultCenter={{ lng: 67.0011 , lat: 24.8607  }}
                 defaultZoom={10}
                 yesIWantToUseGoogleMapApiInternals
-               onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
-              />
+                lati={org.lat}
+                lngo={org.lng}
+                onGoogleApiLoaded={({ map, maps,lati,lngo}) => apiIsLoaded(map, maps, lati, lngo)}
+                 //This function is not re-rendering 
+              >
+                <Marker
+                 lat={org.lat}
+                 lng={org.lng}
+                text="My Marker"
+                />
+  </GoogleMapReact>
             </div>
             </Col>
             

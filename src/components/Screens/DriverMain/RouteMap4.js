@@ -38,8 +38,8 @@ function GoogleMaps(props) {
             directionsRenderer.setMap(map);
       
           //  const origin = {lng: this.state.coordinates[1] , lat: this.state.coordinates[0]};
-           //const origin= {lng: 67.0632675 , lat: 24.9180271};
-           const origin ={lng: props.dataFromParent[0].lng, lat:props.dataFromParent[0].lat}
+           const origin= {lng: 67.063255 , lat: 24.9180271};
+           //const origin ={lng: props.dataFromParent[0].lng, lat:props.dataFromParent[0].lat}
            //const origin ={lat: props.dataFromParent[0].lat , lng: props.dataFromParent[0].lng};
            console.log(origin);
            const destination = {lng: 67.0632675 , lat: 24.8568991};
