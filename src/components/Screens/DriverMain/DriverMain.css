@@ -23,6 +23,8 @@
 
 .submit-btn{
     float: right;
-   
 }
 
+.step2-submit-btn{
+    margin-left: 85%;
+}

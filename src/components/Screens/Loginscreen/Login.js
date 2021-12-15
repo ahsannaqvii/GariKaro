@@ -3,21 +3,21 @@ import React, { useState } from "react";
 import useInput from "../../hooks/use-input";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Prompt ,useHistory } from "react-router";
+import { Prompt, useHistory } from "react-router";
 import { authentication } from "../../../firebase_config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import {Button} from "react-bootstrap";
-import logo from '../../../assets/google_signin.png';
+import { Button } from "react-bootstrap";
+import logo from "../../../assets/google_signin.png";
 
-const Login = ({authentication}) => {
-  let history=useHistory();
-  // const [isEntering, setisEntering] = useState(false);
+const Login = (props) => {
+  let history = useHistory();
+  const [userAuthenticated, setuserAuthenticated] = useState(false);
   const {
     value: enteredEmail,
     enteredValueIsValid: EmailIsValid,
     valueBlurHandler: EmailBlurHandler,
     valueChangeHandler: EmailChangeHandler,
-    // hasError: EmailHasError,
+
     reset: resetEmail,
   } = useInput((value) => value.includes("@")); //FOR USER EMAIL
   const {
@@ -25,7 +25,6 @@ const Login = ({authentication}) => {
     enteredValueIsValid: PasswordIsValid,
     valueBlurHandler: PasswordBlurHandler,
     valueChangeHandler: PasswordChangeHandler,
-    // hasError: PasswordHasError,
     reset: resetPassword,
   } = useInput((value) => value.trim().length !== 0); //FOR USER PASSWORD
 
@@ -40,44 +39,50 @@ const Login = ({authentication}) => {
     if (!formIsValid) {
       return;
     }
-    resetEmail();
-    resetPassword();
-    // resetPhoneNumber();
+    // resetEmail();
+    // resetPassword();
   };
-  // const login = () => {
-  //   console.log("Here");
-  //   const user = {
-  //     email: enteredEmail,
-  //     password: enteredPassword,
-  //     // phoneNumber: enteredPhoneNumber,
-  //   };
-  //   axios
-  //     .post("http://localhost:4000/login", user)
-  //     .then((res) => console.log(res));
-  // };
-  // const focusHandler = () => {
-  //   setisEntering(true);
-  // };
-  // const finishEnteringHandler = () => {
-  //   setisEntering(false);
-  // };
+  async function login() {
+    console.log("Here");
+    const user = {
+      email: enteredEmail,
+      password: enteredPassword,
+    };
+    try {
+      const result = await axios.post("http://localhost:4000/login", user);
+      if (!result.statusText === "OK") {
+        throw new Error("Couldnt fetch Data!");
+      }
+      console.log("AHSAN");
+      console.log(result.data[0].email);
 
-  const signInWithGoogle = () => {  //FOR FIREBASE SIGN IN AUTH
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(authentication, provider)
-    .then((res)=>{
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      setuserAuthenticated(true);
+      history.push("/user");
+      // props.auth2();
+      // props.onLog
+      props.onLogin();
+    } catch (error) {
+      console.error("FAILED!");
+      setuserAuthenticated(false);
+      // history.push("/home");
+    }
+  }
 
-  };
+  // const signInWithGoogle = () => {
+  //   //FOR FIREBASE SIGN IN AUTH
+  //   const provider = new GoogleAuthProvider();
+  //   signInWithPopup(authentication, provider)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
-
     <React.Fragment>
-
+      {/* conditional lagado agar false aye tou prompt kardena  */}
 
       <div class="container-fluid">
         <div class="row no-gutter">
@@ -91,7 +96,7 @@ const Login = ({authentication}) => {
                     <h3 class="display-4">Gari Karo!</h3>
                     <p class="text-muted mb-4">Already have an acccount?</p>
                     {/* onFocus={focusHandler} */}
-                    <form onSubmit={formChangeHandler} >
+                    <form onSubmit={formChangeHandler}>
                       <div class="form-group mb-3">
                         <input
                           id="inputEmail"
@@ -131,23 +136,15 @@ const Login = ({authentication}) => {
                       </div>
                       <button
                         disabled={!formIsValid}
-                        // onClick={login}
-                        onClick={authentication}
-                        // onClick={() => {
-                        //   // finishEnteringHandler();
-                        //   // login();
-                          
-                        //   history.push('/user');
-
-                        // }}
+                        onClick={login}
                         type="submit"
                         class=" btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm "
                       >
                         Sign in
                       </button>
-                        {/* <Button onClick={signInWithGoogle} className="btn-google"> */}
-                          {/* <img src={logo} className="btn-img" ></img> */}
-                          {/* SignUp With Google
+                      {/* <Button onClick={signInWithGoogle} className="btn-google"> */}
+                      {/* <img src={logo} className="btn-img" ></img> */}
+                      {/* SignUp With Google
                         </Button> */}
 
                       <div class="text-center d-flex justify-content-between mt-4 ">
@@ -171,3 +168,15 @@ const Login = ({authentication}) => {
 };
 
 export default Login;
+// const focusHandler = () => {
+//   setisEntering(true);
+// };
+// const finishEnteringHandler = () => {
+//   setisEntering(false);
+// };
+// onClick={props.authen}
+// onClick={() => {
+//   // finishEnteringHandler();
+//   // login();
+//   eventHandler();
+// }}
