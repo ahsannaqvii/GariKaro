@@ -25,24 +25,8 @@ export class MapContainer extends Component {
     };
     
     
-    // handleChange = address => {
-    //     this.setState({ Address: address});
-    //     console.log(this.state.Address);
-    //   };
-     
-    //   handleSelect = async address => {
-    //     const results = await geocodeByAddress(address);
-    //     const latlng = await getLatLng(results[0]);
-    //     this.setState({Address: address});
-    //     this.setState({coordinates: latlng});
-    //     console.log(this.state.Address);
-    //     console.log(this.state.coordinates);
-    //     //   .then(results => getLatLng(results[0]))
-    //     //   .then(latLng => console.log('Success', latLng))
-    //     //   .catch(error => console.error('Error', error));
-    //   };
-
       handleChange = address => {
+        console.log(this.state.Address);
         this.setState({ Address: address});
         //setAddress(address);
         // console.log(Address);
@@ -65,17 +49,11 @@ export class MapContainer extends Component {
            this.props.parentCallback({address: this.state.Address, lat: this.state.coordinates[0],
            lng: this.state.coordinates[1]});
         }
-        // console.log(this.state.Address);
-        // console.log(this.state.coordinates[0]); //lat
-        // console.log(this.state.coordinates[1]); //lng;
-        //   .then(results => getLatLng(results[0]))
-        //   .then(latLng => console.log('Success', latLng))
-        //   .catch(error => console.error('Error', error));
       };
       
      searchOptions = { 
        componentRestrictions: {country :'pk'},
-       types: ['geocode']  //Enter karachi geocode 
+       types: ['geocode']  //Enter karachi geocode (Not Working)
      };
      
       render() {
@@ -129,6 +107,7 @@ export class MapContainer extends Component {
     }
 }
 
+//Key loaded only once
 // export default GoogleApiWrapper({
 //     apiKey: ('Google_API_Key')
 //   })(MapContainer)

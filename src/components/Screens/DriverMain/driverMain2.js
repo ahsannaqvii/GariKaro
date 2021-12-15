@@ -7,37 +7,44 @@ import axios from "axios";
 import carsvg from '../../../assets/images/car.svg';
 import bikesvg from '../../../assets/images/bike.jpeg';
 import Input from './PlacesAutocomplete';
-import GoogleMaps from './RouteMap4';
+import Maps from './DirectionPath';
 
+//Warning: each child must ahve unique prop value
 
 function DriverMain (){
 
-    const [pickUp ,setPickUp]= useState({address:"", lat: 24.9180271, lng:67.0632675});
-    const [dest, setDest] = useState({address:"", lat: null, lng:null});
-   
+    const [pickUp ,setPickUp]= useState({address:"", lat: 24.918027, lng:67.0632675});
+    const [dest, setDest] = useState({address:"" , lat: 24.8568991, lng: 67.0632675});
+    const [org, setOrigin] = useState({lat: 24.918027, lng:67.0632675});
+    const [mapReference, setMapReference] = useState(null);
+    const [mapsReference, setMapsReference] = useState(null);
+
+    //RouteMap Work
+    const [showingInfoWindow, setInfo] = useState(false);
+    const [activeMarker, setMarker] = useState({});
+    const [selecetdPlace, setPlace] = useState({});
+
+    // const [Lng, setLng] = useState(pickUp.lng);
+    // const [Lat, setLat] = useState(pickUp.lat);
+
     useEffect(()=>{
-     console.log("value Changed");
-    console.log(pickUp.lat);
-    console.log(pickUp.lng);
-    // async function fetch(){
-    // document.getElementById("renderr").innerHTML = ' <GoogleMaps dataFromParent={[pickUp,dest] }/> ';
-    // }
-    // fetch();
-    const player = async() => {
-         setPickUp(pickUp);
-         console.log(pickUp);
-         <GoogleMaps dataFromParent={[pickUp,dest] }/> 
-         //document.getElementByID("renderr").innerHTML = '<h1> Sara </h1>';
-        //document.getElementById("renderr").innerHTML = ' <GoogleMaps dataFromParent={[pickUp,dest] }/> ';
-         console.log("value in here");
-    }
-    player();
-    },[pickUp,dest])
+        console.log("value Changed");
+         console.log(pickUp.lat);
+         console.log(pickUp.lng);
+
+        //  setOrigin({lat:pickUp.lat, lng: pickUp.lng});
+        // //  setTimeout(() => {
+        //    console.log(document.getElementById("renderr").innerHTML);
+        // // }, 2000);
+         
+
+    },[pickUp,dest,mapReference, mapsReference]);
+      
 
     return (
         <Row>
             <Col>
-            <Form className = "formLayout">
+              <Form className = "formLayout">
                 <Row>  
                     <Col>
                         <label> Driver </label>
@@ -60,7 +67,6 @@ function DriverMain (){
                     Pickup
                     </Form.Label>
                     <Col sm={6}>
-                        {/* <Form.Control type="textarea" placeholder="search for a location" /> */}
                         <Input name= "setPick" parentCallback={setPickUp} />
                        
                     </Col>
@@ -70,8 +76,7 @@ function DriverMain (){
                     <Form.Label column sm={6}>
                     Drop-Off / Stop
                     </Form.Label>
-                    <Col sm={6}>
-                        {/* <Form.Control type="textarea" placeholder="search for a location" /> */}
+                    <Col sm={6}>                     
                         <Input name= "setDest" parentCallback={setDest}/>
                     </Col>
                 </Form.Group>
@@ -131,14 +136,9 @@ function DriverMain (){
             </Col>
 
             <Col>
-              
-              <div id="renderr">   
-               <GoogleMaps dataFromParent={[pickUp,dest] }/> 
-             </div>
+               <Maps places={[pickUp,dest]}/>
             </Col>
-            
         </Row>
-
     );
 } 
 
