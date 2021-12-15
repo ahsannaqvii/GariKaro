@@ -17,10 +17,16 @@ import AuthContext from "./components/store/auth-context";
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("")
 
-  const loginHandler = () => {
+  const loginHandler = (email,Name) => {
+    setName(Name);
+    setEmail(email);
     localStorage.setItem("Is logged in", "1"); //1 for loggedin user
     setIsLoggedIn(true);
+    // console.log("BHU HARD");
+    // console.log(Name + Email);
   };
 
   useEffect(() => {
@@ -34,10 +40,11 @@ function App() {
     setIsLoggedIn(false);
   };
 
+
   return (
     <AuthContext.Provider
-      value={{ logUser: isLoggedIn, onLogOutUser: logoutHandler }}
-    >
+      value={{ logUser: isLoggedIn, onLogOutUser: logoutHandler  , userName: Name , emailID: Email}}
+    > 
       <Navbar />
       <Switch>
         <Route path="/" exact>

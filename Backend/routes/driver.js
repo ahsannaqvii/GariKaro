@@ -8,10 +8,14 @@ router.post("/driver" , function(req,res){
     const dropoff = req.body.dropoff;
     const availableSeats = req.body.seats;
     const leavingtime = req.body.leavingTime;
-    const driverinfo = req.body.driverInfo;
-    const carType = req.body.carType;
-    const carReg = req.body.carReg;
-    
+    const driverinfo = req.body.driver;
+    // const carType = req.body.carType;
+    const carReg = req.body.carRegistrationNumber;
+    const fare = req.body.Fare;
+    const date = req.body.Date;
+    const pickup=req.body.pickup;
+
+    console.log(driverinfo + " " + pickup.address + " " + dropoff.address + " " + carReg + " " + fare + " " + date + " " + leavingtime + " " + availableSeats);
     // const d = { 
     //     pickup: pickup,
     //     dropoff: dropoff,

@@ -35,7 +35,6 @@ const Login = (props) => {
 
   const formChangeHandler = (event) => {
     event.preventDefault();
-
     if (!formIsValid) {
       return;
     }
@@ -53,14 +52,13 @@ const Login = (props) => {
       if (!result.statusText === "OK") {
         throw new Error("Couldnt fetch Data!");
       }
-      console.log("AHSAN");
-      console.log(result.data[0].email);
+      // console.log("AHSAN");
+      // console.log(result.data[0].email,result.data[0].first_name);
 
       setuserAuthenticated(true);
       history.push("/user");
-      // props.auth2();
-      // props.onLog
-      props.onLogin();
+
+      props.onLogin(result.data[0].email,result.data[0].first_name);
     } catch (error) {
       console.error("FAILED!");
       setuserAuthenticated(false);

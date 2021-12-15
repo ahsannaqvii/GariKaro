@@ -8,7 +8,7 @@ router.post("/login" , function(req,res){
     const email = req.body.email;
     const password = req.body.password;
     console.log(email + " " + password);
-    var sql = "SELECT email FROM USERSDB WHERE email = '" + email + "' AND password = '" + password + "'";
+    var sql = "SELECT email , first_name  FROM USERSDB WHERE email = '" + email + "' AND password = '" + password + "'";
     db.query(sql , function(err,result){
         if (err){
             console.log(err);
