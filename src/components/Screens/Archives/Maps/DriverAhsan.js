@@ -2,69 +2,34 @@ import "./DriverMain.css";
 import React, { useState, useEffect } from "react";
 import {Form , Row, Col , Button} from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useInput from "../../hooks/use-input";
-import axios from "axios";
+// import useInput from "../../hooks/use-input";
+// import axios from "axios";
 import carsvg from '../../../assets/images/car.svg';
 import bikesvg from '../../../assets/images/bike.jpeg';
-import Input from './PlacesAutocomplete';
-import GoogleMaps from './RouteMap7';
-import GoogleMapReact from 'google-map-react';
+import PlacesAutoComplete from './PlacesAutocomplete';
+// import GoogleMaps from './RouteMap7';
+// import GoogleMapReact from 'google-map-react';
+import GMaps from './GMaps'
 
-
-//Warning: each child must ahve unique prop value
-
-function DriverMain (){
-
-    const [pickUp ,setPickUp]= useState({address:"", lat: 24.918027, lng:67.0632675});
-    const [dest, setDest] = useState({address:"", lat: 24.8568991, lng: 67.0632675});
-
-    //RouteMap Work
-    const [showingInfoWindow, setInfo] = useState(false);
-    const [activeMarker, setMarker] = useState({});
-    const [selecetdPlace, setPlace] = useState({});
-
-    // const [Lng, setLng] = useState(pickUp.lng);
-    // const [Lat, setLat] = useState(pickUp.lat);
-
-    useEffect(()=>{
-        console.log("value Changed");
-         console.log(pickUp.lat);
-         console.log(pickUp.lng);
-    },[pickUp,dest]);
+const DUMMY_LOCATIONS = [
+     {address:"", lat: 24.918027, lng:67.0632675} , 
+  ];
+function DriverMain (){ 
+    // const [pickUp ,setPickUp]= useState({address:"", lat: 24.918027, lng:67.0632675});
+    // const [dest, setDest] = useState({address:"", lat: 24.8568991, lng: 67.0632675});
+    const [Locations, setLocations] = useState(DUMMY_LOCATIONS)
    
-
-    const apiIsLoaded = (map, maps) => {
-       const directionsService = new window.google.maps.DirectionsService();
-       const directionsRenderer = new window.google.maps.DirectionsRenderer();
-    
-      const origin ={lat: pickUp.lat , lng: pickUp.lng};
-     // const origin= {lng: 67.063255 , lat: 24.9180271};
-      console.log(origin);
-      console.log("yes");
-      console.log("helllllo");
-      const destination = {lng: dest.lng, lat: dest.lat};
-      directionsRenderer.setMap(map);
-        directionsService.route(
-          {
-            origin: origin,
-            destination: destination,
-            travelMode: window.google.maps.TravelMode.DRIVING
-          },
-          (result, status) => {
-            if (status === window.google.maps.DirectionsStatus.OK) {
-              directionsRenderer.setDirections(result);
-              console.log(result);
-            } else {
-              console.error(`error fetching directions ${result}`);
-            }
-          }
-        );
-      }
-   
-   
-
+    const LocationHandler = (newLocation) => {
+        //construcing new array and also a dynamic list
+        setLocations((prevLocations) => {
+          return [newLocation, ...prevLocations];
+        });
+        console.log("AHSANyar");
+        console.log(DUMMY_LOCATIONS);
+      };
     return (
         <Row>
+       
             <Col>
             <Form className = "formLayout">
                 <Row>  
@@ -82,15 +47,15 @@ function DriverMain (){
                         </Form.Select>
                     </Col>
                 </Row>
-
-
+                
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalPickup">
                     <Form.Label column sm={6}>
                     Pickup
                     </Form.Label>
                     <Col sm={6}>
                         {/* <Form.Control type="textarea" placeholder="search for a location" /> */}
-                        <Input name= "setPick" parentCallback={setPickUp} />
+                        <PlacesAutoComplete name= "setPick" onAddLocation={LocationHandler} />
+                        {/* parentCallback={setPickUp} */}
                        
                     </Col>
                 </Form.Group>
@@ -101,7 +66,8 @@ function DriverMain (){
                     </Form.Label>
                     <Col sm={6}>
                         {/* <Form.Control type="textarea" placeholder="search for a location" /> */}
-                        <Input name= "setDest" parentCallback={setDest}/>
+                        <PlacesAutoComplete name= "setDest" onAddLocation={LocationHandler}/>
+                        {/* parentCallback={setDest} */}
                     </Col>
                 </Form.Group>
 
@@ -152,6 +118,7 @@ function DriverMain (){
                 <Button style={{background:"#5B0A0C"}} className="submit-btn" type="submit">Post Ride</Button>
                 
                 <div className="BelowForm mb-3">
+                    
                     <a>View Scheduled Rides</a>
                     <br/>
                     <a>View Past Rides</a>
@@ -161,13 +128,10 @@ function DriverMain (){
 
             <Col>
               <div style={{ height: "650px", width: "90%" , marginTop: "1.5rem"}}  id="renderr">   
-              <GoogleMapReact
-                defaultCenter={{ lng: 67.0011 , lat: 24.8607  }}
-                defaultZoom={10}
-                yesIWantToUseGoogleMapApiInternals
-               onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
-              />
+               <GMaps places={Location}/>
+         
             </div>
+            
             </Col>
             
         </Row>
