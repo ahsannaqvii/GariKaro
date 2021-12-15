@@ -20,7 +20,6 @@ router.post("/login" , function(req,res){
             console.log("User authenticated");
         }
     });
-    
 });
 
 module.exports = router;

@@ -24,6 +24,7 @@
     "react": "^16.14.0",
     "react-bootstrap": "^2.0.0-rc.1",
     "react-bootstrap-icons": "^1.6.1",
+    "react-color": "^2.19.3",
     "react-dom": "^16.14.0",
     "react-google-maps": "^9.4.5",
     "react-icons": "^4.3.1",

@@ -26,11 +26,7 @@ export class MapContainer extends Component {
     
     
       handleChange = address => {
-        console.log(this.state.Address);
         this.setState({ Address: address});
-        //setAddress(address);
-        // console.log(Address);
-        console.log(this.state.Address);
       };
       
       handleSelect = async (address, id) => {
@@ -40,12 +36,10 @@ export class MapContainer extends Component {
         this.setState({coordinates: Object.entries(latlng).slice(0).map(entry => entry[1])});
         
          if(this.props.name == 'setPick'){
-          console.log("setPickUp Prop"); 
           this.props.parentCallback({address: this.state.Address, lat: this.state.coordinates[0],
           lng: this.state.coordinates[1]});
         }
         else{
-           console.log("setDest Prop");
            this.props.parentCallback({address: this.state.Address, lat: this.state.coordinates[0],
            lng: this.state.coordinates[1]});
         }

@@ -1,13 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import img from "../../../assets/GK_LOGO.svg";
 import "./Navbar.css";
 import { Button } from "../../UI/Button";
+import AuthContext from "../../store/auth-context";
+import context from "react-bootstrap/esm/AccordionContext";
 
 function Navbar(props) {
+  const contextData = useContext(AuthContext);
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  // const [LoginButton, setLoginButton] = useState(false);
+  // const buttonHandler=()=>{
+  //   setLoginButton((prevStatus) => !prevStatus);
+  // }
+  // useEffect(() => {
+  //   console.log("run");
+  //   buttonHandler();
+  // }, [])
 
   const closeMobileMenu = () => {
     setClick(false);
@@ -34,37 +45,51 @@ function Navbar(props) {
           <Link to="/home" className="navbar-logo" onClick={closeMobileMenu}>
             <img src={img} className="img_logo"></img>
           </Link>
-          <div  className="menu-icon" onClick={clickHandler}>
+          <div className="menu-icon" onClick={clickHandler}>
             {click ? <FaTimes /> : <FaBars />}
           </div>
           {/* //yeh wala part jab mobile screen pai lines pai click karoge tou options dekhaaega */}
           {/* //nav-menu is for desktop , nav-menu active is for mobile */}
-          <ul className={click ? "nav-menu active" : "nav-menu"}> 
+          <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <Link to="/home" className="nav-links" onClick={closeMobileMenu}>
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+              <Link
+                to="/driver"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
                 Drive
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-              Ride
+              <Link to="/user" className="nav-links" onClick={closeMobileMenu}>
+                Ride
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/user" className="nav-links" onClick={closeMobileMenu}>
+                My Profile
               </Link>
             </li>
             <li className="nav-btn">
-              {button ? (
-                <Link to="/login" className="btn-link">
-                  <Button buttonStyle="btn--outline" >{props.authorized ? "LOGOUT" : "LOGIN"} </Button>
-                </Link>
-              ) : (
-                <Link to="/login" className="btn-link">
-                  <Button buttonStyle="btn--outline" buttonSize="btn--mobile">
-                    SIGN UP{" "}
+              {contextData.logUser && (
+                <Link to="/home" className="btn-link">
+                  <Button
+                    buttonStyle="btn--outline"
+                    onClick={contextData.onLogOutUser}
+                  >
+                    LOGOUT
                   </Button>
+                </Link>
+              )}
+
+              {!contextData.logUser && (
+                <Link to="/login" className="btn-link">
+                  <Button buttonStyle="btn--outline">LOGIN</Button>
                 </Link>
               )}
             </li>
@@ -76,3 +101,18 @@ function Navbar(props) {
 }
 
 export default Navbar;
+
+//FOR RESPONSIVE
+{
+  /* {button ? (
+                <Link to="/login" className="btn-link">
+                  <Button buttonStyle="btn--outline"  >{props.status ? "LOGOUT" : "LOGIN"} </Button>
+                </Link>
+              ) : (
+                <Link to="/login" className="btn-link">
+                  <Button buttonStyle="btn--outline" buttonSize ="btn--mobile">
+                    SIGN UP{" "}
+                  </Button>
+                </Link>
+              )} */
+}
