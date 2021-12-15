@@ -218,19 +218,7 @@ function DriverMain() {
               <label>Car Registration Number</label>
             </Col>
             <Col>
-              <Row>
-                <Col>
-                  <label>Leaving Date</label>
-                </Col>
-                <Col>
-                  <Form.Control
-                    className="mb-3"
-                    type="date"
-                    placeholder="date"
-                    onChange={dateHandler}
-                  />
-                </Col>
-              </Row>
+              
               <Form.Control
                 className="mb-3"
                 type="text"
@@ -239,6 +227,19 @@ function DriverMain() {
               />
             </Col>
           </Row>
+          <Row>
+              <Col>
+                <label>Leaving Date</label>
+              </Col>
+              <Col>
+                <Form.Control
+                  className="mb-3"
+                  type="date"
+                  placeholder="date"
+                  onChange={dateHandler}
+                />
+              </Col>
+            </Row>
           <Row>
             <Col>
               <label>Fare</label>
