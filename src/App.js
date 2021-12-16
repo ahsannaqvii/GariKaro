@@ -13,6 +13,7 @@ import Navbar from "./components/Screens/Navbar/Navbar";
 import DriverMainStep2 from './components/Screens/DriverMain/StepTwo';
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "./components/store/auth-context";
+import UserFormAhsan from "./components/Screens/UserForum/UserForumAhsan";
 
 function App() {
 
@@ -70,7 +71,8 @@ function App() {
           
         <Route exact path="/user">
           {/* {!Authorized ? <Redirect to="/" /> : <UserForum />}  */}
-          <UserForum />
+          {/* <UserForum /> */}
+          <UserFormAhsan/>
         </Route>
 
         {/* default case for no page found  */}

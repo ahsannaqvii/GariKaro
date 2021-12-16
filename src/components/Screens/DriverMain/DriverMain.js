@@ -68,7 +68,7 @@ function DriverMain() {
   const dateHandler = (e) => {
     setDate(e.target.value)
   };
-  const driverHandler = () => {
+  async function driverHandler () {
     const name = contextData.userName;
     // const email=contextData.userEmail;
     console.log("DRIVER");
@@ -88,9 +88,10 @@ function DriverMain() {
     try {
       const result=await axios.post("http://localhost:4000/driver", d);
       if (!result.statusText === "OK") {
-        throw new Error("Couldnt fetch Data!");
+        throw new Error("Couldnt fetch Data!");              
       }
-      // console.log(result.)
+
+      console.log(result);
 
     }
     catch(err){
@@ -291,7 +292,7 @@ export default DriverMain;
     id={`Car`}
     label={carsvg}
     className = "mb-3"
-/>   */
+/>   */ 
 }
 
 {
