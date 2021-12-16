@@ -85,16 +85,18 @@ function DriverMain() {
       Date:Date,
     };
     history.push("/user");
+    try {
+      const result=await axios.post("http://localhost:4000/driver", d);
+      if (!result.statusText === "OK") {
+        throw new Error("Couldnt fetch Data!");
+      }
+      // console.log(result.)
 
-      axios
-        .post("http://localhost:4000/driver", d)
-        .then((res) => {
-            // if (res.carFound){
-
-            // } else {
-
-            // }
-        });
+    }
+    catch(err){
+      console.error("FAILED!");
+      // setuserAuthenticated(false);
+    }
   };
 
   return (
