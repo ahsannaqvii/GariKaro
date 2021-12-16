@@ -1,0 +1,52 @@
+CREATE TABLE USERSDB (
+	Email_ID varchar(255),
+	First_Name varchar(255) NOT NULL,
+	Last_Name varchar(255),
+	Password varchar(255) NOT NULL,
+	Contact_Number varchar(11) NOT NULL ,
+	PRIMARY KEY (Email_ID)
+);
+
+CREATE TABLE VEHICLESDB (
+	Car_Registration_Number varchar(255),
+	Car_Make varchar(255) NOT NULL,
+	Car_Name varchar(255) NOT NULL,
+	Car_Model varchar(255) NOT NULL,
+	Color varchar(255),
+	PRIMARY KEY (Car_Registration_Number)
+);
+
+CREATE TABLE RIDESDB (
+	Ride_ID int NOT NULL AUTO_INCREMENT,
+	Driver_RollNo varchar(255) NOT NULL,
+	Driver_Name varchar(255) NOT NULL,
+	Pickup_Location varchar(255) NOT NULL,
+	Dropoff_Location varchar(255) NOT NULL,
+	Vehicle_Type varchar(255) NOT NULL,
+	Leaving_Time time NOT NULL,
+	Seats int NOT NULL,
+	Car_Registration_Number varchar(255) NOT NULL,
+	Date date NOT NULL,
+	Fare int NOT NULL,
+	PRIMARY KEY (Ride_ID, Driver_RollNo , Date , Leaving_Time), 
+	FOREIGN KEY (Car_Registration_Number) REFERENCES VEHICLESDB(Car_Registration_Number)
+);
+
+
+CREATE TABLE PASSENGERSDB (
+	Passenger_RollNo varchar(255),
+	Ride_ID int,
+	PRIMARY KEY (Passenger_RollNo),
+	FOREIGN KEY (Ride_ID) REFERENCES RIDESDB(Ride_ID)
+);
+
+CREATE TABLE ADMINSDB (
+	ID int NOT NULL AUTO_INCREMENT,
+	Username varchar(255),
+	Password varchar(255),
+	Security_Key varchar(255),
+	PRIMARY KEY (ID)
+);
+
+
+
