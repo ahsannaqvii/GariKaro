@@ -6,19 +6,43 @@ import {CirclePicker} from 'react-color';
 import axios from "axios";
 
 function Step2 (){ 
-    const [state , setState] = useState({background: '#fff'});
+    const [carName , setCarName] = useState("");
+    const [carModel , setCarModel] = useState("");
+    const [carMake , setcarMake] = useState ("");
+    const [carColor , setCarColor] = useState({background: '#fff'});
 
-    const handleChangeComplete = (color) =>{
-        setState({background: color.hex});
+    const ColorhandleChange = (color) =>{
+        setCarColor({background: color.hex});
     }
 
-    const vehicle = () => {
-        const a = {
-            
-          };
-          axios
-            .post("http://localhost:4000/driver2", a)
-            .then((res) => {});
+    const carModelhandleChange = (e) => {
+        setCarModel(e.target.value); 
+    }
+
+    const carNamehandleChange = (e) => {
+        setCarName(e.target.value);
+    }
+
+    const carMakehandleChange = (e) => {
+        setcarMake(e.target.value);
+    }
+
+    const carDetails = () => {
+        const carInfo = {
+            carName: carName, 
+            carModel: carModel, 
+            carMake: carMake, 
+            carColor: carColor
+        };
+        axios
+            .post("http://localhost:4000/car-details", carInfo)
+            .then((res) => {
+                // if (res.carFound){
+
+                // } else {
+
+                // }
+        });
     }
     
     return (
@@ -30,10 +54,18 @@ function Step2 (){
                 <Form className = "formLayout"> 
                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalPickup">
                         <Form.Label column sm={6}>
+                        Car Make
+                        </Form.Label>
+                        <Col sm={6}>
+                            <Form.Control type="textarea" placeholder="HONDA" onChange={carMakehandleChange} />        
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3" controlId="formHorizontalPickup">
+                        <Form.Label column sm={6}>
                         Car Name
                         </Form.Label>
                         <Col sm={6}>
-                            <Form.Control type="textarea" placeholder="Car Name" /> 
+                            <Form.Control type="textarea" placeholder="Car Name" onChange={carNamehandleChange}/> 
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalPickup">
@@ -41,15 +73,7 @@ function Step2 (){
                         Car Model
                         </Form.Label>
                         <Col sm={6}>
-                            <Form.Control type="textarea" placeholder="Car Model" />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} className="mb-3" controlId="formHorizontalPickup">
-                        <Form.Label column sm={6}>
-                        Car Registration Year
-                        </Form.Label>
-                        <Col sm={6}>
-                            <Form.Control type="textarea" placeholder="YYYY" />        
+                            <Form.Control type="textarea" placeholder="YYYY" onChange={carModelhandleChange} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-5" controlId="formHorizontalPickup">
@@ -57,10 +81,10 @@ function Step2 (){
                         Car Color
                         </Form.Label>
                         <Col sm={6}>
-                            <CirclePicker color={state.background} onChangeComplete={handleChangeComplete}/>                       
+                            <CirclePicker colors = {["#020202", "#FCF9F9" , "#3f51b5", "#6d6b6a", "#673ab7", "#637f64","#89cff0", "#03a9f4", "#00bcd4", "#009688", "#4caf50", "#8bc34a", "#cddc39", "#ffeb3b", "#ffc107", "#ff9800", "#ff5722", "#795548", "#607d8b"]} color={carColor.background} onChangeComplete={ColorhandleChange}/>                       
                         </Col>
                     </Form.Group>
-                    <Button style={{background:"#5B0A0C"}} className="mb-3 step2-submit-btn" type="submit" onClick={vehicle}>Post Ride</Button>
+                    <Button style={{background:"#5B0A0C"}} className="mb-3 step2-submit-btn" type="submit" onClick={carDetails}>Post Ride</Button>
                 </Form>
             </Col>
                 <Col sm={2} >

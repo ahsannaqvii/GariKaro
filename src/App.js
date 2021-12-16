@@ -64,7 +64,7 @@ function App() {
           <DriverMain />
         </Route>
 
-        <Route path="/driver2" exact>
+        <Route path="/car-details" exact>
           <DriverMainStep2/> 
           </Route> 
           
