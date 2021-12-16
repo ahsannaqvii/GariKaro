@@ -39,10 +39,10 @@ const Login = (props) => {
       return;
     }
     // resetEmail();
-    // resetPassword();
+    // resetPassword(); 
   };
   async function login() {
-    console.log("Here");
+    console.log("Here AT LOGIN ASYNC");
     const user = {
       email: enteredEmail,
       password: enteredPassword,
@@ -53,13 +53,13 @@ const Login = (props) => {
         throw new Error("Couldnt fetch Data!");
       }
       // console.log("AHSAN");
-      // console.log(result.data[0].email,result.data[0].first_name);
+      // console.log(result.data[0].Roll_Number,result.data[0].First_Name);
 
       setuserAuthenticated(true);
       history.push("/user");
-      props.onLogin(result.data[0].Email_ID,result.data[0].First_Name);
+      props.onLogin(result.data[0].Roll_Number,result.data[0].First_Name);
     } catch (error) {
-      console.error("FAILED!");
+      console.error("FAILED KESE?!");
       setuserAuthenticated(false);
       // history.push("/home");
     }

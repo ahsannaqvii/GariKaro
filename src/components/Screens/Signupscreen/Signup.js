@@ -89,19 +89,19 @@ const Signup = () => {
       lastname: enteredLastName,
       Rollno: enteredRollNo,
     };
-    try {
-      const result = await axios.post("http://localhost:4000/signup", user);
-      console.log(result);
-      // if (!result.statusText === "OK") {
-      //   throw new Error("Couldnt fetch Data!");
-      // }
-      // console.log("ESE KESE ");
-      // history.push("/user");
-    } catch (error) {
-      console.log("ESE KESE ERROR ");
-      console.error("FAILED!");
-      // history.push("/signup");
-    }
+    const result = await axios.post("http://localhost:4000/signup", user);
+    console.log(result);
+    // try {
+     
+    //   // if (!result.statusText === "Succesfully Added") {
+    //   //   throw new Error("Couldnt fetch Data!");
+    //   // }
+    //   console.log("Success!");
+    // } catch (error) {
+    //   console.log("ESE KESE ERROR ");
+    //   console.error("FAILED!");
+    //   // history.push("/signup");
+    // }
   }
 
   const focusHandler = () => {

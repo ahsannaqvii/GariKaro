@@ -7,7 +7,6 @@ CREATE TABLE USERSDB (
 	Contact_Number varchar(11) NOT NULL ,
 	PRIMARY KEY (Email_ID)
 );
-
 CREATE TABLE VEHICLESDB (
 	Car_Registration_Number varchar(255),
 	Car_Make varchar(255) NOT NULL,

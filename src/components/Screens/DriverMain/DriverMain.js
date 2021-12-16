@@ -63,6 +63,10 @@ function DriverMain() {
   };
 
   const FareHandleChange = (e) => {
+    const rollNo = contextData.rollNo;
+    // const email=contextData.userEmail;
+    console.log("DRIVERNAME BAHU HARD1:");
+    console.log(rollNo);
     setFare(e.target.value);
   };
   const dateHandler = (e) => {
@@ -70,32 +74,32 @@ function DriverMain() {
   };
   async function driverHandler() {
     const name = contextData.userName;
-    const email=contextData.emailID;
+    const rollNo = contextData.rollNo;
     // const email=contextData.userEmail;
     console.log("DRIVERNAME BAHU HARD:");
-    console.log(email);
+    console.log(rollNo);
     const d = {
       pickup: pickUp,
-      dropoff: dest,  
+      dropoff: dest,
       seats: seats,
       driver: name,
       leavingTime: time,
-      email: email,
+      rollNo: rollNo,
       Fare: Fare,
       //   carType: carType,
       carRegistrationNumber: carRegistrationNumber,
       Date: Date,
     };
-    history.push("/user");
+
     try {
       const result = await axios.post("http://localhost:4000/driver", d);
       if (!result.statusText === "OK") {
         throw new Error("Couldnt fetch Data!");
       }
-
+      history.push("/user");
       console.log(result);
     } catch (err) {
-      console.error("FAILED!");
+      console.error("FAILED ahsan!");
       // setuserAuthenticated(false);
     }
   }

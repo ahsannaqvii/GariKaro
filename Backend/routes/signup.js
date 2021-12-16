@@ -18,8 +18,8 @@ router.post("/signup" , function(req,res){
             res.send(err);
         }
         else {
-            res.send(result);
             console.log(result);
+            res.send({statusText: "Succesfully Added"});
         }
     });
 });

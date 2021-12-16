@@ -4,7 +4,7 @@ const AuthContext = React.createContext({
   isLoggedIn: false,
   onLogout: () => {},
   userName:"",
-  emailID:"",
+  rollNo:"",
 
 });
 //often it will be an object

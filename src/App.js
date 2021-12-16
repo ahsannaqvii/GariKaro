@@ -19,11 +19,13 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [Name, setName] = useState("");
-  const [Email, setEmail] = useState("")
+  const [rollNo, setRollNo] = useState("")
 
-  const loginHandler = (email,Name) => {
+  const loginHandler = (rollNO,Name) => {
     setName(Name);
-    setEmail(email);
+    console.log("karak");
+    console.log(rollNO);
+    setRollNo(rollNO);
     localStorage.setItem("Is logged in", "1"); //1 for loggedin user
     setIsLoggedIn(true);
     // console.log("BHU HARD");
@@ -44,7 +46,7 @@ function App() {
 
   return (
     <AuthContext.Provider
-      value={{ logUser: isLoggedIn, onLogOutUser: logoutHandler  , userName: Name , emailID: Email}}
+      value={{ logUser: isLoggedIn, onLogOutUser: logoutHandler  , userName: Name , rollNo: rollNo}}
     > 
       <Navbar />
       <Switch>
