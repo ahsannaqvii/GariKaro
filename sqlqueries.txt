@@ -1,5 +1,6 @@
 CREATE TABLE USERSDB (
 	Email_ID varchar(255),
+	Roll_Number varchar(255) NOT NULL,
 	First_Name varchar(255) NOT NULL,
 	Last_Name varchar(255),
 	Password varchar(255) NOT NULL,

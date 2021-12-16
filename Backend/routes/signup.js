@@ -11,7 +11,7 @@ router.post("/signup" , function(req,res){
     const password = req.body.password;
     const phonenumber = req.body.phoneNumber;
     const Rollno = req.body.Rollno;
-    var sql = "INSERT INTO USERSDB VALUES ('" + email + "','" + firstname + "','" + lastname + "','" + password + "'," + phonenumber + ")";
+    var sql = "INSERT INTO USERSDB VALUES ('" + email + "','" + Rollno+ "','" + firstname + "','" + lastname + "','" + password + "'," + phonenumber + ")";
     db.query(sql , function(err,result){
         if (err){
             console.log(err);
