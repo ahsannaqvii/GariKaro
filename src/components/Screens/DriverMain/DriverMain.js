@@ -74,9 +74,9 @@ function DriverMain() {
     console.log("DRIVER");
     console.log(name);
     const d = {
-      pickup: pickUp, //working
-      dropoff: dest, //working
-      seats: seats, //working
+      pickup: pickUp, 
+      dropoff: dest, 
+      seats: seats, 
       driver: name,
       leavingTime: time,
       Fare: Fare,
@@ -155,7 +155,7 @@ function DriverMain() {
             </Form.Label>
             <Col sm={6}>
               <Button
-                style={{ background: "#F2F5F8" }}
+                style={{ background: "#EEEEEE" }}
                 value="car"
                 type="button"
                 variant="light"
@@ -165,7 +165,7 @@ function DriverMain() {
                 <img src={carsvg}></img>
               </Button>
               <Button
-                style={{ background: "#F2F5F8" }}
+                style={{ background: "#EEEEEE" }}
                 value="bike"
                 type="button"
                 variant="light"
