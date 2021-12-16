@@ -80,7 +80,7 @@ function DriverMain() {
       seats: seats,
       driver: name,
       leavingTime: time,
-      email:email,
+      email: email,
       Fare: Fare,
       //   carType: carType,
       carRegistrationNumber: carRegistrationNumber,

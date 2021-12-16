@@ -5,9 +5,9 @@ const db = require('../models/UsersDB');
 const router = express.Router();
 
 router.get("/forum" , function(req,res){
-    const driverName = req.body;
+    const recievedData = req.body;
 
-    var sql = "SELECT * FROM RIDESDB WHERE Driver_RollNo = '" + driverName.RollNo + "';";
+    var sql = "SELECT * FROM RIDESDB WHERE Driver_RollNo = '" + recievedData.rollNo + "';";
 
     db.query(sql , function(err,result){
         if (err){

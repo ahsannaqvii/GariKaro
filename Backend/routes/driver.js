@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/driver" , function(req,res){
     const recievedInfo = req.body;
-    const driverRollNo = recievedInfo.driverRollNo;
+    let driverRollNo = recievedInfo.rollNo;
     const driverName = recievedInfo.driver;
     const pickup = recievedInfo.pickup;
     const dropoff = recievedInfo.dropoff;
@@ -17,23 +17,9 @@ router.post("/driver" , function(req,res){
     const carRegistrationNumber = recievedInfo.carRegistrationNumber;
     const date = recievedInfo.Date;
     const fare = recievedInfo.Fare;
-    
-    const rideDetails = { 
-        driverName: driverName,
-        pickup: pickup,
-        dropoff: dropoff,
-        // carType: carType,
-        leavingtime: leavingtime,
-        availableSeats: availableSeats,
-        carRegistrationNumber: carRegistrationNumber,
-        Date: date,
-        Fare: fare,
-        email:email,
-    }
     const value = 0;
-    // var sql1 = "INSERT INTO RIDESDB VALUES ('" + driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
-    var sql1 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup + "','" + dropoff + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
-
+    
+    var sql1 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
     var sql2 = "SELECT Car_Registration_Number FROM VEHICLESDB WHERE Car_Registration_Number = '" + carRegistrationNumber + "';";
 
     db.query(sql1  + ";" + sql2 , [1,2] , function(err,results){
