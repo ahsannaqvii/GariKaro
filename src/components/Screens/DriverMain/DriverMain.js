@@ -10,7 +10,7 @@ import AuthContext from "../../store/auth-context";
 import { useHistory } from "react-router";
 
 function DriverMain() {
-    let history = useHistory();
+  let history = useHistory();
   const contextData = useContext(AuthContext);
 
   const [pickUp, setPickUp] = useState({
@@ -66,39 +66,39 @@ function DriverMain() {
     setFare(e.target.value);
   };
   const dateHandler = (e) => {
-    setDate(e.target.value)
+    setDate(e.target.value);
   };
-  async function driverHandler () {
+  async function driverHandler() {
     const name = contextData.userName;
+    const email=contextData.emailID;
     // const email=contextData.userEmail;
-    console.log("DRIVER");
-    console.log(name);
+    console.log("DRIVERNAME BAHU HARD:");
+    console.log(email);
     const d = {
-      pickup: pickUp, 
-      dropoff: dest, 
-      seats: seats, 
+      pickup: pickUp,
+      dropoff: dest,  
+      seats: seats,
       driver: name,
       leavingTime: time,
+      email:email,
       Fare: Fare,
-    //   carType: carType,
+      //   carType: carType,
       carRegistrationNumber: carRegistrationNumber,
-      Date:Date,
+      Date: Date,
     };
     history.push("/user");
     try {
-      const result=await axios.post("http://localhost:4000/driver", d);
+      const result = await axios.post("http://localhost:4000/driver", d);
       if (!result.statusText === "OK") {
-        throw new Error("Couldnt fetch Data!");              
+        throw new Error("Couldnt fetch Data!");
       }
 
       console.log(result);
-
-    }
-    catch(err){
+    } catch (err) {
       console.error("FAILED!");
       // setuserAuthenticated(false);
     }
-  };
+  }
 
   return (
     <Row>
@@ -221,7 +221,6 @@ function DriverMain() {
               <label>Car Registration Number</label>
             </Col>
             <Col>
-              
               <Form.Control
                 className="mb-3"
                 type="text"
@@ -231,18 +230,18 @@ function DriverMain() {
             </Col>
           </Row>
           <Row>
-              <Col>
-                <label>Leaving Date</label>
-              </Col>
-              <Col>
-                <Form.Control
-                  className="mb-3"
-                  type="date"
-                  placeholder="date"
-                  onChange={dateHandler}
-                />
-              </Col>
-            </Row>
+            <Col>
+              <label>Leaving Date</label>
+            </Col>
+            <Col>
+              <Form.Control
+                className="mb-3"
+                type="date"
+                placeholder="date"
+                onChange={dateHandler}
+              />
+            </Col>
+          </Row>
           <Row>
             <Col>
               <label>Fare</label>
@@ -292,7 +291,7 @@ export default DriverMain;
     id={`Car`}
     label={carsvg}
     className = "mb-3"
-/>   */ 
+/>   */
 }
 
 {

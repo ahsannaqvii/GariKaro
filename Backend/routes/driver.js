@@ -28,6 +28,7 @@ router.post("/driver" , function(req,res){
         carRegistrationNumber: carRegistrationNumber,
         Date: date,
         Fare: fare,
+        email:email,
     }
     const value = 0;
     // var sql1 = "INSERT INTO RIDESDB VALUES ('" + driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";

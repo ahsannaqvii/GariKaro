@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import useInput from "../../hooks/use-input";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Prompt } from "react-router";
+import { Prompt, useHistory } from "react-router";
 const Signup = () => {
+  let history = useHistory();
+
   const [isEntering, setisEntering] = useState(false);
   const {
     value: enteredEmail,
@@ -78,7 +80,7 @@ const Signup = () => {
     resetPhoneNumber();
   };
 
-  const login = () => {
+  async function login() {
     const user = {
       email: enteredEmail,
       password: enteredPassword,
@@ -87,10 +89,20 @@ const Signup = () => {
       lastname: enteredLastName,
       Rollno: enteredRollNo,
     };
-    axios
-      .post("http://localhost:4000/signup", user)
-      .then((res) => console.log(res));
-  };
+    try {
+      const result = await axios.post("http://localhost:4000/signup", user);
+      console.log(result);
+      // if (!result.statusText === "OK") {
+      //   throw new Error("Couldnt fetch Data!");
+      // }
+      // console.log("ESE KESE ");
+      // history.push("/user");
+    } catch (error) {
+      console.log("ESE KESE ERROR ");
+      console.error("FAILED!");
+      // history.push("/signup");
+    }
+  }
 
   const focusHandler = () => {
     setisEntering(true);
@@ -206,10 +218,10 @@ const Signup = () => {
                     <button
                       disabled={!formIsValid}
                       onClick={login}
-                      onClick={() => {
-                        finishEnteringHandler();
-                         login();
-                      }}
+                      // onClick={() => {
+                      //   finishEnteringHandler();
+                      //    login();
+                      // }}
                       type="submit"
                       class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"
                     >

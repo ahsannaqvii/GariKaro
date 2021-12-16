@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/login" , function(req,res){
     const email = req.body.email;
     const password = req.body.password;
-    var sql = "SELECT email , first_name  FROM USERSDB WHERE email = '" + email + "' AND password = '" + password + "'";
+    var sql = "SELECT Email_ID , First_Name  FROM USERSDB WHERE Email_ID = '" + email + "' AND Password = '" + password + "'";
     db.query(sql , function(err,result){
         if (err){
             console.log(err);

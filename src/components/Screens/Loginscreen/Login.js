@@ -57,8 +57,7 @@ const Login = (props) => {
 
       setuserAuthenticated(true);
       history.push("/user");
-
-      props.onLogin(result.data[0].email,result.data[0].first_name);
+      props.onLogin(result.data[0].Email_ID,result.data[0].First_Name);
     } catch (error) {
       console.error("FAILED!");
       setuserAuthenticated(false);
