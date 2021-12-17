@@ -93,6 +93,7 @@ function DriverMain() {
 
     try {
       const result = await axios.post("http://localhost:4000/driver", d);
+      console.log(result);
       if (!result.entryAdded) {
         throw new Error("Couldnt fetch Data!");
       }
@@ -263,7 +264,7 @@ function DriverMain() {
           <Button
             style={{ background: "#5B0A0C" }}
             className="submit-btn"
-            type="button"
+            type="submit"
             onClick={driverHandler}
           >
             Next
