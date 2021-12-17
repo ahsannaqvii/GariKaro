@@ -93,9 +93,16 @@ function DriverMain() {
     };
     
     try {
-      console.log("HELLO WORLD");
+      // console.log("HELLO WORLD");
       await axios.post("http://localhost:4000/driver", d)
-      .then((response) => console.log(response))
+      .then((response) => {
+        if (response.data.entryAdded && response.data.carFound){
+          console.log("CAR FOUND & ENTRY ADDED");
+        }
+        else if (response.data.entryAdded == true && response.data.carFound == false){
+          console.log("CAR NOT FOUND & ENTRY ADDED");
+        }
+      }) 
       .catch((err) => console.log(err));
       history.push("/user");
       // console.log(`here ${result}`);
