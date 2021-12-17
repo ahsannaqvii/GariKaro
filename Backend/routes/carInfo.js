@@ -10,11 +10,12 @@ router.post("/car-details" , function(req,res){
     const carName = req.body.carName;
     const carModel = req.body.carModel;
     const carMake = req.body.carMake;
-    const carColor = req.body.carColor.background;
+    const carColor = req    .body.carColor.background;
     console.log(carName + " " + carModel + " " + carMake + " " + carColor);
     var sql = "INSERT INTO VEHICLESDB VALUES ('" + carRegistrationNumber + "','" + carMake + "','" + carModel + "','" + carName + "','" + carColor + "')";
     db.query(sql , function(err,result){
         if (err){
+            console.log("ERROR IN CAR DETAILS ");
             console.log(err);
             res.send(err);
         }

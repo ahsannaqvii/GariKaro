@@ -27,9 +27,9 @@ function DriverMain() {
   const [mapReference, setMapReference] = useState(null);
   const [mapsReference, setMapsReference] = useState(null);
   //RouteMap Work
-  const [showingInfoWindow, setInfo] = useState(false);
-  const [activeMarker, setMarker] = useState({});
-  const [selecetdPlace, setPlace] = useState({});
+  // const [showingInfoWindow, setInfo] = useState(false);
+  // const [activeMarker, setMarker] = useState({});
+  // const [selecetdPlace, setPlace] = useState({});
 
   useEffect(() => {}, [pickUp, dest, mapReference, mapsReference]);
 
@@ -72,7 +72,7 @@ function DriverMain() {
   const dateHandler = (e) => {
     setDate(e.target.value);
   };
-  async function driverHandler() {
+  const  driverHandler=async()=> {
     const name = contextData.userName;
     const rollNo = contextData.rollNo;
     // const email=contextData.userEmail;
@@ -81,7 +81,7 @@ function DriverMain() {
     const d = {
       pickup: pickUp,
       dropoff: dest,
-      seats: seats,
+      seats: seats, 
       driver: name,
       leavingTime: time,
       rollNo: rollNo,
@@ -93,13 +93,14 @@ function DriverMain() {
 
     try {
       const result = await axios.post("http://localhost:4000/driver", d);
-      if (!result.statusText === "OK") {
+      if (!result.entryAdded) {
         throw new Error("Couldnt fetch Data!");
       }
-      history.push("/user");
+      console.log("/home");
       console.log(result);
     } catch (err) {
-      console.error("FAILED ahsan!");
+      console.error("FAILED ahsan how?!");
+      history.push("/user");
       // setuserAuthenticated(false);
     }
   }
@@ -262,7 +263,7 @@ function DriverMain() {
           <Button
             style={{ background: "#5B0A0C" }}
             className="submit-btn"
-            type="submit"
+            type="button"
             onClick={driverHandler}
           >
             Next

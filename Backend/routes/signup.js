@@ -21,6 +21,7 @@ router.post("/signup" , function(req,res){
             console.log(result);
             res.send({statusText: "Succesfully Added"});
         }
+        
     });
 });
 

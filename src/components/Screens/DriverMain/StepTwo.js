@@ -27,22 +27,16 @@ function Step2 (){
         setcarMake(e.target.value);
     }
 
-    const carDetails = () => {
+    const carDetails = async () => {
         const carInfo = {
             carName: carName, 
             carModel: carModel, 
             carMake: carMake, 
             carColor: carColor
         };
-        axios
-            .post("http://localhost:4000/car-details", carInfo)
-            .then((res) => {
-                // if (res.carFound){
-
-                // } else {
-
-                // }
-        });
+         const result=await axios.post("http://localhost:4000/car-details", carInfo)
+           console.log(result);
+        
     }
     
     return (
