@@ -20,43 +20,17 @@ router.post("/driver" , function(req,res){
     const value = 0;
 
     // console.log(driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare);
-    var sql1 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
+    // var sql1 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
+    var sql1 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup + "','" + dropoff + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
+
     var sql2 = "SELECT Car_Registration_Number FROM VEHICLESDB WHERE Car_Registration_Number = '" + carRegistrationNumber + "';";
     db.query(sql1 + ";" + sql2 , [1,2] , function(err,results){
         if (err){
-            if (!results[0]){
-                
-            }
-            throw(err);
+            return res.status(200).json({ entryAdded : "true" , carFound: "false" });
         }
         else {
-
+            return res.status(200).json({ entryAdded : "true" , carFound: "true" });
         }
-        // if (err){
-     
-        //     const entry="OK"
-        //     const queryResult = {
-        //         entryAdded: true,
-        //         carFound: false
-        //     }
-        //     console.log("YEH CHALA ERROR IN NODE ");
-        //     console.log(err);
-        //     console.log(queryResult);
-        //     res.send(queryResult);
-        // }
-        // else {
-        //     if (results[1]){
-        //         const queryResult = {
-        //             entryAdded: true,
-        //             carFound: true
-        //         }
-        //         console.log("YEH CHALA RESULT IN NODE ");
-        //         console.log(queryResult);
-        //         res.send(queryResult);
-        //     }
-        // }
-       
-        return res.status(200).json({ msg : "bahukadak" });
     });
 }); 
 
