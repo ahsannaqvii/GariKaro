@@ -2,40 +2,43 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import SignUp from "./components/Screens/Signupscreen/Signup";
 import Login from "./components/Screens/Loginscreen/Login";
-import UserForum from "../src/components/Screens/UserForum/UserForum";
 import DriverMain from "./components/Screens/DriverMain/DriverMain";
-// import DriverMain2 from "./components/Screens/DriverMain/StepTwo";
-import NotFound from './components/Screens/NotFound'
-import 'font-awesome/css/font-awesome.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import NotFound from "./components/Screens/NotFound";
+import "font-awesome/css/font-awesome.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/Screens/Homepage/Home";
 import Navbar from "./components/Screens/Navbar/Navbar";
-import DriverMainStep2 from './components/Screens/DriverMain/StepTwo';
-import { useState, useEffect, useContext } from "react";
+import DriverMainStep2 from "./components/Screens/DriverMain/StepTwo";
+import { useState, useEffect } from "react";
 import AuthContext from "./components/store/auth-context";
-import UserFormAhsan from "./components/Screens/UserForum/UserForumAhsan";
+import UserForum from "./components/Screens/UserForum/UserForum";
 
 function App() {
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [Name, setName] = useState("");
-  const [rollNo, setRollNo] = useState("")
+  const [rollNo, setRollNo] = useState("");
 
-  const loginHandler = (rollNO,Name) => {
+  const loginHandler = (rollNO, Name) => {
     setName(Name);
-    console.log("karak");
-    console.log(rollNO);
+
     setRollNo(rollNO);
-    localStorage.setItem("Is logged in", "1"); //1 for loggedin user
+    const obj = { id: "1", name: Name, no: rollNO };
+
+    localStorage.setItem("user", JSON.stringify(obj)); //1 for loggedin user
+    localStorage.setItem("Is logged in", 1); //1 for loggedin user
+
     setIsLoggedIn(true);
-    // console.log("BHU HARD");
-    // console.log(Name + Email);
+
   };
 
   useEffect(() => {
-    const checkIfUserLoggedIn = localStorage.getItem("Is logged in");
+    var user = JSON.parse(localStorage.getItem("user"));
+
+    const checkIfUserLoggedIn = user.id;
     if (checkIfUserLoggedIn === "1") {
       setIsLoggedIn(true);
+      setName(user.name);
+      setRollNo(user.no);
     }
   }, []);
   const logoutHandler = () => {
@@ -43,11 +46,15 @@ function App() {
     setIsLoggedIn(false);
   };
 
-
   return (
     <AuthContext.Provider
-      value={{ logUser: isLoggedIn, onLogOutUser: logoutHandler  , userName: Name , rollNo: rollNo}}
-    > 
+      value={{
+        logUser: isLoggedIn,
+        onLogOutUser: logoutHandler,
+        userName: Name,
+        rollNo: rollNo,
+      }}
+    >
       <Navbar />
       <Switch>
         <Route path="/" exact>
@@ -68,13 +75,13 @@ function App() {
         </Route>
 
         <Route path="/car-details" exact>
-          <DriverMainStep2/> 
-          </Route> 
-          
+          <DriverMainStep2 />
+        </Route>
+
         <Route exact path="/user">
           {/* {!Authorized ? <Redirect to="/" /> : <UserForum />}  */}
           {/* <UserForum /> */}
-          <UserFormAhsan/>
+          <UserForum />
         </Route>
 
         {/* default case for no page found  */}

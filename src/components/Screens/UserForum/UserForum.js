@@ -1,100 +1,114 @@
-import "./UserForum.css";
-import React, { useState } from "react";
-import {Row , Col , Tab , Tabs, Form , Card} from "react-bootstrap";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useInput from "../../hooks/use-input";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import Card from "../../UI/Card/Card";
+// import MealItem from './MealItem/MealItem';
+import classes from "./UserForum.module.css";
+import RideDetails from "./RideDetails/RideDetails";
+import UserSummary from "./UserSummary";
+import RideConfirm from "./RidesForm/RideConfirm";
+import AuthContext2 from "../../store/auth-context2";
+const loadedRides = [];
+const UserForum = () => {
+    const [seatsRemaining, setseatsRemaining] = useState(4);
 
-function UserForum (){
+  const seatChangeHandler=(n)=>{
+    setseatsRemaining(n);
+  }
+  const [details, setDetails] = useState([]);
+  const [Loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isRideConfirm, setisRideConfirm] = useState(false);
+  const [ID, setID] = useState(1);
+  const showRideHandler = () => {
+    setisRideConfirm(true);
+  };
+  const closeRideHandler = () => {
+    setisRideConfirm(false);
+  };
+
+  useEffect(() => {
+    const fetchRides = async () => {
+      const response = await axios.get("http://localhost:4000/forum");
+      console.log(response.data[0].Ride_ID);
+
+  
+
+      for (let key in response.data) {
+        console.log(response.data[key].Ride_ID);
+        loadedRides.push({
+          id: response.data[key].Ride_ID,
+          name: response.data[key].Driver_Name,
+          rollNo: response.data[key].Driver_RollNo,
+          vehicleType: response.data[key].Vehicle_Type,
+          pickUp: response.data[key].Pickup_Location,
+          dropoff: response.data[key].Dropoff_Location,
+          Seats: response.data[key].Seats,
+          Date: response.data[key].Date,
+          Fare: response.data[key].Fare,
+          L_Time: response.data[key].L_Time,
+          carRegNumb: response.data[key].Car_Registration_Number,
+        });
+      }
+      setDetails(loadedRides);
+      setLoading(false);
+    };
+
+    fetchRides().catch((error) => {
+      console.log(error);
+      setLoading(false);
+      setError(error.message);
+    });
+  }, []);
+  if (Loading) {
     return (
-            <div className="maincontainer" >
-                <Tabs defaultActiveKey="allrides" id="uncontrolled-tab-example" className="mb-3"> 
-                    <Tab eventKey="allrides" title="ALL RIDES" >
-                        <Form>
-                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalPickup">
-                                <Col sm={12}>
-                                    <Form.Control type="textarea" placeholder="search locations"/>
-                                </Col>
-                            </Form.Group>
-                        </Form>
-                        <div className="postedRide">
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>Ahsan Naqvi</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Posted By: Ahsan Naqvi</Card.Subtitle>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                    Ride ID 19778949494
-                                    </Card.Subtitle>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                    26 Sep, 2021 12:02 PM
-                                    </Card.Subtitle>
-                                </Card.Body>
-                                </Card>
-                        </div>
-                        <hr/>
-                        <div className="postedRide">
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>Mustafa Bawany</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Posted By: Mustafa Bawany</Card.Subtitle>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                    Ride ID 19778949494
-                                    </Card.Subtitle>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                    26 Sep, 2021 2:06 PM
-                                    </Card.Subtitle>
-                                </Card.Body>
-                                </Card>
-                        </div>
-                    </Tab>
-
-
-                    <Tab eventKey="myrides" title="MY RIDES">
-                    <Form>
-                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalPickup">
-                                <Col sm={12}>
-                                    <Form.Control type="textarea" placeholder="search for a location" />
-                                </Col>
-                            </Form.Group>
-                        </Form>
-                        <div className="postedRide">
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>Ahsan Naqvi</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Posted By: Amjad Talpur</Card.Subtitle>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                    Booking ID 19778949494
-                                    </Card.Subtitle>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                    26 Sep, 2021 12:02 PM
-                                    </Card.Subtitle>
-                                </Card.Body>
-                                </Card>
-                        </div>
-                        <hr/>
-                        <div className="postedRide">
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>Ahsan Naqvi</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Posted By: Mustafa Bawany</Card.Subtitle>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                    Booking ID 19778949494
-                                    </Card.Subtitle>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                    26 Sep, 2021 2:06 PM
-                                    </Card.Subtitle>
-                                </Card.Body>
-                                </Card>
-                        </div>
-                        
-                    </Tab>
-                </Tabs>
-
-                
-            </div>
-                
-
+      <section className={classes.mealsLoading}>
+        <p>Loading ...</p>
+      </section>
     );
-} 
+  }
+
+  if (error) {
+    <section className={classes.errorState}>
+      <p>{error}</p>
+    </section>;
+  }
+  const setDriverID=(id)=>{
+    setID(id);
+    console.log(id);
+  }
+  const ridesList = details.map((ride) => (
+    <RideDetails
+      id={ride.id}
+      name={ride.name}
+      // Driver_RollNo={ride.rollNo}
+      dest={ride.dropoff}
+      vehicleType={ride.vehicleType}
+      // L_Time={ride.L_Time}
+      carRegNumb={ride.carRegNumb}
+      pickUp={ride.pickUp}
+      Seats={ride.Seats}
+      Date={ride.Date}
+      riderID={setDriverID}
+      setSeats={seatChangeHandler}
+    />
+  ));
+
+  return (
+    <AuthContext2.Provider
+      value={{ pageShown: showRideHandler, pageHidden: closeRideHandler }}
+    >
+      <UserSummary />
+
+      <section className={classes.meals}>
+        <Card css3={classes.meals}>
+          <ul>{ridesList}</ul>
+        </Card>
+      </section>
+      {/* Seats={ride.Seats} Fare={ride.Fare}  */}
+      {isRideConfirm && <RideConfirm id={ID}  seats={seatsRemaining}/>}  
+      {/* //RIDE CONFIRM MAI ID BHIJWANI PAREGI , PHIR RIDE CONFIRM KE PAGE MAI US ID KELIYE DRIVER DATA UTHALENA */}
+    </AuthContext2.Provider>
+  );
+};
 
 export default UserForum;

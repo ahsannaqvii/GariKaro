@@ -105,14 +105,6 @@ function DriverMain() {
       }) 
       .catch((err) => console.log(err));
       history.push("/user");
-      // console.log(`here ${result}`);
-      // // setState(result);
-      // console.log(result.data);
-      // if (!result.entryAdded) {
-      //   throw new Error("Couldnt fetch Data!");
-      // }
-      // console.log("/home");
-      // console.log(result);
     } catch (err) {
       console.error("FAILED ahsan how?!");
       history.push("/user");

@@ -1,31 +1,22 @@
-import React, { useContext } from "react";
-// import AuthContext2 from "../../store/auth-context2";
+import React, { useContext, useState } from "react";
 import classes from "./RideDetails.module.css";
+import RidesForm from "../RidesForm/RidesForm";
 // import MealItemForm from "./MealItemForm";
 function MealItem(props) {
-//   const cartContext = useContext(AuthContext2);
-  const price = `$${props.price.toFixed(2)}`;
 
-//   const AddToCartHandler = (amount) => {
-//     cartContext.addItem({
-//       id: props.id,
-//       amount: amount,
-//       price: props.price,
-//       name: props.name,
-//     });
-//   };
-  
   return (
     <li className={classes.meal}>
       <div>
         {" "}
-        <h3>{props.name}</h3>
-        <div className={classes.description}>{props.description}</div>
-        <div className={classes.price}>{price}</div>
+        <h3>{`Mr. ${props.name}`}</h3>
+        <div className={classes.description}>{props.carRegNumb}</div>
+        <div className={classes.description}>{`Remaining Seats: ${props.Seats}`}</div>
+        <div className={classes.price}>{props.pickUp}</div>
+        <div className={classes.price}>{props.dest}</div>
       </div>
-      {/* <div>
-        <MealItemForm addToCart={AddToCartHandler} />
-      </div> */}
+      <div>
+        <RidesForm vehicleType={props.vehicleType} Seats={props.Seats} riderID={props.riderID} id={props.id} setSeats={props.setSeats}/>
+      </div>
     </li>
   );
 }
