@@ -23,6 +23,8 @@ const AvailableRides = () => {
       price={meal.price}
     />
   ));
+
+
   return (
     <section className={classes.meals}>
       <Card>

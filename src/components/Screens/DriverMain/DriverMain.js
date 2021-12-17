@@ -26,6 +26,7 @@ function DriverMain() {
   const [org, setOrigin] = useState({ lat: 24.918027, lng: 67.0632675 });
   const [mapReference, setMapReference] = useState(null);
   const [mapsReference, setMapsReference] = useState(null);
+  const [state , setState] = useState({});
   //RouteMap Work
   // const [showingInfoWindow, setInfo] = useState(false);
   // const [activeMarker, setMarker] = useState({});
@@ -90,15 +91,21 @@ function DriverMain() {
       carRegistrationNumber: carRegistrationNumber,
       Date: Date,
     };
-
+    
     try {
-      const result = await axios.post("http://localhost:4000/driver", d);
-      console.log(result);
-      if (!result.entryAdded) {
-        throw new Error("Couldnt fetch Data!");
-      }
-      console.log("/home");
-      console.log(result);
+      console.log("HELLO WORLD");
+      await axios.post("http://localhost:4000/driver", d)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+      history.push("/user");
+      // console.log(`here ${result}`);
+      // // setState(result);
+      // console.log(result.data);
+      // if (!result.entryAdded) {
+      //   throw new Error("Couldnt fetch Data!");
+      // }
+      // console.log("/home");
+      // console.log(result);
     } catch (err) {
       console.error("FAILED ahsan how?!");
       history.push("/user");
@@ -109,7 +116,7 @@ function DriverMain() {
   return (
     <Row>
       <Col sm={6}>
-        <Form className="formLayout">
+        <Form className="formLayout" method="POST">
           <Row>
             <Col>
               <label>Driver</label>
@@ -264,7 +271,7 @@ function DriverMain() {
           <Button
             style={{ background: "#5B0A0C" }}
             className="submit-btn"
-            type="submit"
+            type="button"
             onClick={driverHandler}
           >
             Next
