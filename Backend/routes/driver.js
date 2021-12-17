@@ -18,16 +18,20 @@ router.post("/driver" , function(req,res){
     const date = recievedInfo.Date;
     const fare = recievedInfo.Fare;
     const value = 0;
-    console.log(res);
+
     // console.log(driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare);
     var sql1 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
     var sql2 = "SELECT Car_Registration_Number FROM VEHICLESDB WHERE Car_Registration_Number = '" + carRegistrationNumber + "';";
     db.query(sql1 + ";" + sql2 , [1,2] , function(err,results){
         if (err){
+            if (!results[0]){
+                
+            }
             throw(err);
         }
-        console.log(results);
-        
+        else {
+
+        }
         // if (err){
      
         //     const entry="OK"
@@ -51,7 +55,7 @@ router.post("/driver" , function(req,res){
         //         res.send(queryResult);
         //     }
         // }
-        console.log("HELLO WOLRD");
+       
         return res.status(200).json({ msg : "bahukadak" });
     });
 }); 
