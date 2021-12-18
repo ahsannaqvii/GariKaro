@@ -92,16 +92,12 @@ const Signup = () => {
     
     try {
       const result = await axios.post("http://localhost:4000/signup", user);
-      console.log(result);
-      if (!result === "Succesfully Added") {
+      if (result.data.signupStatus === "false") {
         throw new Error("Couldnt fetch Data!");
       }
-      console.log("Success!");
-      history.push("/login");
+      history.push("/user");
     } catch (error) {
-      console.log("ESE KESE ERROR ");
-      console.error("FAILED!");
-      // history.push("/signup");
+      history.push("/signup");
     }
   }
 

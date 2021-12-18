@@ -10,7 +10,7 @@ function RidesForm(props) {
   const contextData = useContext(AuthContext2);
   const amountInputRef = useRef();
   const [seatValid, setSeatValid] = useState(true);
-  const [enteredSeatsU, setenteredSeats] = useState(1);
+  const [userSeats, setuserSeats] = useState(1);
   // const [upperBound, setupperBound] = useState(5);
   const totalSeats = props.Seats;
   // const [confirmRide, setconfirmRide] = useState(false);
@@ -18,46 +18,50 @@ function RidesForm(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     // determineVehicleType();
-    const enteredSeats = amountInputRef.current.value;
-    console.log(enteredSeats + "ORIGINAL");
+    // const enteredSeats = amountInputRef.current.value;
+    // console.log(enteredSeats + "ORIGINAL");
     // const enteredSeatNumber = + enteredSeats; //converted to _isInteger
     // const ss=enteredSeatNumber;
     // console.log(ss + "ORIGINAL");
 
-    if (
-      enteredSeats.trim().length === 0 || enteredSeats < 0 || enteredSeats > props.Seats
-    ) {
-      setSeatValid(false);  
-      return;
-    }
-    else{
-      setenteredSeats(enteredSeats);
-      console.log(enteredSeats + "BEFORE UPDATE");
-      console.log(enteredSeatsU + "STATE VALUE");
-    }
+    // if (
+    //   enteredSeats.trim().length === 0 || enteredSeats < 0 || enteredSeats > props.Seats
+    // ) {
+    //   setSeatValid(false);  
+    //   return;
+    // }
+    // else{
+    //   setuserSeats(userSeats);
+    //   // console.log(enteredSeats + "BEFORE UPDATE");
+    //   // console.log(enteredSeatsU + "STATE VALUE");
+    // }
     
   };
+  // const seatHandler = (e) => {
+  //   setuserSeats(e.target.value);
+  // }
 
   const buttonHandler = () => {
-    contextData.pageShown();  
+    console.log("HELLO" + userSeats);
     props.riderID(props.id);
-    props.setSeats(enteredSeatsU);
+    props.setSeats(userSeats);
+    contextData.pageShown();  
   };
   return (
     <form className={classes.form} onSubmit={submitHandler}>
-      <Input
-        ref={amountInputRef}
-        label="Amount"
-        input={{
-          id: "amount",
-          type: "number",
-          min: "0", //validation
-          max: { totalSeats }, //validation
-          // step: "1", //validation
-          defaultValue: "0", //validation
-        }}
-      />
 
+      <input
+        className = {classes.inputBox}
+        id ="amount"
+        type= "number"
+        min= "0" 
+        max= { totalSeats }
+        step= "1" 
+        value= {userSeats}
+        onChange= {event => setuserSeats(event.target.value)}
+        defaultValue= "0" 
+      />
+      
       <Button onClick={buttonHandler}>Book Ride</Button>
       {!seatValid && <p>Enter a valid amount!</p>}
     </form>

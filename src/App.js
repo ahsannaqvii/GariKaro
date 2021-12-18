@@ -67,16 +67,16 @@ function App() {
     setIsLoggedIn(true);
   };
 
-  useEffect(() => {
-    var user = JSON.parse(localStorage.getItem("user"));
+  // useEffect(() => {
+  //   var user = JSON.parse(localStorage.getItem("user"));
 
-    const checkIfUserLoggedIn = user.id;
-    if (checkIfUserLoggedIn === "1") {
-      setIsLoggedIn(true);
-      setName(user.name);
-      setRollNo(user.no);
-    }
-  }, []);
+  //   const checkIfUserLoggedIn = user.id;
+  //   if (checkIfUserLoggedIn === "1") {
+  //     setIsLoggedIn(true);
+  //     setName(user.name);
+  //     setRollNo(user.no);
+  //   }
+  // }, []);
 
   const logoutHandler = () => {
     localStorage.removeItem("user");

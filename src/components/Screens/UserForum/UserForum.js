@@ -14,6 +14,7 @@ const UserForum = () => {
   const seatChangeHandler = (n) => {
     console.log("PROP VALUE " + n);
     setseatsRemaining(n);
+    
   };
   const [details, setDetails] = useState([]);
   const [Loading, setLoading] = useState(true);
@@ -71,7 +72,7 @@ const UserForum = () => {
   }
   const setDriverID = (id) => {
     setID(id);
-    console.log(id);
+    // console.log(id);
   };
   const ridesList = details.map((ride) => (
     <RideDetails
