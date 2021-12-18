@@ -5,10 +5,16 @@ const db = require('../models/UsersDB');
 const router = express.Router();
 
 router.get("/car-details/:CarRegistrationNumber" , function(req,res){
-    console.log("hh");
     var carRegistrationNumber = req.params.CarRegistrationNumber;
-    console.log(carRegistrationNumber);
-    res.send(carRegistrationNumber);
+    var sql = "SELECT * FROM VEHICLESDB WHERE Car_Registration_Number='" + carRegistrationNumber + "');";
+    db.query(sql , function(err,result){
+        if (err){
+            throw(err);
+        }
+        else {
+            res.send(result);
+        }
+    });
 });
 
 router.post("/car-details" , function(req,res){
