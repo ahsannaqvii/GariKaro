@@ -1,14 +1,15 @@
 import React , {useContext} from 'react'
 import classes from './Modal.module.css';
 import ReactDOM from "react-dom";
-import AuthContext from '../../store/auth-context';
+
 const BackDrop = (props) => {
     //for portal
     // {
     //   /* onclick ka function ka matlab jab backdrop ya button pai
     //       click huga tou onCOnfirm ka function chaljaega */
     // }
-    return <div className={classes.backdrop} onClick={props.onClick} />;
+    // onClick={props.onClick} 
+    return <div className={classes.backdrop}/>;
 };
 const ModalOverlay=props=>{
     return(
@@ -19,14 +20,15 @@ const ModalOverlay=props=>{
 };
 const portalElement=document.getElementById("overlays")
 
-function Modal2(props) {
+function Modal2(props) {  
 
-  const contextData = useContext(AuthContext);
+  // const contextData = useContext(AuthContext);
 
     return (
         <div>
+          {/* onClick={contextData.cartHidden} */}
         {ReactDOM.createPortal(
-          <BackDrop onClick={contextData.cartHidden}/>,
+          <BackDrop />,
           portalElement,
         
         )}

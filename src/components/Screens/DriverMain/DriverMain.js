@@ -25,7 +25,6 @@ function DriverMain(props) {
     lng: 67.0632675,
   });
 
-
   // useEffect(() => {}, [pickUp, dest, mapReference, mapsReference]);
 
   const [seats, setSeats] = useState(0);
@@ -70,32 +69,34 @@ function DriverMain(props) {
     console.log("DRIVERNAME BAHU HARD:");
     console.log(rollNo);
     const d = {
-      // pickup: pickUp,
-      // dropoff: dest,
-      // seats: seats,
-      // driver: name,
-      // leavingTime: time,
-      // rollNo: rollNo,
-      // Fare: Fare,
-      // carType: carType,
+      pickup: pickUp,
+      dropoff: dest,
+      seats: seats,
+      driver: name,
+      leavingTime: time,
+      rollNo: rollNo,
+      Fare: Fare,
+      carType: carType,
       carRegistrationNumber: carRegistrationNumber,
-      // Date: Date,
+      Date: Date,
     };
     props.set(d);
     try {
-      await axios
-        .post("http://localhost:4000/driver", d)
-        .then((response) => {
-          if (response.data.carFound) {
-            // console.log("CAR FOUND & ENTRY ADDED");
-            props.carRegister(1, carRegistrationNumber);
-          } else if (response.data.carFound == false) {
-            console.log("CAR NOT FOUND & ENTRY ADDED");
-            // setcarFound(false);
-            props.carRegister(2, carRegistrationNumber);
-          }
-        })
-        .catch((err) => console.log(err));
+      const response = await axios.post("http://localhost:4000/driver", d);
+
+      if (response.data.carFound === "true") {
+        console.log("AHSAN2" + response.data.carFound);
+        props.carRegister(1, carRegistrationNumber,  response.data.carFound );
+      } else if (response.data.carFound === "false") {
+        console.log("AHSAN1" + response.data.carFound ,  response.data.carFound);
+
+        // setcarFound(false);
+        props.carRegister(2, carRegistrationNumber);
+      }
+      // else{
+      //   throw error
+      // }
+
       // history.push("/car-details");
     } catch (err) {
       console.log(err);
@@ -285,7 +286,7 @@ function DriverMain(props) {
           <Link
             style={{ background: "#5B0A0C" }}
             className="submit-btn"
-            type="button"
+            type="submit"
             onClick={driverHandler}
             to={`/car-details/${carRegistrationNumber}`}
           >
@@ -332,10 +333,10 @@ export default DriverMain;
 />   */
 }
 
-  //RouteMap Work
-  // const [showingInfoWindow, setInfo] = useState(false);
-  // const [activeMarker, setMarker] = useState({});
-  // const [selecetdPlace, setPlace] = useState({});
-  // const [org, setOrigin] = useState({ lat: 24.918027, lng: 67.0632675 });
-  // const [mapReference, setMapReference] = useState(null);
-  // const [mapsReference, setMapsReference] = useState(null);
+//RouteMap Work
+// const [showingInfoWindow, setInfo] = useState(false);
+// const [activeMarker, setMarker] = useState({});
+// const [selecetdPlace, setPlace] = useState({});
+// const [org, setOrigin] = useState({ lat: 24.918027, lng: 67.0632675 });
+// const [mapReference, setMapReference] = useState(null);
+// const [mapsReference, setMapsReference] = useState(null);

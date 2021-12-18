@@ -25,7 +25,7 @@ app.post("/driver" , driverRoutes);
 
 app.get("/car-details/:CarRegistrationNumber" , carDetailsRoutes);
 
-app.post("/car-details" , carDetailsRoutes);
+app.post("/car-details/:CarRegistrationNumber" , carDetailsRoutes);
 
 app.get("/forum" , userForumRoutes);
 

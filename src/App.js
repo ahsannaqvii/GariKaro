@@ -46,13 +46,15 @@ function App() {
     setCarType(d.carType);
     setSeats(d.seats);
   };
-  const setCarAlreadyRegistered = (n, regNumb) => {
-    if (n === 1) {
+
+  const setCarAlreadyRegistered = (n, regNumb , boolean) => {
+    if (n === 1 && boolean ==="true") {
       console.log("CAR FOUND & ENTRY ADDED");
       setcarFound(true);
       setcarRegNumb(regNumb);
-    } else {
+    } else if(n===2 && boolean ==="false") {
       setcarFound(false);
+      console.log("CAR NOT FOUND " + carFound);
       setcarRegNumb(regNumb);
     }
   };
@@ -87,6 +89,8 @@ function App() {
         onLogOutUser: logoutHandler,
         userName: Name,
         rollNo: rollNo,
+        // showDriveModal:showRideHandler ,
+        // hideDriveModal:closeRideHandler,
       }}
     >
       <Navbar />
@@ -109,18 +113,21 @@ function App() {
             carRegister={setCarAlreadyRegistered}
             set={setAttributes}
           />
+        
         </Route>
         <Route path="/car-details/:carReg">
           <DriverMainStep2
             carFound={carFound}
             carRegNumb={carRegNumb}
-            Name={Name}
-            rollNo={rollNo}
-            seats={seats}
-            Fare={Fare}
-            Date={Date}
-            carType={carType}
-            time={time}
+            Name={Name} //
+            rollNo={rollNo} //
+            seats={seats} //
+            Fare={Fare} //
+            Date={Date} //
+            carType={carType} //
+            time={time} //
+            pickUp={pickUp}
+            dest={dest}
           />
         </Route>
 

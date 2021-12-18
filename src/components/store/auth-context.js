@@ -5,6 +5,8 @@ const AuthContext = React.createContext({
   onLogout: () => {},
   userName:"",
   rollNo:"",
+  showDrivePage: () => {},
+  hideDrivePage: () => {},
 
 });
 //often it will be an object
