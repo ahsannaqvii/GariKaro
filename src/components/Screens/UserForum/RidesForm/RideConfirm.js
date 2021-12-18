@@ -1,6 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import classes from "./RideConfirm.module.css";
 import Modal2 from "../../../UI/Modal/Modal";
+import axios from "axios";
 import AuthContext2 from "../../../store/auth-context2";
 
 function RideConfirm(props) {
@@ -9,7 +10,20 @@ function RideConfirm(props) {
     // const totalAmount=props.Seats*props.Fare;
     //TODO : CALCULATE FARE ON THE BASIS OF SEATS AND FARE RETURNED BY DRIVER DB.
 
-
+    useEffect(() => {
+      const fetchRides = async () => {
+        await axios.get(
+          "http://localhost:4000/ride-confirmation" 
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err)=> {
+          throw err;
+        })
+      };
+    }, []);
+    
   const modalActions = (
     <div className={classes.actions}>
       <button

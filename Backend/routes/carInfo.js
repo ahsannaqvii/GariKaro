@@ -5,7 +5,7 @@ const db = require('../models/UsersDB');
 const router = express.Router();
 
 router.get("/car-details/:CarRegistrationNumber" , function(req,res){
-    console.log("HELLO WORLD");
+    // console.log("HELLO WORLD");
     var carRegistrationNumber = req.params.CarRegistrationNumber;
     var sql = "SELECT * FROM VEHICLESDB WHERE Car_Registration_Number='" + carRegistrationNumber + "';";
     db.query(sql , function(err,result){
@@ -13,7 +13,7 @@ router.get("/car-details/:CarRegistrationNumber" , function(req,res){
             throw(err);
         }
         else {
-            console.log(result);
+            // console.log(result);
             res.send(result);
         }
     });

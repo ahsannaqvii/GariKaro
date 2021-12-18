@@ -15,11 +15,11 @@ router.post("/signup" , function(req,res){
     db.query(sql , function(err,result){
         if (err){
             console.log(err);
-            res.send(err);
+            return res.status(200).json({signupStatus: "false" });
         }
         else {
             console.log(result);
-            res.send({statusText: "Succesfully Added"});
+            return res.status(200).json({signupStatus: "true" });
         }
         
     });
