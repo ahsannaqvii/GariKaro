@@ -19,23 +19,46 @@ router.get("/car-details/:CarRegistrationNumber" , function(req,res){
 
 router.post("/car-details" , function(req,res){
     // const driverRollNo = req.body.driverRollNo;
-    const carRegistrationNumber = "AEY-335"
-    const carName = req.body.carName;
-    const carModel = req.body.carModel;
-    const carMake = req.body.carMake;
-    const carColor = req    .body.carColor.background;
+    // const carRegistrationNumber = "AEY-335"
+    const recievedInfo = req.body;
+    const driverRollNo = recievedInfo.rollNo;
+    const driverName = recievedInfo.driver;
+    const pickup = recievedInfo.pickup;
+    const dropoff = recievedInfo.dropoff;
+    const carType = req.body.carType;
+    const leavingtime = recievedInfo.leavingTime;
+    const availableSeats = recievedInfo.seats;
+    const carRegistrationNumber = recievedInfo.carRegistrationNumber;
+    const date = recievedInfo.Date;
+    const fare = recievedInfo.Fare;
+    const value = 0;
+
+    const carName = recievedInfo.carName;
+    const carModel = recievedInfo.carModel;
+    const carMake = recievedInfo.carMake;
+    // const carColor = recievedInfo.carColor.background;
+    const carColor = "#FFFFFF";
+    console.log(driverRollNo + " " + carType + " " + carRegistrationNumber + " " + fare);
     console.log(carName + " " + carModel + " " + carMake + " " + carColor);
-    var sql = "INSERT INTO VEHICLESDB VALUES ('" + carRegistrationNumber + "','" + carMake + "','" + carModel + "','" + carName + "','" + carColor + "')";
-    db.query(sql , function(err,result){
+    
+    var sql1 = "INSERT INTO VEHICLESDB VALUES ('" + carRegistrationNumber + "','" + carMake + "','" + carModel + "','" + carName + "','" + carColor + "')";
+    db.query(sql1 , function(err,result){
         if (err){
-            console.log("ERROR IN CAR DETAILS ");
             console.log(err);
-            res.send(err);
+            return res.status(200).json({carAdded: "false" , rideAdded : "false"});
         }
         else {
-            // console.log(result);
-            res.send(result);
-            console.log("Car Added");
+            // var sql2 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
+            var sql2 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup + "','" + dropoff + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
+
+            db.query(sql2 , function(error , res){
+                if (error){
+                    console.log(error);
+                    return res.status(200).json({carAdded: "true" , rideAdded : "false"});
+                } else {
+                    return res.status(200).json({carAdded: "true" , rideAdded : "true"});
+                }
+            })
         }
     });
 });

@@ -70,29 +70,26 @@ function DriverMain(props) {
     console.log("DRIVERNAME BAHU HARD:");
     console.log(rollNo);
     const d = {
-      pickup: pickUp,
-      dropoff: dest,
-      seats: seats,
-      driver: name,
-      leavingTime: time,
-      rollNo: rollNo,
-      Fare: Fare,
-      carType: carType,
+      // pickup: pickUp,
+      // dropoff: dest,
+      // seats: seats,
+      // driver: name,
+      // leavingTime: time,
+      // rollNo: rollNo,
+      // Fare: Fare,
+      // carType: carType,
       carRegistrationNumber: carRegistrationNumber,
-      Date: Date,
+      // Date: Date,
     };
     props.set(d);
     try {
       await axios
         .post("http://localhost:4000/driver", d)
         .then((response) => {
-          if (response.data.entryAdded && response.data.carFound) {
+          if (response.data.carFound) {
             // console.log("CAR FOUND & ENTRY ADDED");
             props.carRegister(1, carRegistrationNumber);
-          } else if (
-            response.data.entryAdded == true &&
-            response.data.carFound == false
-          ) {
+          } else if (response.data.carFound == false) {
             console.log("CAR NOT FOUND & ENTRY ADDED");
             // setcarFound(false);
             props.carRegister(2, carRegistrationNumber);
