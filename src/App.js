@@ -12,6 +12,7 @@ import DriverMainStep2 from "./components/Screens/DriverMain/StepTwo";
 import { useState, useEffect } from "react";
 import AuthContext from "./components/store/auth-context";
 import UserForum from "./components/Screens/UserForum/UserForum";
+import EditCarDetails from "./components/Screens/DriverMain/EditCarDetails";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -132,11 +133,12 @@ function App() {
         </Route>
 
         <Route exact path="/user">
-          {/* {!Authorized ? <Redirect to="/" /> : <UserForum />}  */}
-          {/* <UserForum /> */}
+
           <UserForum />
         </Route>
-
+      <Route exact path="/edit-details">
+        <EditCarDetails/>
+      </Route>
         {/* default case for no page found  */}
         <Route path="*">
           <NotFound />

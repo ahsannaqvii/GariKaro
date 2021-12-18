@@ -1,17 +1,19 @@
 import "./DriverMain.css";
-import React, { useState, useEffect, useContext } from "react";
-import { Form, Row, Col, Button } from "react-bootstrap";
+import  { useState, useContext } from "react";
+import { Form, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import carsvg from "../../../assets/images/car.svg";
-import bikesvg from "../../../assets/images/bike.jpeg";
+// import carsvg from "../../../assets/images/car.svg";
+// import bikesvg from "../../../assets/images/bike.jpeg";
 import Input from "./PlacesAutocomplete";
 import Maps from "./DirectionPath";
 import AuthContext from "../../store/auth-context";
-import { useHistory } from "react-router";
+import { useHistory , useLocation} from "react-router";
 import { Link } from "react-router-dom";
 
 function DriverMain(props) {
-  // let history = useHistory();
+  let history = useHistory();
+  const location = useLocation();
+
   const contextData = useContext(AuthContext);
 
   const [pickUp, setPickUp] = useState({
@@ -65,7 +67,7 @@ function DriverMain(props) {
   const driverHandler = async () => {
     const name = contextData.userName;
     const rollNo = contextData.rollNo;
-    // const email=contextData.userEmail;
+
     console.log("DRIVERNAME BAHU HARD:");
     console.log(rollNo);
     const d = {
@@ -93,14 +95,18 @@ function DriverMain(props) {
         // setcarFound(false);
         props.carRegister(2, carRegistrationNumber);
       }
-      // else{
-      //   throw error
-      // }
+      // console.log( location);
+      // history.push(`/car-details/${carRegistrationNumber}`);
+      history.push({
+        pathname: '/car-details/' + carRegistrationNumber,
+        // search: carRegistrationNumber
+        
+    });
 
-      // history.push("/car-details");
+     
     } catch (err) {
       console.log(err);
-      // history.push("/user");
+
     }
   };
 
@@ -185,26 +191,7 @@ function DriverMain(props) {
                   />
                 </Col>
               </Row>
-              {/* <Button
-                style={{ background: "#EEEEEE" }}
-                value="car"
-                type="button"
-                variant="light"
-                className="cartype-btn"
-                onClick={carTypeChangeHandler}
-              >
-                <img src={carsvg}></img>
-              </Button>
-              <Button
-                style={{ background: "#EEEEEE" }}
-                value="bike"
-                type="button"
-                variant="light"
-                className="cartype-btn"
-                onClick={carTypeChangeHandler}
-              >
-                <img src={bikesvg}></img>
-              </Button> */}
+           
             </Col>
           </Form.Group>
 
@@ -283,15 +270,15 @@ function DriverMain(props) {
               />
             </Col>
           </Row>
-          <Link
+          <button
             style={{ background: "#5B0A0C" }}
             className="submit-btn"
-            type="submit"
+            type="button"
             onClick={driverHandler}
-            to={`/car-details/${carRegistrationNumber}`}
+            // to={`/car-details/${carRegistrationNumber}`}
           >
             Next
-          </Link>
+          </button>
 
           <div className="BelowForm mb-3">
             <a>View Scheduled Rides</a>
@@ -340,3 +327,23 @@ export default DriverMain;
 // const [org, setOrigin] = useState({ lat: 24.918027, lng: 67.0632675 });
 // const [mapReference, setMapReference] = useState(null);
 // const [mapsReference, setMapsReference] = useState(null);
+   {/* <Button
+                style={{ background: "#EEEEEE" }}
+                value="car"
+                type="button"
+                variant="light"
+                className="cartype-btn"
+                onClick={carTypeChangeHandler}
+              >
+                <img src={carsvg}></img>
+              </Button>
+              <Button
+                style={{ background: "#EEEEEE" }}
+                value="bike"
+                type="button"
+                variant="light"
+                className="cartype-btn"
+                onClick={carTypeChangeHandler}
+              >
+                <img src={bikesvg}></img>
+              </Button> */}

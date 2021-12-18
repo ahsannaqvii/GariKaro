@@ -13,7 +13,7 @@ router.post("/driver" , function(req,res){
         if (err){
             throw(err);
         } else {
-            console.log(result);
+            // console.log(result);
             
             if (result.length == 0){
                 return res.status(200).json({carFound: "false" });

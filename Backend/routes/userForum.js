@@ -15,7 +15,7 @@ router.get("/forum" , function(req,res){
             res.send(err);
         }
         else {
-            console.log(result);
+            // console.log(result);
             res.send(result);
         }
     });

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useInput from "../../hooks/use-input";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { CirclePicker } from "react-color";
-import { useParams, Route, useRouteMatch } from "react-router-dom";
+import { useParams, Route, useRouteMatch, useHistory } from "react-router-dom";
 import axios from "axios";
 import Modal2 from "../../UI/Modal/Modal";
 import VehicleItem from "./VehicleItem";
@@ -10,15 +10,17 @@ import CarFound from "./CarFound";
 
 function Step2(props) {
   const params1 = useParams();
+  const history = useHistory();
   const [carName, setCarName] = useState("");
   const [carModel, setCarModel] = useState("");
   const [carMake, setcarMake] = useState("");
   const [carColor, setCarColor] = useState({ background: "#fff" });
-  const [carFound, setcarFound] = useState(props.carFound);
+  const [carFound, setcarFound] = useState(false);
+  const [carRegistrationNumber, setcarRegistrationNumber] = useState(params1.carReg)
 
-  const negCarFound = () => {
-    setcarFound(false);
-  };
+  const RegHandler=(e)=>{
+    setcarRegistrationNumber(e.target.value);
+  }
   const ColorhandleChange = (color) => {
     setCarColor({ background: color.hex });
   };
@@ -34,6 +36,9 @@ function Step2(props) {
   const carMakehandleChange = (e) => {
     setcarMake(e.target.value);
   };
+  const negCarFound = () => {
+    setcarFound(false);
+  };
 
   const carDetails = async () => {
     const carInfo = {
@@ -47,7 +52,7 @@ function Step2(props) {
       Date: props.Date,
       carType: props.carType,
       name: props.Name,
-      carRegistrationNumber: props.carRegNumb,
+      CarRegistrationNumber: carRegistrationNumber,
       pickUp: props.pickUp,
       dest: props.dest,
       //Jo data found hoa hai woh yahan bhej dena, warna agar gaari found nai hoi tou form se data already araha hai
@@ -56,12 +61,14 @@ function Step2(props) {
       carMake: carMake,
       carColor: carColor,
     };
+    console.log("KYA YECHALRAHA HAI?");
     const result = await axios.post(
       "http://localhost:4000/car-details/" + params1.carReg,
       carInfo
     );
     console.log(result);
     console.log("CAR FOUNDSTEP TWO : " + carFound);
+    history.push("/user");
     //IF ride added : false -- that mean ride already exists.
     //If ride Added : true  - ride added
     //if car added :false -- gari already exists.
@@ -73,54 +80,39 @@ function Step2(props) {
       const result = await axios.get(
         "http://localhost:4000/car-details/" + params1.carReg
       );
-    
       console.log(result);
-      setCarModel(result.data[0].Car_Model);
-      setcarMake(result.data[0].Car_Make);
-      // setCarColor(result.carColor);
-      setCarName(result.data[0].Car_Name);
-      // console.log("Ahsan : " + result.data[0].Car_Model + result.data[0].Car_Make);
+      if (result.data.length == 0) {
+        console.log("empty array");
+        setcarFound(false);
+      } else {
+        console.log("fill array");
+        setcarFound(true);
+        setCarModel(result.data[0].Car_Model);
+        setcarMake(result.data[0].Car_Make);
+        setCarName(result.data[0].Car_Name);
+      }
+      console.log(result);
+
     };
     console.log("CAR FOUNDSTEP TWO : " + carFound);
     fetchRides().catch((error) => {
       console.log(error);
     });
   }, []);
-  // const rideResults = (
-  //   <ul className="cart-items">
-  //     <VehicleItem carModel={carModel} carMake={carMake} carName={carName} carName={carName} />
-  //     ))
-  //   </ul>
-  // );
-  // const MODELLING = (
-  //   <div className="actions">
-  //     <button className="button--alt" onClick={negCarFound}>
-  //       Edit
-  //     </button>
-
-  //     <button className="button" onClick={negCarFound}>
-  //       Post Ride{" "}
-  //     </button>
-
-  //   </div>
-  // );
-  // const ABC = () => {
-  //   console.log("KYN NAI CHALRAHA BAY?");
-  //   <React.Fragment>
-  //     {rideResults}
-  //     <div className="total">
-  //       <span>Total Fare</span>
-  //       {/* <span>{props.id}</span> */}
-  //     </div>
-  //     {MODELLING}
-  //   </React.Fragment>;
-  // };
 
   return (
     <div>
-   {/* {carFound &&  */}
-   <CarFound carMake={carMake} carModel={carModel} />
-      {/* {!carFound && (
+      {carFound && (
+        <CarFound
+          carMake={carMake}
+          carModel={carModel}
+          carName={carName}
+          carID={carRegistrationNumber}
+          onClick={carDetails}
+          carNeg={negCarFound}
+        />
+      )}
+      {!carFound && (
         <Row>
           <Col sm={2}></Col>
           <Col sm={8}>
@@ -138,6 +130,22 @@ function Step2(props) {
                     type="textarea"
                     placeholder="HONDA"
                     onChange={carMakehandleChange}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group
+                as={Row}
+                className="mb-3"
+                controlId="formHorizontalPickup"
+              >
+                <Form.Label column sm={6}>
+                  Car Number
+                </Form.Label>
+                <Col sm={6}>
+                  <Form.Control
+                    type="textarea"
+                    placeholder="KBC-6006"
+                    onChange={RegHandler}
                   />
                 </Col>
               </Form.Group>
@@ -221,16 +229,38 @@ function Step2(props) {
           </Col>
           <Col sm={2}></Col>
         </Row>
-      )} */}
+      )}
     </div>
-    // <div>
-    //   {carFound ? (
-    //     <Modal2>{ABC}</Modal2>
-    //   ) : (
-    //
-    //   )}
-    // </div>
   );
 }
 
 export default Step2;
+// const rideResults = (
+//   <ul className="cart-items">
+//     <VehicleItem carModel={carModel} carMake={carMake} carName={carName} carName={carName} />
+//     ))
+//   </ul>
+// );
+// const MODELLING = (
+//   <div className="actions">
+//     <button className="button--alt" onClick={negCarFound}>
+//       Edit
+//     </button>
+
+//     <button className="button" onClick={negCarFound}>
+//       Post Ride{" "}
+//     </button>
+
+//   </div>
+// );
+// const ABC = () => {
+//   console.log("KYN NAI CHALRAHA BAY?");
+//   <React.Fragment>
+//     {rideResults}
+//     <div className="total">
+//       <span>Total Fare</span>
+//       {/* <span>{props.id}</span> */}
+//     </div>
+//     {MODELLING}
+//   </React.Fragment>;
+// };

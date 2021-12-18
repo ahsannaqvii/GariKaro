@@ -28,7 +28,10 @@ router.post("/car-details/:CarRegistrationNumber" , function(request,response){
     const carType = recievedInfo.carType;
     const leavingtime = recievedInfo.leavingTime;
     const availableSeats = recievedInfo.seats;
-    const carRegistrationNumber = recievedInfo.carRegistrationNumber;
+    const carRegistrationNumber = recievedInfo.CarRegistrationNumber;
+    console.log("HELO WORLD" +carRegistrationNumber );
+
+    // recievedInfo.carRegistrationNumber; 
     const date = recievedInfo.Date;
     const fare = recievedInfo.Fare;
     const value = 0;
