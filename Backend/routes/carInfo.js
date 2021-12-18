@@ -4,13 +4,11 @@ const db = require('../models/UsersDB');
 
 const router = express.Router();
 
-router.get("/car-details" , function(req,res){
+router.get("/car-details/:CarRegistrationNumber" , function(req,res){
     console.log("hh");
-    var abc = req.query.carRegistrationNumber;
-    res.send(abc);
-    // var carRegistrationNumber = req.params.CarRegistrationNumber;
-    // console.log(carRegistrationNumber);
-    // res.send(carRegistrationNumber);
+    var carRegistrationNumber = req.params.CarRegistrationNumber;
+    console.log(carRegistrationNumber);
+    res.send(carRegistrationNumber);
 });
 
 router.post("/car-details" , function(req,res){
