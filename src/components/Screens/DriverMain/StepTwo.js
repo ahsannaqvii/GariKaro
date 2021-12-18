@@ -31,6 +31,14 @@ function Step2(props) {
 
   const carDetails = async () => {
     const carInfo = {
+      pickup: pickUp,
+      dropoff: dest,
+      seats: seats, 
+      driver: name,
+      leavingTime: time,
+      rollNo: rollNo,
+      Fare: Fare,
+      //Jo data found hoa hai woh yahan bhej dena, warna agar gaari found nai hoi tou form se data already araha hai
       carName: carName,
       carModel: carModel,
       carMake: carMake,
@@ -51,6 +59,7 @@ function Step2(props) {
         },
       });
       console.log(result);
+      setCarModel(result.carModel);
     };
     fetchRides().catch((error) => {
       console.log(error);

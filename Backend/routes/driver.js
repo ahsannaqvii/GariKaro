@@ -19,17 +19,30 @@ router.post("/driver" , function(req,res){
     const fare = recievedInfo.Fare;
     const value = 0;
 
-    // console.log(driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare);
-    // var sql1 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
-    var sql1 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup + "','" + dropoff + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
-
-    var sql2 = "SELECT Car_Registration_Number FROM VEHICLESDB WHERE Car_Registration_Number = '" + carRegistrationNumber + "';";
-    db.query(sql1 + ";" + sql2 , [1,2] , function(err,results){
+    console.log(driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare);
+    // var sql1 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup + "','" + dropoff + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
+    var sql1 = "SELECT Car_Registration_Number FROM VEHICLESDB WHERE Car_Registration_Number = '" + carRegistrationNumber + "';";
+    db.query(sql1 , function(err , result){
         if (err){
-            return res.status(200).json({ entryAdded : "true" , carFound: "false" });
-        }
-        else {
-            return res.status(200).json({ entryAdded : "true" , carFound: "true" });
+            throw(err);
+        } else {
+            console.log(result);
+            
+            if (result.length == 0){
+                return res.status(200).json({carFound: "false" });
+            }
+            else {
+                // var sql2 = "INSERT INTO RIDESDB VALUES ("  + value + ",'"  + driverRollNo + "','" + driverName + "','" + pickup.address + "','" + dropoff.address + "','" + carType + "','" + leavingtime + "'," + availableSeats + ",'" + carRegistrationNumber + "','" + date + "'," + fare + ")";
+                // db.query(sql2, function(error , res){
+                //     if (err){
+                //         throw(err);
+                //     }
+                //     else {
+                //         return res.status(200).json({ entryAdded : "true" , carFound: "true" });
+                //     }
+                // });
+                return res.status(200).json({carFound: "true" });
+            }
         }
     });
 }); 

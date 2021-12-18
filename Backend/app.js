@@ -23,7 +23,7 @@ app.post("/signup" , signupRoutes);
 
 app.post("/driver" , driverRoutes);
 
-app.get("/car-details" , carDetailsRoutes);
+app.get("/car-details/:CarRegistrationNumber" , carDetailsRoutes);
 
 app.post("/car-details" , carDetailsRoutes);
 
