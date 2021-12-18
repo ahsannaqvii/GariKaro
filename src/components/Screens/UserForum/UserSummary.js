@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "../../UI/Card/Card";
-import Homepage from "../Homepage/Homepage";
 import classes from "./UserSummary.module.css";
 import UserSummary_img from "./UserSummary_img";
 function UserSummary() {

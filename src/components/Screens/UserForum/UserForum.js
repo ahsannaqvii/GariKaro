@@ -9,11 +9,12 @@ import RideConfirm from "./RidesForm/RideConfirm";
 import AuthContext2 from "../../store/auth-context2";
 const loadedRides = [];
 const UserForum = () => {
-    const [seatsRemaining, setseatsRemaining] = useState(4);
+  const [seatsRemaining, setseatsRemaining] = useState(4);
 
-  const seatChangeHandler=(n)=>{
+  const seatChangeHandler = (n) => {
+    console.log("PROP VALUE " + n);
     setseatsRemaining(n);
-  }
+  };
   const [details, setDetails] = useState([]);
   const [Loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,12 +30,8 @@ const UserForum = () => {
   useEffect(() => {
     const fetchRides = async () => {
       const response = await axios.get("http://localhost:4000/forum");
-      console.log(response.data[0].Ride_ID);
-
-  
 
       for (let key in response.data) {
-        console.log(response.data[key].Ride_ID);
         loadedRides.push({
           id: response.data[key].Ride_ID,
           name: response.data[key].Driver_Name,
@@ -72,10 +69,10 @@ const UserForum = () => {
       <p>{error}</p>
     </section>;
   }
-  const setDriverID=(id)=>{
+  const setDriverID = (id) => {
     setID(id);
     console.log(id);
-  }
+  };
   const ridesList = details.map((ride) => (
     <RideDetails
       id={ride.id}
@@ -104,8 +101,7 @@ const UserForum = () => {
           <ul>{ridesList}</ul>
         </Card>
       </section>
-      {/* Seats={ride.Seats} Fare={ride.Fare}  */}
-      {isRideConfirm && <RideConfirm id={ID}  seats={seatsRemaining}/>}  
+      {isRideConfirm && <RideConfirm id={ID} seats={seatsRemaining} />}
       {/* //RIDE CONFIRM MAI ID BHIJWANI PAREGI , PHIR RIDE CONFIRM KE PAGE MAI US ID KELIYE DRIVER DATA UTHALENA */}
     </AuthContext2.Provider>
   );

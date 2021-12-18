@@ -4,6 +4,7 @@ import Modal2 from "../../../UI/Modal/Modal";
 import AuthContext2 from "../../../store/auth-context2";
 
 function RideConfirm(props) {
+
   const contextData = useContext(AuthContext2);
     // const totalAmount=props.Seats*props.Fare;
     //TODO : CALCULATE FARE ON THE BASIS OF SEATS AND FARE RETURNED BY DRIVER DB.

@@ -17,16 +17,25 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [Name, setName] = useState("");
   const [rollNo, setRollNo] = useState("");
+  const [carFound, setcarFound] = useState(false);
+  const [carRegNumb, setcarRegNumb] = useState("AEY-999");
 
+  const setCarAlreadyRegistered=(n, regNumb)=>{
+    if(n===1){
+      console.log("CAR FOUND & ENTRY ADDED");
+      setcarFound(true);
+      setcarRegNumb(regNumb);
+    }
+    else{
+      setcarFound(false);
+      setcarRegNumb(regNumb);
+    }
+  }
   const loginHandler = (rollNO, Name) => {
     setName(Name);
-
     setRollNo(rollNO);
     const obj = { id: "1", name: Name, no: rollNO };
-
     localStorage.setItem("user", JSON.stringify(obj)); //1 for loggedin user
-    localStorage.setItem("Is logged in", 1); //1 for loggedin user
-
     setIsLoggedIn(true);
 
   };
@@ -42,7 +51,7 @@ function App() {
     }
   }, []);
   const logoutHandler = () => {
-    localStorage.removeItem("Is logged in");
+    localStorage.removeItem("user");
     setIsLoggedIn(false);
   };
 
@@ -71,11 +80,11 @@ function App() {
           <SignUp />
         </Route>
         <Route path="/driver" exact>
-          <DriverMain />
+          <DriverMain carRegister={setCarAlreadyRegistered} />
         </Route>
 
-        <Route path="/car-details" exact>
-          <DriverMainStep2 />
+        <Route path="/car-details/:carReg" >
+          <DriverMainStep2 carFound={carFound} carRegNumb={carRegNumb}/>
         </Route>
 
         <Route exact path="/user">

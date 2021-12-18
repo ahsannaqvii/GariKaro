@@ -8,8 +8,9 @@ import Input from "./PlacesAutocomplete";
 import Maps from "./DirectionPath";
 import AuthContext from "../../store/auth-context";
 import { useHistory } from "react-router";
+import { Link } from 'react-router-dom';
 
-function DriverMain() {
+function DriverMain(props) {
   let history = useHistory();
   const contextData = useContext(AuthContext);
 
@@ -26,7 +27,7 @@ function DriverMain() {
   const [org, setOrigin] = useState({ lat: 24.918027, lng: 67.0632675 });
   const [mapReference, setMapReference] = useState(null);
   const [mapsReference, setMapsReference] = useState(null);
-  const [state , setState] = useState({});
+
   //RouteMap Work
   // const [showingInfoWindow, setInfo] = useState(false);
   // const [activeMarker, setMarker] = useState({});
@@ -46,10 +47,6 @@ function DriverMain() {
   const SeatshandleChange = (e) => {
     setSeats(e.target.value);
   };
-
-  // const DriverhandleChange = (e) => {
-  //     setDriver(e.target.value);
-  // }
 
   const timehandleChange = (e) => {
     setTime(e.target.value);
@@ -93,22 +90,25 @@ function DriverMain() {
     };
     
     try {
-      // console.log("HELLO WORLD");
+
       await axios.post("http://localhost:4000/driver", d)
       .then((response) => {
         if (response.data.entryAdded && response.data.carFound){
-          console.log("CAR FOUND & ENTRY ADDED");
+          // console.log("CAR FOUND & ENTRY ADDED");
+          props.carRegister(1,carRegistrationNumber);
         }
         else if (response.data.entryAdded == true && response.data.carFound == false){
           console.log("CAR NOT FOUND & ENTRY ADDED");
+          // setcarFound(false);
+          props.carRegister(2,carRegistrationNumber);
         }
       }) 
       .catch((err) => console.log(err));
-      history.push("/user");
+      // history.push("/car-details");
     } catch (err) {
-      console.error("FAILED ahsan how?!");
-      history.push("/user");
-      // setuserAuthenticated(false);
+      console.log(err);
+      // history.push("/user");
+
     }
   }
 
@@ -267,14 +267,15 @@ function DriverMain() {
               />
             </Col>
           </Row>
-          <Button
-            style={{ background: "#5B0A0C" }}
+          <Link
+            style={{ background: "#5B0A0C"  ,}}
             className="submit-btn"
             type="button"
             onClick={driverHandler}
+            to={`/car-details/${carRegistrationNumber}`}
           >
             Next
-          </Button>
+          </Link>
 
           <div className="BelowForm mb-3">
             <a>View Scheduled Rides</a>
