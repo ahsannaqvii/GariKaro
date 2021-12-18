@@ -39,8 +39,7 @@ function DriverMain(props) {
   // const [driverInfo , setDriver] = useState("Select Driver");
   const [time, setTime] = useState("");
   const [carType, setCarType] = useState("Car");
-  const [carRegistrationNumber, setcarRegistrationNumber] =
-    useState("AXP-9999");
+  const [carRegistrationNumber, setcarRegistrationNumber] = useState("AXP-9999");
   const [Fare, setFare] = useState(0);
   const [Date, setDate] = useState("12-12-2000");
 
@@ -84,7 +83,7 @@ function DriverMain(props) {
       leavingTime: time,
       rollNo: rollNo,
       Fare: Fare,
-      //   carType: carType,
+      carType: carType,
       carRegistrationNumber: carRegistrationNumber,
       Date: Date,
     };
@@ -169,7 +168,32 @@ function DriverMain(props) {
               Car Type
             </Form.Label>
             <Col sm={6}>
-              <Button
+            <Row>
+              <Col sm={6}> 
+                <Form.Check 
+                    type="radio"
+                    name = "CarType"
+                    value="Car"
+                    id={`Car`}
+                    label={`Car`}
+                    className = "mb-3"
+                    onChange={carTypeChangeHandler}
+                />  
+              </Col>
+              <Col sm={6}> 
+                <Form.Check 
+                    type="radio"
+                    value="Bike"
+                    name = "CarType"
+                    id={`Bike`}
+                    label={`Bike`}
+                    className = "mb-3"
+                    onChange={carTypeChangeHandler}
+                />  
+              </Col>
+              
+            </Row>
+                {/* <Button
                 style={{ background: "#EEEEEE" }}
                 value="car"
                 type="button"
@@ -188,7 +212,7 @@ function DriverMain(props) {
                 onClick={carTypeChangeHandler}
               >
                 <img src={bikesvg}></img>
-              </Button>
+              </Button> */}
             </Col>
           </Form.Group>
 
