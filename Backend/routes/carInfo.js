@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/car-details/:CarRegistrationNumber" , function(req,res){
     var carRegistrationNumber = req.params.CarRegistrationNumber;
-    var sql = "SELECT * FROM VEHICLESDB WHERE Car_Registration_Number='" + carRegistrationNumber + "');";
+    var sql = "SELECT * FROM VEHICLESDB WHERE Car_Registration_Number='" + carRegistrationNumber + "';";
     db.query(sql , function(err,result){
         if (err){
             throw(err);

@@ -97,6 +97,7 @@ const Signup = () => {
         throw new Error("Couldnt fetch Data!");
       }
       console.log("Success!");
+      history.push("/login");
     } catch (error) {
       console.log("ESE KESE ERROR ");
       console.error("FAILED!");
@@ -112,12 +113,12 @@ const Signup = () => {
   };
   return (
     <div class="container-fluid">
-      <Prompt
+      {/* <Prompt
         when={isEntering}
         message={(location) =>
           "Are you sure you want to leave? All your data will be lost!"
         }
-      />
+      /> */}
       <div class="row no-gutter">
         <div class="col-md-6 d-none d-md-flex bg-image"></div>
 
@@ -222,7 +223,7 @@ const Signup = () => {
                       //   finishEnteringHandler();
                       //    login();
                       // }}
-                      type="submit"
+                      type="button"
                       class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"
                     >
                       Sign Up

@@ -30,6 +30,7 @@ function Step2(props) {
   };
 
   const carDetails = async () => {
+    
     const carInfo = {
       // pickup: pickUp,
       // dropoff: dest,
@@ -53,11 +54,7 @@ function Step2(props) {
   useEffect(() => {
     console.log(params1.carReg);
     const fetchRides = async () => {
-      const result = await axios.get("/car-details", {
-        params: {
-          CarRegistrationNumber: params1.carReg,
-        },
-      });
+      const result = await axios.get("http://localhost:4000/car-details/" + params1.carReg);
       console.log(result);
       // is tarhan se use state se already found data set karwado
       // setCarModel(result.carModel);

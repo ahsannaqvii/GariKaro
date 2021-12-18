@@ -8,10 +8,10 @@ import Input from "./PlacesAutocomplete";
 import Maps from "./DirectionPath";
 import AuthContext from "../../store/auth-context";
 import { useHistory } from "react-router";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function DriverMain(props) {
-  let history = useHistory();
+  // let history = useHistory();
   const contextData = useContext(AuthContext);
 
   const [pickUp, setPickUp] = useState({
@@ -24,22 +24,16 @@ function DriverMain(props) {
     lat: 24.8568991,
     lng: 67.0632675,
   });
-  const [org, setOrigin] = useState({ lat: 24.918027, lng: 67.0632675 });
-  const [mapReference, setMapReference] = useState(null);
-  const [mapsReference, setMapsReference] = useState(null);
 
-  //RouteMap Work
-  // const [showingInfoWindow, setInfo] = useState(false);
-  // const [activeMarker, setMarker] = useState({});
-  // const [selecetdPlace, setPlace] = useState({});
 
-  useEffect(() => {}, [pickUp, dest, mapReference, mapsReference]);
+  // useEffect(() => {}, [pickUp, dest, mapReference, mapsReference]);
 
   const [seats, setSeats] = useState(0);
-  // const [driverInfo , setDriver] = useState("Select Driver");
+
   const [time, setTime] = useState("");
   const [carType, setCarType] = useState("Car");
-  const [carRegistrationNumber, setcarRegistrationNumber] = useState("AXP-9999");
+  const [carRegistrationNumber, setcarRegistrationNumber] =
+    useState("AXP-9999");
   const [Fare, setFare] = useState(0);
   const [Date, setDate] = useState("12-12-2000");
 
@@ -61,7 +55,7 @@ function DriverMain(props) {
 
   const FareHandleChange = (e) => {
     const rollNo = contextData.rollNo;
-    // const email=contextData.userEmail;
+
     console.log("DRIVERNAME BAHU HARD1:");
     console.log(rollNo);
     setFare(e.target.value);
@@ -69,7 +63,7 @@ function DriverMain(props) {
   const dateHandler = (e) => {
     setDate(e.target.value);
   };
-  const  driverHandler=async()=> {
+  const driverHandler = async () => {
     const name = contextData.userName;
     const rollNo = contextData.rollNo;
     // const email=contextData.userEmail;
@@ -78,7 +72,7 @@ function DriverMain(props) {
     const d = {
       pickup: pickUp,
       dropoff: dest,
-      seats: seats, 
+      seats: seats,
       driver: name,
       leavingTime: time,
       rollNo: rollNo,
@@ -87,29 +81,30 @@ function DriverMain(props) {
       carRegistrationNumber: carRegistrationNumber,
       Date: Date,
     };
-    
+    props.set(d);
     try {
-
-      await axios.post("http://localhost:4000/driver", d)
-      .then((response) => {
-        if (response.data.entryAdded && response.data.carFound){
-          // console.log("CAR FOUND & ENTRY ADDED");
-          props.carRegister(1,carRegistrationNumber);
-        }
-        else if (response.data.entryAdded == true && response.data.carFound == false){
-          console.log("CAR NOT FOUND & ENTRY ADDED");
-          // setcarFound(false);
-          props.carRegister(2,carRegistrationNumber);
-        }
-      }) 
-      .catch((err) => console.log(err));
+      await axios
+        .post("http://localhost:4000/driver", d)
+        .then((response) => {
+          if (response.data.entryAdded && response.data.carFound) {
+            // console.log("CAR FOUND & ENTRY ADDED");
+            props.carRegister(1, carRegistrationNumber);
+          } else if (
+            response.data.entryAdded == true &&
+            response.data.carFound == false
+          ) {
+            console.log("CAR NOT FOUND & ENTRY ADDED");
+            // setcarFound(false);
+            props.carRegister(2, carRegistrationNumber);
+          }
+        })
+        .catch((err) => console.log(err));
       // history.push("/car-details");
     } catch (err) {
       console.log(err);
       // history.push("/user");
-
     }
-  }
+  };
 
   return (
     <Row>
@@ -168,32 +163,31 @@ function DriverMain(props) {
               Car Type
             </Form.Label>
             <Col sm={6}>
-            <Row>
-              <Col sm={6}> 
-                <Form.Check 
+              <Row>
+                <Col sm={6}>
+                  <Form.Check
                     type="radio"
-                    name = "CarType"
+                    name="CarType"
                     value="Car"
                     id={`Car`}
                     label={`Car`}
-                    className = "mb-3"
+                    className="mb-3"
                     onChange={carTypeChangeHandler}
-                />  
-              </Col>
-              <Col sm={6}> 
-                <Form.Check 
+                  />
+                </Col>
+                <Col sm={6}>
+                  <Form.Check
                     type="radio"
                     value="Bike"
-                    name = "CarType"
+                    name="CarType"
                     id={`Bike`}
                     label={`Bike`}
-                    className = "mb-3"
+                    className="mb-3"
                     onChange={carTypeChangeHandler}
-                />  
-              </Col>
-              
-            </Row>
-                {/* <Button
+                  />
+                </Col>
+              </Row>
+              {/* <Button
                 style={{ background: "#EEEEEE" }}
                 value="car"
                 type="button"
@@ -292,7 +286,7 @@ function DriverMain(props) {
             </Col>
           </Row>
           <Link
-            style={{ background: "#5B0A0C"  ,}}
+            style={{ background: "#5B0A0C" }}
             className="submit-btn"
             type="button"
             onClick={driverHandler}
@@ -340,3 +334,11 @@ export default DriverMain;
     className = "mb-3"
 />   */
 }
+
+  //RouteMap Work
+  // const [showingInfoWindow, setInfo] = useState(false);
+  // const [activeMarker, setMarker] = useState({});
+  // const [selecetdPlace, setPlace] = useState({});
+  // const [org, setOrigin] = useState({ lat: 24.918027, lng: 67.0632675 });
+  // const [mapReference, setMapReference] = useState(null);
+  // const [mapsReference, setMapsReference] = useState(null);
