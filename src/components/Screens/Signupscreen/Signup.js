@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import useInput from "../../hooks/use-input";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Prompt, useHistory } from "react-router";
+import { useHistory } from "react-router";
 const Signup = () => {
   let history = useHistory();
 
@@ -50,7 +50,6 @@ const Signup = () => {
     enteredValueIsValid: PhoneNumberIsValid,
     valueBlurHandler: PhoneNumberBlurHandler,
     valueChangeHandler: PhoneNumberChangeHander,
-    // hasError: NumberHasError,
     reset: resetPhoneNumber,
   } = useInput((value) => value.length >= 11); //FOR USER PHONE NUMBER
 
@@ -67,7 +66,6 @@ const Signup = () => {
   }
 
   const formChangeHandler = (event) => {
-    // event.preventDefault();
 
     if (!formIsValid) {
       return;
@@ -95,7 +93,7 @@ const Signup = () => {
       if (result.data.signupStatus === "false") {
         throw new Error("Couldnt fetch Data!");
       }
-      history.push("/user");
+      history.push("/login");
     } catch (error) {
       history.push("/signup");
     }
@@ -109,15 +107,8 @@ const Signup = () => {
   };
   return (
     <div class="container-fluid">
-      {/* <Prompt
-        when={isEntering}
-        message={(location) =>
-          "Are you sure you want to leave? All your data will be lost!"
-        }
-      /> */}
       <div class="row no-gutter">
         <div class="col-md-6 d-none d-md-flex bg-image"></div>
-
         <div class="col-md-6 bg-light">
           <div class="login d-flex align-items-center py-5">
             <div class="container">
@@ -167,7 +158,6 @@ const Signup = () => {
                     <div class="form-group mb-3">
                       <input
                         id="inputrollno"
-                        // type=""
                         placeholder="Roll Number"
                         required=""
                         autofocus=""
@@ -182,8 +172,6 @@ const Signup = () => {
                         type="password"
                         placeholder="Password"
                         required=""
-                        // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"]
-                        // pattern=""
                         onBlur={PasswordBlurHandler}
                         onChange={PasswordChangeHandler}
                         class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
@@ -204,7 +192,6 @@ const Signup = () => {
                       <input
                         id="customCheck1"
                         type="checkbox"
-                        // checked
                         class="custom-control-input"
                       />
                       <label for="customCheck1" class="custom-control-label">
@@ -215,10 +202,6 @@ const Signup = () => {
                     <button
                       disabled={!formIsValid}
                       onClick={login}
-                      // onClick={() => {
-                      //   finishEnteringHandler();
-                      //    login();
-                      // }}
                       type="button"
                       class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"
                     >

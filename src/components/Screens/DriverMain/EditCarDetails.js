@@ -7,7 +7,6 @@ const EditCarDetails = (props) => {
   const [carModel, setCarModel] = useState("");
   const [carMake, setcarMake] = useState("");
   const [carColor, setCarColor] = useState({ background: "#fff" });
-//   const [carFound, setcarFound] = useState(props.carFound);
   const ColorhandleChange = (color) => {
     setCarColor({ background: color.hex });
   };
@@ -116,7 +115,6 @@ const EditCarDetails = (props) => {
             style={{ background: "#5B0A0C" }}
             className="mb-3 step2-submit-btn"
             type="button"
-            // onClick={carDetails}
           >
             Post Ride
           </Button>

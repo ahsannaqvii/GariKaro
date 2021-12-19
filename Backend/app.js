@@ -14,7 +14,7 @@ const ridesHistoryRoutes = require('./routes/rideshistory');
 const driverPostedRidesRoutes = require('./routes/driverpostedrides');
 const rideConfirmationRoutes = require('./routes/rideConfirmation');
 const pastRidesRoutes = require("./routes/pastRides");
-const scheduledRidesRoutes = require("./routes/scheduled-rides");
+const myRides = require("./routes/myrides");
 
 app.use(cors());
 app.use(bodyParser({extended: true}));
@@ -41,7 +41,7 @@ app.post("/ride-confirmation" , rideConfirmationRoutes);
 
 app.get("/ride-confirmation" , rideConfirmationRoutes);
 
-app.get("/scheduled-rides" , scheduledRidesRoutes);
+app.get("/my-rides" , myRides);
 
 app.get("/past-rides" , pastRidesRoutes);
 

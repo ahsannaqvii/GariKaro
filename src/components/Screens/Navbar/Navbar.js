@@ -11,14 +11,6 @@ function Navbar(props) {
   const contextData = useContext(AuthContext);
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
-  // const [LoginButton, setLoginButton] = useState(false);
-  // const buttonHandler=()=>{
-  //   setLoginButton((prevStatus) => !prevStatus);
-  // }
-  // useEffect(() => {
-  //   console.log("run");
-  //   buttonHandler();
-  // }, [])
 
   const closeMobileMenu = () => {
     setClick(false);
@@ -83,6 +75,17 @@ function Navbar(props) {
                   onClick={closeMobileMenu}
                 >
                   Ride
+                </Link>
+              </li>
+            )}
+            {props.isLoggedIn && (
+              <li className="nav-item">
+                <Link
+                  to="/history"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  My Rides
                 </Link>
               </li>
             )}

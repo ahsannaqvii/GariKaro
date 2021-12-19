@@ -12,7 +12,6 @@ function RideConfirm(props) {
   const contextData1 = useContext(AuthContext);
 
   const [details, setDetails] = useState([]);
-  //TODO : CALCULATE FARE ON THE BASIS OF SEATS AND FARE RETURNED BY DRIVER DB.
   const [TotalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
@@ -25,7 +24,6 @@ function RideConfirm(props) {
           },
         })
         .then((response) => {
-          console.log(response);
           loadedRides.push({
             id: response.data[0].Ride_ID,
             rollNo: response.data[0].Driver_RollNo,
@@ -44,7 +42,7 @@ function RideConfirm(props) {
     };
 
     fetchRides().catch((error) => {
-      console.log(error);
+      throw error;
     });
   }, []);
   const rideResults = (
@@ -72,7 +70,7 @@ function RideConfirm(props) {
       .post("http://localhost:4000/ride-confirmation", data)
       .then((response) => {})
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   };
   const modalActions = (
@@ -102,7 +100,6 @@ function RideConfirm(props) {
 
   return (
     <Modal2>
-      {/* onclick implement karlena */}
       {rideModalContent}
     </Modal2>
   );

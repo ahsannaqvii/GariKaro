@@ -74,7 +74,7 @@ const UserForum = (props) => {
     </section>;
   }
   const setDriverID = (id) => {
-    setID(id);
+      setID(id);
   };
   const ridesList = details.map((ride) => (
     <RideDetails
