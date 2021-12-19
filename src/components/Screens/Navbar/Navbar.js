@@ -51,30 +51,53 @@ function Navbar(props) {
           {/* //yeh wala part jab mobile screen pai lines pai click karoge tou options dekhaaega */}
           {/* //nav-menu is for desktop , nav-menu active is for mobile */}
           <ul className={click ? "nav-menu active" : "nav-menu"}>
-            <li className="nav-item">
-              <Link to="/home" className="nav-links" onClick={closeMobileMenu}>
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/driver"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
-                Drive
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/user" className="nav-links" onClick={closeMobileMenu}>
-                Ride
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/user" className="nav-links" onClick={closeMobileMenu}>
-                My Profile
-              </Link>
-            </li>
+            {props.isLoggedIn && (
+              <li className="nav-item">
+                <Link
+                  to="/home"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Home
+                </Link>
+              </li>
+            )}
+
+            {props.isLoggedIn && (
+              <li className="nav-item">
+                <Link
+                  to="/driver"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Drive
+                </Link>
+              </li>
+            )}
+
+            {props.isLoggedIn && (
+              <li className="nav-item">
+                <Link
+                  to="/user"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Ride
+                </Link>
+              </li>
+            )}
+            {props.isLoggedIn && (
+              <li className="nav-item">
+                <Link
+                  to="/user"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  My Profile
+                </Link>
+              </li>
+            )}
+
             <li className="nav-btn">
               {contextData.logUser && (
                 <Link to="/home" className="btn-link">

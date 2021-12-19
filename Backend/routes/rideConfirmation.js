@@ -5,7 +5,7 @@ const db = require('../models/UsersDB');
 const router = express.Router();
 
 router.get ("/ride-confirmation" , function(req,res){
-    const recievedData = req.body;
+    const recievedData = req.query;
     const rideID = recievedData.id;
     var sql = "SELECT * FROM RIDESDB WHERE Ride_ID = '" + rideID + "';";
     db.query(sql , function(err,result){
@@ -21,6 +21,7 @@ router.get ("/ride-confirmation" , function(req,res){
 });
 
 router.post("/ride-confirmation" , function(req,res){
+    console.log("heelo from the ");
     const recievedData = req.body;
     const rideID = recievedData.id;
     const passengerRollNo = recievedData.rollNo;

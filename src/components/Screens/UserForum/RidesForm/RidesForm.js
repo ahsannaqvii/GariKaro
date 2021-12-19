@@ -12,53 +12,19 @@ function RidesForm(props) {
   const amountInputRef = useRef();
   const [seatValid, setSeatValid] = useState(true);
   const [userSeats, setuserSeats] = useState(1);
-  // const [upperBound, setupperBound] = useState(5);
-  const totalSeats = props.Seats;
-  // const [confirmRide, setconfirmRide] = useState(false);
+    const totalSeats = props.Seats;
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // determineVehicleType();
-    // const enteredSeats = amountInputRef.current.value;
-    // console.log(enteredSeats + "ORIGINAL");
-    // const enteredSeatNumber = + enteredSeats; //converted to _isInteger
-    // const ss=enteredSeatNumber;
-    // console.log(ss + "ORIGINAL");
-
-    // if (
-    //   enteredSeats.trim().length === 0 || enteredSeats < 0 || enteredSeats > props.Seats
-    // ) {
-    //   setSeatValid(false);  
-    //   return;
-    // }
-    // else{
-    //   setuserSeats(userSeats);
-    //   // console.log(enteredSeats + "BEFORE UPDATE");
-    //   // console.log(enteredSeatsU + "STATE VALUE");
-    // }
     
   };
-  // const seatHandler = (e) => {
-  //   setuserSeats(e.target.value);
-  // }
+  
 
   async function buttonHandler(){
     console.log("HELLO" + userSeats);
     props.riderID(props.id);
     props.setSeats(userSeats);
-    const data = {
-      rideID: props.id,
-      bookedSeats: userSeats
-    }
-    await axios.post(
-      "http://localhost:4000/forum" , data 
-    )
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((err)=> {
-      throw err;
-    }) 
+   
     contextData.pageShown();  
   };
 

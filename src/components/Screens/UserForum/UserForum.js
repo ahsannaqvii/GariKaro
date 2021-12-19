@@ -7,14 +7,13 @@ import RideDetails from "./RideDetails/RideDetails";
 import UserSummary from "./UserSummary";
 import RideConfirm from "./RidesForm/RideConfirm";
 import AuthContext2 from "../../store/auth-context2";
-const loadedRides = [];
-const UserForum = () => {
+
+const UserForum = (props) => {
   const [seatsRemaining, setseatsRemaining] = useState(4);
 
   const seatChangeHandler = (n) => {
     console.log("PROP VALUE " + n);
     setseatsRemaining(n);
-    
   };
   const [details, setDetails] = useState([]);
   const [Loading, setLoading] = useState(true);
@@ -31,22 +30,24 @@ const UserForum = () => {
   useEffect(() => {
     const fetchRides = async () => {
       const response = await axios.get("http://localhost:4000/forum");
-
+      const loadedRides = [];
       for (let key in response.data) {
+      
         loadedRides.push({
           id: response.data[key].Ride_ID,
-          name: response.data[key].Driver_Name,
+          name: response.data[key].Driver_Name, //printed
           rollNo: response.data[key].Driver_RollNo,
           vehicleType: response.data[key].Vehicle_Type,
-          pickUp: response.data[key].Pickup_Location,
-          dropoff: response.data[key].Dropoff_Location,
-          Seats: response.data[key].Seats,
+          pickUp: response.data[key].Pickup_Location, //printed
+          dropoff: response.data[key].Dropoff_Location, //printed
+          Seats: response.data[key].Seats, //printed
           Date: response.data[key].Date,
           Fare: response.data[key].Fare,
-          L_Time: response.data[key].L_Time,
-          carRegNumb: response.data[key].Car_Registration_Number,
+          L_Time: response.data[key].Leaving_Time,
+          carRegNumb: response.data[key].Car_Registration_Number, //printed
         });
       }
+      console.log(loadedRides);
       setDetails(loadedRides);
       setLoading(false);
     };
@@ -101,7 +102,14 @@ const UserForum = () => {
           <ul>{ridesList}</ul>
         </Card>
       </section>
-      {isRideConfirm && <RideConfirm id={ID} seats={seatsRemaining} />}
+      {isRideConfirm && (
+        <RideConfirm
+          id={ID}
+          seats={seatsRemaining}
+          myPickUp={props.mypickUp}
+          myDest={props.myDest}
+        />
+      )}
       {/* //RIDE CONFIRM MAI ID BHIJWANI PAREGI , PHIR RIDE CONFIRM KE PAGE MAI US ID KELIYE DRIVER DATA UTHALENA */}
     </AuthContext2.Provider>
   );

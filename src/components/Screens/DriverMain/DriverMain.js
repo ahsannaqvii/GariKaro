@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 
 function DriverMain(props) {
   let history = useHistory();
-  const location = useLocation();
 
   const contextData = useContext(AuthContext);
 

@@ -2,28 +2,79 @@ import React, { useState, useContext, useEffect } from "react";
 import classes from "./RideConfirm.module.css";
 import Modal2 from "../../../UI/Modal/Modal";
 import axios from "axios";
+import AuthContext from "../../../store/auth-context";
 import AuthContext2 from "../../../store/auth-context2";
 
+import RideItem from "./RideItem";
+
 function RideConfirm(props) {
-
   const contextData = useContext(AuthContext2);
-    // const totalAmount=props.Seats*props.Fare;
-    //TODO : CALCULATE FARE ON THE BASIS OF SEATS AND FARE RETURNED BY DRIVER DB.
+  const contextData1 = useContext(AuthContext);
 
-    useEffect(() => {
-      const fetchRides = async () => {
-        await axios.get(
-          "http://localhost:4000/ride-confirmation" 
-        )
+  const [details, setDetails] = useState([]);
+  //TODO : CALCULATE FARE ON THE BASIS OF SEATS AND FARE RETURNED BY DRIVER DB.
+  const [TotalAmount, setTotalAmount] = useState(0);
+
+  useEffect(() => {
+    const fetchRides = async () => {
+      const loadedRides = [];
+      await axios
+        .get("http://localhost:4000/ride-confirmation", {
+          params: {
+            id: props.id,
+          },
+        })
         .then((response) => {
           console.log(response);
+          loadedRides.push({
+            id: response.data[0].Ride_ID,
+            rollNo: response.data[0].Driver_RollNo,
+            vehicleType: response.data[0].Vehicle_Type,
+            Date: response.data[0].Date,
+            Fare: response.data[0].Fare,
+            L_Time: response.data[0].Leaving_Time,
+          });
+
+          setDetails(loadedRides);
+          setTotalAmount(props.seats * response.data[0].Fare);
         })
-        .catch((err)=> {
+        .catch((err) => {
           throw err;
-        })
-      };
-    }, []);
-    
+        });
+    };
+
+    fetchRides().catch((error) => {
+      console.log(error);
+    });
+  }, []);
+  const rideResults = (
+    <ul className={classes["cart-items"]}>
+      {details.map((item) => (
+        <RideItem
+          id={item.id}
+          Driver_RollNo={item.rollNo}
+          Date={item.Date}
+          L_Time={item.L_Time}
+          vehicleType={item.vehicleType}
+          Fare={item.Fare}
+        />
+      ))}
+    </ul>
+  );
+
+  const confirmRidePost = () => {
+    const data = {
+      id: props.id,
+      rollNo: contextData1.rollNo,
+      bookedSeats: props.seats,
+    };
+    axios
+      .post("http://localhost:4000/ride-confirmation", data)
+      .then((response) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const modalActions = (
     <div className={classes.actions}>
       <button
@@ -32,39 +83,28 @@ function RideConfirm(props) {
       >
         Close
       </button>
-      <button className={classes.button}>Confirm Ride</button>
+      <button className={classes.button} onClick={confirmRidePost}>
+        Confirm Ride
+      </button>
     </div>
   );
 
   const rideModalContent = (
     <React.Fragment>
-      {/* {rideResults} */}
+      {rideResults}
       <div className={classes.total}>
         <span>Total Fare</span>
-        {/* <span>{props.id}</span>  ye rahi ID , ab is ID ke basis pai backend se is rider ka data uthalo aur response lado   */}
-        {/* jab tum props.seats access karoge tou you will get remaining seats tou wo backend ke table mai alter kardena */}
+        <span>{TotalAmount}</span>
       </div>
       {modalActions}
     </React.Fragment>
   );
 
   return (
-    <Modal2 > 
+    <Modal2>
       {/* onclick implement karlena */}
       {rideModalContent}
     </Modal2>
   );
 }
 export default RideConfirm;
-  //   const rideResults = (
-  //     <ul className={classes["cart-items"]}>
-  //       {cartCtx.items.map((item) => (
-  //         <CartItem
-  //           key={item.id}
-  //           name={item.name}
-  //           amount={item.amount}
-  //           price={item.price}
-  //         />
-  //       ))}
-  //     </ul>
-  //   );
