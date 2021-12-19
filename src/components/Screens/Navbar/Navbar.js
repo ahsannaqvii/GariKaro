@@ -40,8 +40,7 @@ function Navbar(props) {
           <div className="menu-icon" onClick={clickHandler}>
             {click ? <FaTimes /> : <FaBars />}
           </div>
-          {/* //yeh wala part jab mobile screen pai lines pai click karoge tou options dekhaaega */}
-          {/* //nav-menu is for desktop , nav-menu active is for mobile */}
+ 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             {props.isLoggedIn && (
               <li className="nav-item">
