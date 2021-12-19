@@ -139,12 +139,12 @@ function App() {
         </Route>
 
         <Route exact path="/user">
-          <UserForum mypickUp={pickUp} myDest={dest}/>
+          <UserForum />
         </Route>
 
-        <Route exact path="/edit-details">
+        {/* <Route exact path="/edit-details">
           <EditCarDetails/>
-        </Route>
+        </Route> */}
 
         <Route exact path="/scheduled-rides">
           <ScheduledRides/>

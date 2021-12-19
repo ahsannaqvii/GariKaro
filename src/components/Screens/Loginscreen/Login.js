@@ -52,8 +52,7 @@ const Login = (props) => {
       if (!result.statusText === "OK") {
         throw new Error("Couldnt fetch Data!");
       }
-      // console.log("AHSAN");
-      // console.log(result.data[0].Roll_Number,result.data[0].First_Name);
+
 
       setuserAuthenticated(true);
       history.push("/user");

@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import useInput from "../../hooks/use-input";
+import { useState, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { CirclePicker } from "react-color";
-import { useParams, Route, useRouteMatch, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
-import Modal2 from "../../UI/Modal/Modal";
-import VehicleItem from "./VehicleItem";
+
 import CarFound from "./CarFound";
 
 function Step2(props) {
@@ -68,14 +66,13 @@ function Step2(props) {
     );
     console.log(result);
     console.log("CAR FOUNDSTEP TWO : " + carFound);
-    history.push("/user");
+    // history.push("/user");
     //IF ride added : false -- that mean ride already exists.
     //If ride Added : true  - ride added
     //if car added :false -- gari already exists.
     //if car added : true -- gari dalgye hai car-details wale page se .
   };
   useEffect(() => {
-    // console.log(params1.carReg);
     const fetchRides = async () => {
       const result = await axios.get(
         "http://localhost:4000/car-details/" + params1.carReg
@@ -94,7 +91,6 @@ function Step2(props) {
       console.log(result);
 
     };
-    console.log("CAR FOUNDSTEP TWO : " + carFound);
     fetchRides().catch((error) => {
       console.log(error);
     });
