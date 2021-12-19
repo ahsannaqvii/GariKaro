@@ -13,6 +13,8 @@ import { useState, useEffect } from "react";
 import AuthContext from "./components/store/auth-context";
 import UserForum from "./components/Screens/UserForum/UserForum";
 import EditCarDetails from "./components/Screens/DriverMain/EditCarDetails";
+import ScheduledRides from "./components/Screens/ScheduledRides/ScheduledRides";
+import PastRides from "./components/Screens/PastRides/PastRides";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -96,9 +98,11 @@ function App() {
     >
       <Navbar />
       <Switch>
+
         <Route path="/" exact>
           <Redirect to="/home" />
         </Route>
+
         <Route path="/home" exact>
           <Home />
         </Route>
@@ -106,16 +110,18 @@ function App() {
         <Route path="/login" exact>
           <Login onLogin={loginHandler} />
         </Route>
+
         <Route path="/signup" exact>
           <SignUp />
         </Route>
+
         <Route path="/driver" exact>
           <DriverMain
             carRegister={setCarAlreadyRegistered}
             set={setAttributes}
           />
-        
         </Route>
+
         <Route path="/car-details/:carReg">
           <DriverMainStep2
             carFound={carFound}
@@ -133,12 +139,21 @@ function App() {
         </Route>
 
         <Route exact path="/user">
-
           <UserForum />
         </Route>
-      <Route exact path="/edit-details">
-        <EditCarDetails/>
-      </Route>
+
+        <Route exact path="/edit-details">
+          <EditCarDetails/>
+        </Route>
+
+        <Route exact path="/scheduled-rides">
+          <ScheduledRides/>
+        </Route>
+
+        <Route exact path="/past-rides">
+          <PastRides/>
+        </Route>
+
         {/* default case for no page found  */}
         <Route path="*">
           <NotFound />

@@ -72,7 +72,6 @@ const UserForum = () => {
   }
   const setDriverID = (id) => {
     setID(id);
-    // console.log(id);
   };
   const ridesList = details.map((ride) => (
     <RideDetails
