@@ -53,7 +53,7 @@ function Step2(props) {
       CarRegistrationNumber: carRegistrationNumber,
       pickUp: props.pickUp,
       dest: props.dest,
-      carFound : props.carFound,
+      carFound : carFound,
       carName: carName,
       carModel: carModel,
       carMake: carMake,
@@ -120,6 +120,7 @@ function Step2(props) {
                 <Col sm={6}>
                   <Form.Control
                     type="textarea"
+                    
                     placeholder="HONDA"
                     onChange={carMakehandleChange}
                   />
