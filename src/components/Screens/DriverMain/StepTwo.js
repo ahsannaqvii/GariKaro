@@ -120,7 +120,7 @@ function Step2(props) {
                 <Col sm={6}>
                   <Form.Control
                     type="textarea"
-                    
+                    required={true}
                     placeholder="HONDA"
                     onChange={carMakehandleChange}
                   />
@@ -139,6 +139,7 @@ function Step2(props) {
                     type="textarea"
                     placeholder="KBC-6006"
                     onChange={RegHandler}
+                    required={true}
                   />
                 </Col>
               </Form.Group>
@@ -155,6 +156,7 @@ function Step2(props) {
                     type="textarea"
                     placeholder="Car Name"
                     onChange={carNamehandleChange}
+                    required={true}
                   />
                 </Col>
               </Form.Group>
@@ -171,6 +173,7 @@ function Step2(props) {
                     type="textarea"
                     placeholder="YYYY"
                     onChange={carModelhandleChange}
+                    required={true}
                   />
                 </Col>
               </Form.Group>
@@ -206,6 +209,7 @@ function Step2(props) {
                       "#607d8b",
                     ]}
                     color={carColor.background}
+                    required={true}
                     onChangeComplete={ColorhandleChange}
                   />
                 </Col>

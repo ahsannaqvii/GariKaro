@@ -96,15 +96,13 @@ function DriverMain(props) {
               <label>Driver</label>
             </Col>
             <Col>
-              {/* onChange ={DriverhandleChange} */}
               <Form.Select className="mb-3 dropdownForm">
                 <Col>
-                  <Form.Control type="dropdown" placeholder="Driver" />
+                  <Form.Control type="dropdown" placeholder="Driver" required />
                 </Col>
 
                 <option value="Select driver">Select driver</option>
                 <option>{contextData.userName}</option>
-                {/* value = "Ahsan Naqvi" */}
               </Form.Select>
             </Col>
           </Row>
@@ -118,7 +116,7 @@ function DriverMain(props) {
               Pickup{" "}
             </Form.Label>
             <Col sm={6}>
-              <Input className = "inputbox" name="setPick" parentCallback={setPickUp} />
+              <Input className = "inputbox" name="setPick" parentCallback={setPickUp} required=""/>
             </Col>
           </Form.Group>
 
@@ -126,12 +124,13 @@ function DriverMain(props) {
             as={Row}
             className="mb-3"
             controlId="formHorizontalDropoff"
+            required={true}
           >
             <Form.Label column sm={6}>
               Drop-Off / Stop
             </Form.Label>
             <Col sm={6}>
-              <Input name="setDest" parentCallback={setDest} />
+              <Input name="setDest" parentCallback={setDest} required=""/>
             </Col>
           </Form.Group>
 
@@ -140,7 +139,7 @@ function DriverMain(props) {
             className="mb-3"
             controlId="formHorizontalDropoff"
           >
-            <Form.Label column sm={6}>
+            <Form.Label column sm={6} required>
               Car Type
             </Form.Label>
             <Col sm={6}>
@@ -181,6 +180,7 @@ function DriverMain(props) {
                 className="mb-3"
                 type="time"
                 placeholder="time"
+                required={true}
                 onChange={timehandleChange}
               />
             </Col>
@@ -194,6 +194,7 @@ function DriverMain(props) {
               <Form.Select
                 className="mb-3 dropdownForm"
                 onChange={SeatshandleChange}
+                required={true}
               >
                 <Col>
                   <Form.Control type="dropdown" placeholder="Seats" />
@@ -216,6 +217,7 @@ function DriverMain(props) {
               <Form.Control
                 className="mb-3"
                 type="text"
+                required
                 placeholder="AAA-000"
                 onChange={carRegHandler}
               />
@@ -230,6 +232,7 @@ function DriverMain(props) {
                 className="mb-3"
                 type="date"
                 placeholder="date"
+                required={true}
                 onChange={dateHandler}
               />
             </Col>
@@ -243,6 +246,7 @@ function DriverMain(props) {
                 className="mb-4"
                 type="number"
                 placeholder="PKR"
+                required
                 onChange={FareHandleChange}
               />
             </Col>
