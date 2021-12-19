@@ -91,7 +91,7 @@ function Navbar(props) {
             {props.isLoggedIn && (
               <li className="nav-item">
                 <Link
-                  to="/user"
+                  to="/profile"
                   className="nav-links"
                   onClick={closeMobileMenu}
                 >

@@ -14,6 +14,7 @@ const ridesHistoryRoutes = require('./routes/rideshistory');
 const driverPostedRidesRoutes = require('./routes/driverpostedrides');
 const rideConfirmationRoutes = require('./routes/rideConfirmation');
 const pastRidesRoutes = require("./routes/pastRides");
+const myProfileRoutes = require("./routes/myprofile");
 const myRides = require("./routes/myrides");
 
 app.use(cors());
@@ -44,6 +45,8 @@ app.get("/ride-confirmation" , rideConfirmationRoutes);
 app.get("/my-rides" , myRides);
 
 app.get("/past-rides" , pastRidesRoutes);
+
+app.get("/profile" , myProfileRoutes);
 
 app.listen(4000, function(){
     console.log("Server is running on port 4000");

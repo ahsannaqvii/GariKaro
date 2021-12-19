@@ -2,12 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import classes from "./RideConfirm.module.css";
 import Modal2 from "../../../UI/Modal/Modal";
 import axios from "axios";
+import { useHistory } from "react-router";
 import AuthContext from "../../../store/auth-context";
 import AuthContext2 from "../../../store/auth-context2";
 
 import RideItem from "./RideItem";
 
 function RideConfirm(props) {
+  let history = useHistory();
   const contextData = useContext(AuthContext2);
   const contextData1 = useContext(AuthContext);
 
@@ -68,7 +70,9 @@ function RideConfirm(props) {
     };
     axios
       .post("http://localhost:4000/ride-confirmation", data)
-      .then((response) => {})
+      .then((response) => {
+        history.push("/user");
+      })
       .catch((err) => {
         throw err;
       });

@@ -15,6 +15,7 @@ import UserForum from "./components/Screens/UserForum/UserForum";
 import EditCarDetails from "./components/Screens/DriverMain/EditCarDetails";
 import ScheduledRides from "./components/Screens/ScheduledRides/ScheduledRides";
 import History from "./components/Screens/History/History";
+import MyProfile from "./components/Screens/MyProfile/MyProfile";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -149,6 +150,12 @@ function App() {
         <Route exact path="/history">
           <History 
             rollNo={rollNo}
+          />
+        </Route>
+
+        <Route path="/profile" exact>
+          < MyProfile 
+            rollNo = {rollNo}
           />
         </Route>
 
