@@ -2,13 +2,10 @@ import "./DriverMain.css";
 import  { useState, useContext } from "react";
 import { Form, Row, Col } from "react-bootstrap";
 import axios from "axios";
-// import carsvg from "../../../assets/images/car.svg";
-// import bikesvg from "../../../assets/images/bike.jpeg";
 import Input from "./PlacesAutocomplete";
 import Maps from "./DirectionPath";
 import AuthContext from "../../store/auth-context";
-import { useHistory , useLocation} from "react-router";
-import { Link } from "react-router-dom";
+import { useHistory} from "react-router";
 
 function DriverMain(props) {
   let history = useHistory();
@@ -26,14 +23,11 @@ function DriverMain(props) {
     lng: 67.0632675,
   });
 
-  // useEffect(() => {}, [pickUp, dest, mapReference, mapsReference]);
-
   const [seats, setSeats] = useState(0);
 
   const [time, setTime] = useState("");
   const [carType, setCarType] = useState("Car");
-  const [carRegistrationNumber, setcarRegistrationNumber] =
-    useState("AXP-9999");
+  const [carRegistrationNumber, setcarRegistrationNumber] = useState("AXP-9999");
   const [Fare, setFare] = useState(0);
   const [Date, setDate] = useState("12-12-2000");
 
@@ -55,9 +49,6 @@ function DriverMain(props) {
 
   const FareHandleChange = (e) => {
     const rollNo = contextData.rollNo;
-
-    console.log("DRIVERNAME BAHU HARD1:");
-    console.log(rollNo);
     setFare(e.target.value);
   };
   const dateHandler = (e) => {
@@ -66,9 +57,6 @@ function DriverMain(props) {
   const driverHandler = async () => {
     const name = contextData.userName;
     const rollNo = contextData.rollNo;
-
-    console.log("DRIVERNAME BAHU HARD:");
-    console.log(rollNo);
     const d = {
       pickup: pickUp,
       dropoff: dest,
@@ -86,26 +74,16 @@ function DriverMain(props) {
       const response = await axios.post("http://localhost:4000/driver", d);
 
       if (response.data.carFound === "true") {
-        console.log("AHSAN2" + response.data.carFound);
         props.carRegister(1, carRegistrationNumber,  response.data.carFound );
       } else if (response.data.carFound === "false") {
-        console.log("AHSAN1" + response.data.carFound ,  response.data.carFound);
-
-        // setcarFound(false);
         props.carRegister(2, carRegistrationNumber);
       }
-      // console.log( location);
-      // history.push(`/car-details/${carRegistrationNumber}`);
       history.push({
-        pathname: '/car-details/' + carRegistrationNumber,
-        // search: carRegistrationNumber
-        
-    });
-
-     
-    } catch (err) {
-      console.log(err);
-
+        pathname: '/car-details/' + carRegistrationNumber,        
+      });
+    } 
+    catch (err) {
+        throw err;
     }
   };
 
@@ -140,7 +118,7 @@ function DriverMain(props) {
               Pickup{" "}
             </Form.Label>
             <Col sm={6}>
-              <Input name="setPick" parentCallback={setPickUp} />
+              <Input className = "inputbox" name="setPick" parentCallback={setPickUp} />
             </Col>
           </Form.Group>
 
@@ -280,9 +258,7 @@ function DriverMain(props) {
           </button>
 
           <div className="BelowForm mb-3">
-            <a>View Scheduled Rides</a>
-            <br />
-            <a>View Past Rides</a>
+            
           </div>
         </Form>
       </Col>

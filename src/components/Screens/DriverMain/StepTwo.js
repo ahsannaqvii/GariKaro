@@ -53,21 +53,18 @@ function Step2(props) {
       CarRegistrationNumber: carRegistrationNumber,
       pickUp: props.pickUp,
       dest: props.dest,
-      //Jo data found hoa hai woh yahan bhej dena, warna agar gaari found nai hoi tou form se data already araha hai
+      carFound : props.carFound,
       carName: carName,
       carModel: carModel,
       carMake: carMake,
       carColor: carColor,
     };
-    console.log("KYA YECHALRAHA HAI?");
     const result = await axios.post(
       "http://localhost:4000/car-details/" + params1.carReg,
       carInfo
     );
     console.log(result);
-    console.log("CAR FOUNDSTEP TWO : " + carFound);
     history.push("/user");
-    console.log("CAUSING ERROR?");
     //IF ride added : false -- that mean ride already exists.
     //If ride Added : true  - ride added
     //if car added :false -- gari already exists.
@@ -80,10 +77,8 @@ function Step2(props) {
       );
       console.log(result);
       if (result.data.length == 0) {
-        console.log("empty array");
         setcarFound(false);
       } else {
-        console.log("fill array");
         setcarFound(true);
         setCarModel(result.data[0].Car_Model);
         setcarMake(result.data[0].Car_Make);
@@ -93,7 +88,7 @@ function Step2(props) {
 
     };
     fetchRides().catch((error) => {
-      console.log(error);
+      throw error;
     });
   }, []);
 
@@ -232,32 +227,3 @@ function Step2(props) {
 }
 
 export default Step2;
-// const rideResults = (
-//   <ul className="cart-items">
-//     <VehicleItem carModel={carModel} carMake={carMake} carName={carName} carName={carName} />
-//     ))
-//   </ul>
-// );
-// const MODELLING = (
-//   <div className="actions">
-//     <button className="button--alt" onClick={negCarFound}>
-//       Edit
-//     </button>
-
-//     <button className="button" onClick={negCarFound}>
-//       Post Ride{" "}
-//     </button>
-
-//   </div>
-// );
-// const ABC = () => {
-//   console.log("KYN NAI CHALRAHA BAY?");
-//   <React.Fragment>
-//     {rideResults}
-//     <div className="total">
-//       <span>Total Fare</span>
-//       {/* <span>{props.id}</span> */}
-//     </div>
-//     {MODELLING}
-//   </React.Fragment>;
-// };

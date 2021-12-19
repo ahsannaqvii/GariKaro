@@ -1,0 +1,13 @@
+.tabsAlignment{
+    margin: 1.5rem;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+.nav-link{
+    color:#9e1e20;
+}
+
+.nav-link:focus, .nav-link:hover{
+    color: #5b0a0c;
+}

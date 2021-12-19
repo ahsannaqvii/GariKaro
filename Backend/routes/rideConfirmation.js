@@ -9,25 +9,21 @@ router.get ("/ride-confirmation" , function(req,res){
     const rideID = recievedData.id;
     var sql = "SELECT * FROM RIDESDB WHERE Ride_ID = '" + rideID + "';";
     db.query(sql , function(err,result){
-        if (err){
-            console.log(err);    
+        if (err){   
             res.send(err);
         }
         else {
-            // console.log(result);
             res.send(result);
         }
     });
 });
 
 router.post("/ride-confirmation" , function(req,res){
-    console.log("heelo from the ");
     const recievedData = req.body;
     const rideID = recievedData.id;
     const passengerRollNo = recievedData.rollNo;
     const bookedSeats = recievedData.bookedSeats;
-    console.log(rideID + " " + passengerRollNo + " " + bookedSeats);
-    
+  
     db.beginTransaction(function(err){
         if (err){
             throw(err);
@@ -44,7 +40,6 @@ router.post("/ride-confirmation" , function(req,res){
             else {
                 var newSeats = result[0].Seats;
                 newSeats = newSeats - bookedSeats;
-                console.log(newSeats);
                 if (newSeats <= 0){
                     newSeats = 0;
                 }
@@ -60,7 +55,6 @@ router.post("/ride-confirmation" , function(req,res){
                                 throw(err);
                             }
                             else {
-                                console.log(result);
                                 var log = 'Ride ' + rideID + ' booked by ' + passengerRollNo;
                                 var sql3 = "INSERT INTO log SET data= '" + log + "';"; 
                                 db.query('INSERT INTO log SET data=?', log, function(err, results) {
@@ -69,14 +63,12 @@ router.post("/ride-confirmation" , function(req,res){
                                             throw err;
                                         });
                                     }  
-                                    console.log(results);
                                     db.commit(function(err) {
                                         if (err) { 
                                             db.rollback(function() {
                                             throw err;
                                             });
                                         }
-                                        console.log('success!');
                                     });
                                     res.send(results);
                                 });

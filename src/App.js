@@ -14,7 +14,7 @@ import AuthContext from "./components/store/auth-context";
 import UserForum from "./components/Screens/UserForum/UserForum";
 import EditCarDetails from "./components/Screens/DriverMain/EditCarDetails";
 import ScheduledRides from "./components/Screens/ScheduledRides/ScheduledRides";
-import PastRides from "./components/Screens/PastRides/PastRides";
+import History from "./components/Screens/History/History";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,12 +52,10 @@ function App() {
 
   const setCarAlreadyRegistered = (n, regNumb , boolean) => {
     if (n === 1 && boolean ==="true") {
-      console.log("CAR FOUND & ENTRY ADDED");
       setcarFound(true);
       setcarRegNumb(regNumb);
     } else if(n===2 && boolean ==="false") {
       setcarFound(false);
-      console.log("CAR NOT FOUND " + carFound);
       setcarRegNumb(regNumb);
     }
   };
@@ -91,12 +89,10 @@ function App() {
         logUser: isLoggedIn,
         onLogOutUser: logoutHandler,
         userName: Name,
-        rollNo: rollNo,
-        // showDriveModal:showRideHandler ,
-        // hideDriveModal:closeRideHandler,
+        rollNo: rollNo
       }}
     >
-      <Navbar isLoggedIn={isLoggedIn} />
+      <Navbar />
       <Switch>
 
         <Route path="/" exact>
@@ -142,16 +138,18 @@ function App() {
           <UserForum />
         </Route>
 
-        {/* <Route exact path="/edit-details">
+        <Route exact path="/edit-details">
           <EditCarDetails/>
-        </Route> */}
+        </Route>
 
         <Route exact path="/scheduled-rides">
           <ScheduledRides/>
         </Route>
 
-        <Route exact path="/past-rides">
-          <PastRides/>
+        <Route exact path="/history">
+          <History 
+            rollNo={rollNo}
+          />
         </Route>
 
         {/* default case for no page found  */}

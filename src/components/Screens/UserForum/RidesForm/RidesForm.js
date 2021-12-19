@@ -2,7 +2,6 @@ import React, { useRef, useState, useContext  , useEffect} from "react";
 import AuthContext2 from "../../../store/auth-context2";
 import { Button } from "../../../UI/Button";
 import Input from "../../../UI/Input/Input";
-// import Input from "../../UI/Input/Input";
 import classes from "./RidesForm.module.css";
 import axios from 'axios';
 
@@ -12,19 +11,16 @@ function RidesForm(props) {
   const amountInputRef = useRef();
   const [seatValid, setSeatValid] = useState(true);
   const [userSeats, setuserSeats] = useState(1);
-    const totalSeats = props.Seats;
+  const totalSeats = props.Seats;
 
   const submitHandler = (e) => {
     e.preventDefault();
     
   };
   
-
   async function buttonHandler(){
-    console.log("HELLO" + userSeats);
     props.riderID(props.id);
     props.setSeats(userSeats);
-   
     contextData.pageShown();  
   };
 
