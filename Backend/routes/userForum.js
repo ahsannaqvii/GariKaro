@@ -21,4 +21,19 @@ router.get("/forum" , function(req,res){
     });
 });
 
+router.post("/forum" , function(req,res){
+    const recievedData = req.body;
+    const rideID = req.body.rideID;
+    var sql = "SELECT * from RIDESDB WHERE Ride_ID = " + rideID + ";";
+    db.query(sql , function(err , result){
+        if (err){
+            throw err;
+        } else {
+            res.status(200).send(result);
+        }
+    }); 
+
+    
+})
+
 module.exports = router;

@@ -4,6 +4,7 @@ import { Button } from "../../../UI/Button";
 import Input from "../../../UI/Input/Input";
 // import Input from "../../UI/Input/Input";
 import classes from "./RidesForm.module.css";
+import axios from 'axios';
 
 function RidesForm(props) {
   //SEAT LOGIC IS BUILT ON THE LOGIC KEH BACKEND SE DATA REFRESH HUKE ATA RAHEGA
@@ -41,12 +42,26 @@ function RidesForm(props) {
   //   setuserSeats(e.target.value);
   // }
 
-  const buttonHandler = () => {
+  async function buttonHandler(){
     console.log("HELLO" + userSeats);
     props.riderID(props.id);
     props.setSeats(userSeats);
+    const data = {
+      rideID: props.id,
+      bookedSeats: userSeats
+    }
+    await axios.post(
+      "http://localhost:4000/forum" , data 
+    )
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err)=> {
+      throw err;
+    }) 
     contextData.pageShown();  
   };
+
   return (
     <form className={classes.form} onSubmit={submitHandler}>
 
