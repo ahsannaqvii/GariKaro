@@ -66,7 +66,8 @@ function Step2(props) {
     );
     console.log(result);
     console.log("CAR FOUNDSTEP TWO : " + carFound);
-    // history.push("/user");
+    history.push("/user");
+    console.log("CAUSING ERROR?");
     //IF ride added : false -- that mean ride already exists.
     //If ride Added : true  - ride added
     //if car added :false -- gari already exists.

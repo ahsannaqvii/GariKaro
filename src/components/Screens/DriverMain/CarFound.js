@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./CarFound.module.css";
 import { Link } from "react-router-dom";
+import { Button } from "../../UI/Button";
 
 const CarFound = (props) => {
   return (
@@ -22,9 +23,9 @@ const CarFound = (props) => {
         <Link className={classes.btn} onClick={props.carNeg} to={`/car-details/${props.carID}` }>
           Edit Details
         </Link>
-        <Link className={classes.btn} onClick={props.onClick}>
-          Post Ride
-        </Link>
+        <Button className={classes.btn} onClick={props.onClick} type="button">
+           Ride
+        </Button>
       </li>
     </div>
   );
