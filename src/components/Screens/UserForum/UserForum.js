@@ -32,7 +32,9 @@ const UserForum = (props) => {
       const response = await axios.get("http://localhost:4000/forum");
       const loadedRides = [];
       for (let key in response.data) {
-      
+        if(response.data[key].Seats==0){
+          continue;
+        }
         loadedRides.push({
           id: response.data[key].Ride_ID,
           name: response.data[key].Driver_Name, //printed
