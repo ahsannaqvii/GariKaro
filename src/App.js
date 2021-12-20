@@ -16,6 +16,8 @@ import EditCarDetails from "./components/Screens/DriverMain/EditCarDetails";
 import ScheduledRides from "./components/Screens/ScheduledRides/ScheduledRides";
 import History from "./components/Screens/History/History";
 import MyProfile from "./components/Screens/MyProfile/MyProfile";
+import AdminLogin from "./components/Screens/Admin/Adminlogin";
+import AdminDashboard from "./components/Screens/Admin/AdminDashboard/AdminDashboard";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -100,6 +102,10 @@ function App() {
           <Redirect to="/home" />
         </Route>
 
+
+        <Route path="/admin" exact >
+          <AdminLogin/>
+        </Route>
         <Route path="/home" exact>
           <Home />
         </Route>
@@ -111,7 +117,9 @@ function App() {
         <Route path="/signup" exact>
           <SignUp />
         </Route>
-
+        <Route path="/adminroot" exact>
+          <AdminDashboard/>
+        </Route>
         <Route path="/driver" exact>
           <DriverMain
             carRegister={setCarAlreadyRegistered}

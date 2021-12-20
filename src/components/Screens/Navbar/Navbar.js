@@ -40,7 +40,7 @@ function Navbar(props) {
           <div className="menu-icon" onClick={clickHandler}>
             {click ? <FaTimes /> : <FaBars />}
           </div>
- 
+
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             {props.isLoggedIn && (
               <li className="nav-item">
@@ -65,6 +65,16 @@ function Navbar(props) {
                 </Link>
               </li>
             )}
+
+            <li className="nav-item">
+              <Link
+                to="/admin"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                Admin
+              </Link>
+            </li>
 
             {props.isLoggedIn && (
               <li className="nav-item">
