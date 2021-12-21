@@ -26,7 +26,7 @@ router.post("/car-details/:CarRegistrationNumber" , function(request,response){
     const pickup = recievedInfo.pickup;
     const dropoff = recievedInfo.dropoff;
     const carType = recievedInfo.carType;
-    const leavingtime = recievedInfo.leavingTime;
+    const leavingtime = recievedInfo.leavingTime;S
     const availableSeats = recievedInfo.seats;
     const carRegistrationNumber = recievedInfo.CarRegistrationNumber;
 
@@ -62,10 +62,11 @@ router.post("/car-details/:CarRegistrationNumber" , function(request,response){
                     if (error){
                         return response.status(200).json({carAdded: "true" , rideAdded : "false"});
                     } else {
+                        console.log("1540");
                         return response.status(200).json({carAdded: "true" , rideAdded : "true"});
                     }
                 })
-                return response.status(200).json({carAdded: "true" , rideAdded : "true"});
+                // return response.status(200).json({carAdded: "true" , rideAdded : "true"});
             }
         })
     }

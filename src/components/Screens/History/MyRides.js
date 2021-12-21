@@ -6,6 +6,7 @@ import classes from "../History/PastRides.module.css";
 import RideInfo from "./RideInfo";
 
 const MyRides = (props) => {
+  const context = useContext(AuthContext)
     const [details, setDetails] = useState([]);
     const [Loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -77,6 +78,7 @@ const MyRides = (props) => {
       Seats={ride.Seats}
       Date={ride.Date}
       Fare={ride.Fare}
+
     />
   ));
 

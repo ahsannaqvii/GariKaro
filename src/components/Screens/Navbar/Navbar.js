@@ -66,7 +66,7 @@ function Navbar(props) {
               </li>
             )}
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link
                 to="/admin"
                 className="nav-links"
@@ -74,7 +74,7 @@ function Navbar(props) {
               >
                 Admin
               </Link>
-            </li>
+            </li> */}
 
             {props.isLoggedIn && (
               <li className="nav-item">

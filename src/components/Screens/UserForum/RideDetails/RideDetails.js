@@ -1,6 +1,7 @@
 import classes from "./RideDetails.module.css";
 import RidesForm from "../RidesForm/RidesForm";
 function MealItem(props) {
+  console.log("pfft");
 
   return (
     <li className={classes.meal}>

@@ -63,15 +63,18 @@ function RideConfirm(props) {
   );
 
   const confirmRidePost = () => {
+    console.log(props.id);
     const data = {
+     
       id: props.id,
       rollNo: contextData1.rollNo,
       bookedSeats: props.seats,
     };
+    console.log("");
     axios
       .post("http://localhost:4000/ride-confirmation", data)
       .then((response) => {
-        history.push("/user");
+        history.push("/history");
       })
       .catch((err) => {
         throw err;

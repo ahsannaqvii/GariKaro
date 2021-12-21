@@ -6,11 +6,12 @@ const router = express.Router();
 
 router.get("/forum" , function(req,res){
     // const recievedData = req.body;
-
+    console.log("ahsan");
     var sql = "SELECT * FROM RIDESDB;";
 
     db.query(sql , function(err,result){
         if (err){
+            console.log("AHSANBLA");
             console.log(err);
             res.send(err);
         }
@@ -23,14 +24,16 @@ router.get("/forum" , function(req,res){
 });
 
 router.post("/forum" , function(req,res){
+    console.log("ahsan2");
     const recievedData = req.body;
     const rideID = req.body.rideID;
     var sql = "SELECT * from RIDESDB WHERE Ride_ID = " + rideID + ";";
     db.query(sql , function(err , result){
         if (err){
-            throw err;
+            console.log("AHSANBLA");
+            throw(err);
         } else {
-            res.status(200).send(result);
+            res.send(result);
         }
     }); 
 

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Card from "../../UI/Card/Card";
-// import MealItem from './MealItem/MealItem';
 import classes from "./UserForum.module.css";
 import RideDetails from "./RideDetails/RideDetails";
 import UserSummary from "./UserSummary";
@@ -30,6 +29,8 @@ const UserForum = (props) => {
   useEffect(() => {
     const fetchRides = async () => {
       const response = await axios.get("http://localhost:4000/forum");
+      console.log("empty");
+      console.log(response);
       const loadedRides = [];
       for (let key in response.data) {
         if(response.data[key].Seats==0){
@@ -51,6 +52,8 @@ const UserForum = (props) => {
       }
       console.log(loadedRides);
       setDetails(loadedRides);
+      console.log("Ese kese?");
+      console.log(details);
       setLoading(false);
     };
 

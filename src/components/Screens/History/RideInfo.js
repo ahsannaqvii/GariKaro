@@ -7,7 +7,7 @@ function RideItem(props) {
   return (
     <Col sm={5} >
         <Card>
-        <Card.Header as="h5" style={{background: "#5b0a0ced" , color: "white"}}>Mr.Muhammad Mustafa</Card.Header>
+        <Card.Header as="h5" style={{background: "#5b0a0ced" , color: "white"}}>{props.name}</Card.Header>
         <Card.Body>
           <Card.Title>Ride ID: {props.id}</Card.Title>
           <Card.Text>
